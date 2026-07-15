@@ -4,13 +4,18 @@
 
 package fis.proyect.boleteriacine;
 
+import vista.InicioSesion;
+
 /**
  *
- * @author carlos
+ * @author Carlos Ortega
  */
 public class BoleteriaCine {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        System.setProperty("sun.java2d.uiScale", "1.0");
+        java.awt.EventQueue.invokeLater(() -> {
+            new InicioSesion().setVisible(true);
+        });
     }
 }
