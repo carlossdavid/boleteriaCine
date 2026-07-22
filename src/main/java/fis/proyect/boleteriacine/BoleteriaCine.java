@@ -14,6 +14,7 @@ public class BoleteriaCine {
 
     public static void main(String[] args) {
         System.setProperty("sun.java2d.uiScale", "1.0");
+        
         java.awt.EventQueue.invokeLater(() -> {
             new InicioSesion().setVisible(true);
         });

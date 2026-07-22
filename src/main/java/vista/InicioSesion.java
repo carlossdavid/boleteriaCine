@@ -141,6 +141,7 @@ public class InicioSesion extends javax.swing.JFrame {
         jButton1.setToolTipText("");
         jButton1.setAlignmentY(-0.5F);
         jButton1.setBorder(null);
+        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton1.setFocusPainted(false);
         getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 450, 340, 40));
 
