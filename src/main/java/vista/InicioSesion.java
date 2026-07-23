@@ -1,8 +1,11 @@
 package vista;
 
-import java.awt.Color;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.event.FocusEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import vista.util.*;
 /**
  *
@@ -10,11 +13,11 @@ import vista.util.*;
  */
 public class InicioSesion extends javax.swing.JFrame {
     // Definicion de imagenes 
-    ImagenEnJLabel iconoOjo;
-    ImagenEnJLabel imagenFondoPrincipal;
-    ImagenEnJLabel iconoLogo;
-    ImagenEnJLabel iconoUsuario;
-    ImagenEnJLabel iconoCandado;
+    private ImagenEnJLabel iconoOjo;
+    private ImagenEnJLabel imagenFondoPrincipal;
+    private ImagenEnJLabel iconoLogo;
+    private ImagenEnJLabel iconoUsuario;
+    private ImagenEnJLabel iconoCandado;
     
     
     // CONSTANTES GLOBALES 
@@ -31,20 +34,52 @@ public class InicioSesion extends javax.swing.JFrame {
      */
     public InicioSesion() {
         initComponents();
-        //-- PROPIEDADES DE LA VENTANA --//
-        this.setLocationRelativeTo(null); // Centrado
-        this.setTitle("Acceso al Sistema");
-        this.setSize(ANCHO_VENTANA, ALTO_VENTANA); // Tamaño fijo 
-        this.setResizable(false);
-        
-        //-- IMAGENES --// 
+        this.configurarPropiedadesVentana();
         this.cargarImagenes();
-       
+        this.configurarEventosVisuales(); 
+    }
+    
+    // Configuraciones inciales 
+    public void configurarEventosVisuales() {
+        // Botones 
+        btnMostrarContra.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {btnMostrarContraPresionado();}
+        });
+        
+        btnIngresar.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                btnIngresar.setBackground(Tema.ROJO_OPACO);}
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                btnIngresar.setBackground(Tema.ROJO_VIBRANTE);}
+        });
+        
+        txtUserCampo.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {txtUsuarioMousePresionado();}
+            public void focusLost(FocusEvent f) {txtUsuarioPierdeFoco();}
+        });
+        
+        txtContraCampo.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {txtContraMousePresionado();}
+            public void focusLost(FocusEvent f) {txtContraPierdeFoco();}
+        });
         
         
     }
+    public void configurarPropiedadesVentana() {
+        //-- PROPIEDADES DE LA VENTANA --//
+        this.setLocationRelativeTo(null); // Centrado
+        this.setTitle("Sistema de Gestion Night Cine - Acceso al Sistema");
+        this.setSize(ANCHO_VENTANA, ALTO_VENTANA); // Tamaño fijo 
+        this.setResizable(false); // Tamaño fijo 
+    }
     
     public void cargarImagenes() {
+        //-- IMAGENES --// 
         // Añadir imagen de fondo 
         imagenFondoPrincipal = new ImagenEnJLabel(bgPrincipalJLabel, 
                 "imagenesDeFondo/fondoPrincipalLogin.png");
@@ -61,13 +96,60 @@ public class InicioSesion extends javax.swing.JFrame {
         this.repaint();
     }
     
+    // -- EVENTOS VISUALES -- // 
+    private void txtUsuarioMousePresionado () {
+        ManejadorEventosVisuales.eliminarPlaceHolder(txtUserCampo, 
+                PLACEHOLDER_TXT_USUARIO, 
+                Tema.CREMA_CLARO);
+    }
     
+    private void txtContraMousePresionado () {
+        ManejadorEventosVisuales.eliminarPlaceHolder(txtContraCampo, 
+                PLACEHOLDER_TXT_CONTRA, 
+                Tema.CREMA_CLARO);
+    }
+    
+    private void txtContraPierdeFoco() {
+        ManejadorEventosVisuales.restaurarPlaceHolder(
+                txtContraCampo, 
+                PLACEHOLDER_TXT_CONTRA, 
+                Tema.TEXTO_OPACO_FONDOGRIS);
+    }
+    
+    private void txtUsuarioPierdeFoco() {
+        ManejadorEventosVisuales.restaurarPlaceHolder(
+                txtUserCampo, 
+                PLACEHOLDER_TXT_CONTRA, 
+                Tema.TEXTO_OPACO_FONDOGRIS);
+        
+    }
+    
+    private void btnMostrarContraPresionado() {
+        if (seVeLaContra) {
+            txtContraCampo.setEchoChar('•'); 
+            jLabelMostrar.setText("Mostrar"); 
+            iconoOjo.setIcono("iconos/ojo.png");
+            seVeLaContra = false;
+        } else {
+            txtContraCampo.setEchoChar((char) 0); 
+            jLabelMostrar.setText("Ocultar"); 
+                        iconoOjo.setIcono("iconos/ojoAbierto.png");
+            seVeLaContra = true;
+        }
+    }
+    
+    
+    
+    
+    // Método sobreescrito para establecer icono en la ventana 
     @Override
     public Image getIconImage() {
         Image retValue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("iconos/iconoLogo.jpg"));
         return retValue;
     }
     
+    // -- EVENTOS VISUALES -- // 
+    // PLACE HOLDERS
     
 
     /**
@@ -79,22 +161,22 @@ public class InicioSesion extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btnSinSesion = new javax.swing.JButton();
         btnRegistrate = new javax.swing.JButton();
-        btnRegistrate1 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        btnIngresar = new javax.swing.JButton();
         txtNoCuenta = new javax.swing.JLabel();
         iconoLogoJLabel = new javax.swing.JLabel();
         txtContraContainer = new javax.swing.JPanel();
         btnMostrarContra = new javax.swing.JButton();
         iconOjoJLabel = new javax.swing.JLabel();
         baseLinetxt = new javax.swing.JPanel();
-        txtContrajLabel = new javax.swing.JPasswordField();
+        txtContraCampo = new javax.swing.JPasswordField();
         iconContraJLabel = new javax.swing.JLabel();
         jLabelMostrar = new javax.swing.JLabel();
         txtUserContainer = new javax.swing.JPanel();
         iconUserJLabel = new javax.swing.JLabel();
         baseLinetxt1 = new javax.swing.JPanel();
-        txtUserJLabel = new javax.swing.JTextField();
+        txtUserCampo = new javax.swing.JTextField();
         jLabelInciarSesion = new javax.swing.JLabel();
         bgPrincipalJLabel = new javax.swing.JLabel();
 
@@ -102,48 +184,40 @@ public class InicioSesion extends javax.swing.JFrame {
         setIconImage(getIconImage());
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btnRegistrate.setFont(Tema.FUENTE_NORMAL);
+        btnSinSesion.setFont(Tema.FUENTE_NORMAL);
+        btnSinSesion.setForeground(Tema.ROJO_VIBRANTE);
+        btnSinSesion.setText("Continuar sin iniciar Sesión →");
+        btnSinSesion.setToolTipText("");
+        btnSinSesion.setBorder(null);
+        btnSinSesion.setBorderPainted(false);
+        btnSinSesion.setContentAreaFilled(false);
+        btnSinSesion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnSinSesion.setFocusPainted(false);
+        getContentPane().add(btnSinSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 10, 220, 30));
+
+        btnRegistrate.setFont(Tema.FUENTE_NORMAL_BOLD);
         btnRegistrate.setForeground(Tema.ROJO_VIBRANTE);
-        btnRegistrate.setText("Continuar sin iniciar Sesión →");
+        btnRegistrate.setText("Regístrate");
         btnRegistrate.setToolTipText("");
         btnRegistrate.setBorder(null);
         btnRegistrate.setBorderPainted(false);
         btnRegistrate.setContentAreaFilled(false);
         btnRegistrate.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnRegistrate.setFocusPainted(false);
-        btnRegistrate.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRegistrateActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnRegistrate, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 10, 220, 30));
+        getContentPane().add(btnRegistrate, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 500, 70, 30));
 
-        btnRegistrate1.setFont(Tema.FUENTE_NORMAL_BOLD);
-        btnRegistrate1.setForeground(Tema.ROJO_VIBRANTE);
-        btnRegistrate1.setText("Regístrate");
-        btnRegistrate1.setToolTipText("");
-        btnRegistrate1.setBorder(null);
-        btnRegistrate1.setBorderPainted(false);
-        btnRegistrate1.setContentAreaFilled(false);
-        btnRegistrate1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnRegistrate1.setFocusPainted(false);
-        btnRegistrate1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRegistrate1ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnRegistrate1, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 500, 70, 30));
-
-        jButton1.setBackground(Tema.ROJO_VIBRANTE);
-        jButton1.setFont(new java.awt.Font("Arial Black", 1, 16)); // NOI18N
-        jButton1.setForeground(Tema.BLANCO);
-        jButton1.setText("INGRESAR");
-        jButton1.setToolTipText("");
-        jButton1.setAlignmentY(-0.5F);
-        jButton1.setBorder(null);
-        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton1.setFocusPainted(false);
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 450, 340, 40));
+        btnIngresar.setBackground(Tema.ROJO_VIBRANTE);
+        btnIngresar.setFont(new java.awt.Font("Arial Black", 1, 16)); // NOI18N
+        btnIngresar.setForeground(Tema.BLANCO);
+        btnIngresar.setText("INGRESAR");
+        btnIngresar.setToolTipText("");
+        btnIngresar.setAlignmentY(-0.5F);
+        btnIngresar.setBorder(null);
+        btnIngresar.setContentAreaFilled(false);
+        btnIngresar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnIngresar.setFocusPainted(false);
+        btnIngresar.setOpaque(true);
+        getContentPane().add(btnIngresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 450, 340, 40));
 
         txtNoCuenta.setFont(Tema.FUENTE_NORMAL);
         txtNoCuenta.setForeground(Tema.BLANCO);
@@ -162,11 +236,6 @@ public class InicioSesion extends javax.swing.JFrame {
         btnMostrarContra.setContentAreaFilled(false);
         btnMostrarContra.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnMostrarContra.setFocusPainted(false);
-        btnMostrarContra.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                btnMostrarContraMousePressed(evt);
-            }
-        });
         txtContraContainer.add(btnMostrarContra, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 13, 100, 20));
 
         iconOjoJLabel.setText("icon");
@@ -175,26 +244,13 @@ public class InicioSesion extends javax.swing.JFrame {
         baseLinetxt.setBackground(Tema.CREMA_CLARO);
         txtContraContainer.add(baseLinetxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 38, 400, 2));
 
-        txtContrajLabel.setBackground(Tema.GRIS_OSCURO);
-        txtContrajLabel.setFont(Tema.FUENTE_NORMAL);
-        txtContrajLabel.setForeground(new java.awt.Color(93, 86, 79));
-        txtContrajLabel.setText(this.PLACEHOLDER_TXT_CONTRA);
-        txtContrajLabel.setBorder(null);
-        txtContrajLabel.setFocusable(false);
-        txtContrajLabel.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                txtContrajLabelFocusLost(evt);
-            }
-        });
-        txtContrajLabel.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                txtContrajLabelMouseClicked(evt);
-            }
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                txtContrajLabelMousePressed(evt);
-            }
-        });
-        txtContraContainer.add(txtContrajLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 0, 170, 37));
+        txtContraCampo.setBackground(Tema.GRIS_OSCURO);
+        txtContraCampo.setFont(Tema.FUENTE_NORMAL);
+        txtContraCampo.setForeground(new java.awt.Color(93, 86, 79));
+        txtContraCampo.setText(this.PLACEHOLDER_TXT_CONTRA);
+        txtContraCampo.setBorder(null);
+        txtContraCampo.setFocusable(false);
+        txtContraContainer.add(txtContraCampo, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 0, 170, 37));
 
         iconContraJLabel.setText("icon");
         txtContraContainer.add(iconContraJLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 40, 40));
@@ -216,31 +272,13 @@ public class InicioSesion extends javax.swing.JFrame {
         baseLinetxt1.setBackground(Tema.CREMA_CLARO);
         txtUserContainer.add(baseLinetxt1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 38, 400, 2));
 
-        txtUserJLabel.setBackground(Tema.GRIS_OSCURO);
-        txtUserJLabel.setFont(Tema.FUENTE_NORMAL);
-        txtUserJLabel.setForeground(Tema.TEXTO_OPACO_FONDOGRIS);
-        txtUserJLabel.setText(this.PLACEHOLDER_TXT_USUARIO);
-        txtUserJLabel.setBorder(null);
-        txtUserJLabel.setFocusable(false);
-        txtUserJLabel.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                txtUserJLabelFocusLost(evt);
-            }
-        });
-        txtUserJLabel.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                txtUserJLabelMouseClicked(evt);
-            }
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                txtUserJLabelMousePressed(evt);
-            }
-        });
-        txtUserJLabel.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtUserJLabelActionPerformed(evt);
-            }
-        });
-        txtUserContainer.add(txtUserJLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 0, 250, 37));
+        txtUserCampo.setBackground(Tema.GRIS_OSCURO);
+        txtUserCampo.setFont(Tema.FUENTE_NORMAL);
+        txtUserCampo.setForeground(Tema.TEXTO_OPACO_FONDOGRIS);
+        txtUserCampo.setText(this.PLACEHOLDER_TXT_USUARIO);
+        txtUserCampo.setBorder(null);
+        txtUserCampo.setFocusable(false);
+        txtUserContainer.add(txtUserCampo, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 0, 250, 37));
 
         getContentPane().add(txtUserContainer, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 310, 340, 40));
 
@@ -257,91 +295,29 @@ public class InicioSesion extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void txtUserJLabelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUserJLabelActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtUserJLabelActionPerformed
-
-    private void btnRegistrateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrateActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnRegistrateActionPerformed
-
-    private void btnRegistrate1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrate1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnRegistrate1ActionPerformed
-
-    private void txtUserJLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtUserJLabelMouseClicked
-        
-    }//GEN-LAST:event_txtUserJLabelMouseClicked
-
-    private void txtContrajLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtContrajLabelMouseClicked
-        
-        
-    }//GEN-LAST:event_txtContrajLabelMouseClicked
-    // Eliminar placeholder si se da click al TextField
-    private void txtUserJLabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtUserJLabelMousePressed
-        ManejadorEventosVisuales.eliminarPlaceHolder(
-                txtUserJLabel, 
-                PLACEHOLDER_TXT_USUARIO, 
-                Tema.CREMA_CLARO);
-    }//GEN-LAST:event_txtUserJLabelMousePressed
-
-    private void txtContrajLabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtContrajLabelMousePressed
-        ManejadorEventosVisuales.eliminarPlaceHolder(
-                txtContrajLabel, 
-                PLACEHOLDER_TXT_CONTRA, 
-                Tema.CREMA_CLARO);
-    }//GEN-LAST:event_txtContrajLabelMousePressed
-    // Restaurar el placeholder si el campo está vacío 
-    private void txtUserJLabelFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtUserJLabelFocusLost
-        ManejadorEventosVisuales.restaurarPlaceHolder(
-                txtUserJLabel, 
-                PLACEHOLDER_TXT_USUARIO, 
-                Tema.TEXTO_OPACO_FONDOGRIS);
-        
-    }//GEN-LAST:event_txtUserJLabelFocusLost
-
-    private void txtContrajLabelFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtContrajLabelFocusLost
-        ManejadorEventosVisuales.restaurarPlaceHolder(
-                txtContrajLabel, 
-                PLACEHOLDER_TXT_CONTRA, 
-                Tema.TEXTO_OPACO_FONDOGRIS);
-    }//GEN-LAST:event_txtContrajLabelFocusLost
-
-    // Desvelar contraseña 
-    private void btnMostrarContraMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMostrarContraMousePressed
-        if (seVeLaContra) {
-            txtContrajLabel.setEchoChar('•'); 
-            jLabelMostrar.setText("Mostrar"); 
-            iconoOjo.setIcono("iconos/ojo.png");
-            seVeLaContra = false;
-        } else {
-            txtContrajLabel.setEchoChar((char) 0); 
-            jLabelMostrar.setText("Ocultar"); 
-                        iconoOjo.setIcono("iconos/ojoAbierto.png");
-            seVeLaContra = true;
-        }
-    }//GEN-LAST:event_btnMostrarContraMousePressed
-
+    
+    
+    
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel baseLinetxt;
     private javax.swing.JPanel baseLinetxt1;
     private javax.swing.JLabel bgPrincipalJLabel;
+    private javax.swing.JButton btnIngresar;
     private javax.swing.JButton btnMostrarContra;
     private javax.swing.JButton btnRegistrate;
-    private javax.swing.JButton btnRegistrate1;
+    private javax.swing.JButton btnSinSesion;
     private javax.swing.JLabel iconContraJLabel;
     private javax.swing.JLabel iconOjoJLabel;
     private javax.swing.JLabel iconUserJLabel;
     private javax.swing.JLabel iconoLogoJLabel;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabelInciarSesion;
     private javax.swing.JLabel jLabelMostrar;
+    private javax.swing.JPasswordField txtContraCampo;
     private javax.swing.JPanel txtContraContainer;
-    private javax.swing.JPasswordField txtContrajLabel;
     private javax.swing.JLabel txtNoCuenta;
+    private javax.swing.JTextField txtUserCampo;
     private javax.swing.JPanel txtUserContainer;
-    private javax.swing.JTextField txtUserJLabel;
     // End of variables declaration//GEN-END:variables
 }

@@ -4,7 +4,7 @@
 
 package boleteriaCine;
 
-import vista.InicioSesion;
+import vista.*;
 
 /**
  *
@@ -16,7 +16,7 @@ public class BoleteriaCine {
         System.setProperty("sun.java2d.uiScale", "1.0");
         
         java.awt.EventQueue.invokeLater(() -> {
-            new InicioSesion().setVisible(true);
+            new Cartelera().setVisible(true);
         });
     }
 }

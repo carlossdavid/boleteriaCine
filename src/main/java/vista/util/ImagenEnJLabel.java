@@ -32,9 +32,9 @@ public class ImagenEnJLabel extends JFrame {
         
         this.setIcono(ruta);
     }
-    
-    public static ImageIcon conseguirIconoNitido(ImageIcon iconoOriginal, int ancho, int alto) {
-        BufferedImage bi = new BufferedImage(ancho, alto, BufferedImage.TYPE_INT_ARGB);
+     /** 
+    public  ImageIcon conseguirIconoNitido(ImageIcon iconoOriginal, int ancho, int alto) {
+       BufferedImage bi = new BufferedImage(ancho, alto, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g2 = bi.createGraphics();
 
         // --- CLAVE: Activamos la máxima calidad de renderizado ---
@@ -47,13 +47,30 @@ public class ImagenEnJLabel extends JFrame {
         g2.dispose();
 
         return new ImageIcon(bi);
+
     }
-    
+   
     public void setIcono(String ruta) {
         ImageIcon original = new ImageIcon(getClass().getResource("/" + ruta));
        
         ImageIcon nitido = this.conseguirIconoNitido(original, label.getWidth(), label.getHeight()); 
         label.setIcon(nitido);
+    }
+    
+    **/
+    
+    public void setIcono(String ruta) {
+        ImageIcon original = new ImageIcon(getClass().getResource("/" + ruta));
+       
+        ImageIcon icono = new ImageIcon(original.getImage().getScaledInstance(label.getWidth(), label.getHeight(), Image.SCALE_DEFAULT));
+        
+        label.setIcon(icono);
+    }
+    
+    public void actualizarDimensiones() {
+        ImageIcon original = new ImageIcon(getClass().getResource("/" + this.ruta));
+        ImageIcon nueva = new ImageIcon(original.getImage().getScaledInstance(label.getWidth(), label.getHeight(), Image.SCALE_DEFAULT));
+        label.setIcon(nueva);
     }
 
 
