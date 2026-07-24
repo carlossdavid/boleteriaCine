@@ -16,7 +16,8 @@ public class BoleteriaCine {
         System.setProperty("sun.java2d.uiScale", "1.0");
         
         java.awt.EventQueue.invokeLater(() -> {
-            new Cartelera().setVisible(true);
+            new Registrate().setVisible(true);
+            new InicioSesion().setVisible(true);
         });
     }
 }

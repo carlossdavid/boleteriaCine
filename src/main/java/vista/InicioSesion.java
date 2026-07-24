@@ -2,10 +2,13 @@ package vista;
 
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import vista.util.*;
 /**
  *
@@ -34,9 +37,9 @@ public class InicioSesion extends javax.swing.JFrame {
      */
     public InicioSesion() {
         initComponents();
-        this.configurarPropiedadesVentana();
-        this.cargarImagenes();
-        this.configurarEventosVisuales(); 
+        configurarPropiedadesVentana();
+        cargarImagenes();
+        configurarEventosVisuales(); 
     }
     
     // Configuraciones inciales 
@@ -58,15 +61,24 @@ public class InicioSesion extends javax.swing.JFrame {
         
         txtUserCampo.addMouseListener(new MouseAdapter() {
             @Override
-            public void mousePressed(MouseEvent e) {txtUsuarioMousePresionado();}
-            public void focusLost(FocusEvent f) {txtUsuarioPierdeFoco();}
+            public void mousePressed(MouseEvent e) {txtMousePresionado(txtUserCampo, PLACEHOLDER_TXT_USUARIO);}
         });
         
         txtContraCampo.addMouseListener(new MouseAdapter() {
             @Override
-            public void mousePressed(MouseEvent e) {txtContraMousePresionado();}
-            public void focusLost(FocusEvent f) {txtContraPierdeFoco();}
+            public void mousePressed(MouseEvent e) {txtMousePresionado(txtContraCampo, PLACEHOLDER_TXT_CONTRA);}
         });
+        
+        txtUserCampo.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusLost(FocusEvent f) {txtPierdeFoco(txtUserCampo, PLACEHOLDER_TXT_USUARIO);}
+        });
+        
+        txtContraCampo.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusLost(FocusEvent f) {txtPierdeFoco(txtContraCampo, PLACEHOLDER_TXT_CONTRA);}
+        });
+        
         
         
     }
@@ -97,31 +109,17 @@ public class InicioSesion extends javax.swing.JFrame {
     }
     
     // -- EVENTOS VISUALES -- // 
-    private void txtUsuarioMousePresionado () {
-        ManejadorEventosVisuales.eliminarPlaceHolder(txtUserCampo, 
-                PLACEHOLDER_TXT_USUARIO, 
+    private void txtMousePresionado (JTextField campo, String PLACEHOLDER) {
+        ManejadorEventosVisuales.eliminarPlaceHolder(campo, 
+                PLACEHOLDER, 
                 Tema.CREMA_CLARO);
     }
     
-    private void txtContraMousePresionado () {
-        ManejadorEventosVisuales.eliminarPlaceHolder(txtContraCampo, 
-                PLACEHOLDER_TXT_CONTRA, 
-                Tema.CREMA_CLARO);
-    }
-    
-    private void txtContraPierdeFoco() {
+    private void txtPierdeFoco(JTextField campo, String PLACEHOLDER) {
         ManejadorEventosVisuales.restaurarPlaceHolder(
-                txtContraCampo, 
-                PLACEHOLDER_TXT_CONTRA, 
+                campo, 
+                PLACEHOLDER, 
                 Tema.TEXTO_OPACO_FONDOGRIS);
-    }
-    
-    private void txtUsuarioPierdeFoco() {
-        ManejadorEventosVisuales.restaurarPlaceHolder(
-                txtUserCampo, 
-                PLACEHOLDER_TXT_CONTRA, 
-                Tema.TEXTO_OPACO_FONDOGRIS);
-        
     }
     
     private void btnMostrarContraPresionado() {
