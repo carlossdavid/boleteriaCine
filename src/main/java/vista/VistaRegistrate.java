@@ -17,7 +17,7 @@ import vista.util.*;
  *
  * @author carlo
  */
-public class Registrate extends javax.swing.JFrame {
+public class VistaRegistrate extends javax.swing.JFrame {
 
     // CONSTANTES GLOBALES 
     private final int ANCHO_VENTANA = 1011; 
@@ -35,7 +35,7 @@ public class Registrate extends javax.swing.JFrame {
     private ImagenEnJLabel iconoLogo; 
     private ImagenEnJLabel iconoOjo; 
     
-    public Registrate() {
+    public VistaRegistrate() {
         initComponents();
         configurarPropiedadesVentana();
         configurarImagenes();

@@ -4,6 +4,9 @@
 
 package boleteriaCine;
 
+import controlador.ControladorIniciarSesion;
+import modelo.DAO.UsuarioDAO;
+import modelo.servicios.Autenticador;
 import vista.*;
 
 /**
@@ -13,11 +16,18 @@ import vista.*;
 public class BoleteriaCine {
 
     public static void main(String[] args) {
+        // Evita que las imanes se muestren borrosas 
         System.setProperty("sun.java2d.uiScale", "1.0");
         
-        java.awt.EventQueue.invokeLater(() -> {
-            new Registrate().setVisible(true);
-            new InicioSesion().setVisible(true);
-        });
+        UsuarioDAO usuarioDAO = new UsuarioDAO(); 
+        VistaInicioSesion vistaInicioSesion = new VistaInicioSesion();
+        Autenticador autenticador = new Autenticador();
+        
+        ControladorIniciarSesion ctlrIniciarSesion = new ControladorIniciarSesion(vistaInicioSesion, usuarioDAO, autenticador);
+        
+        ctlrIniciarSesion.iniciar();
+        
+        
+        
     }
 }

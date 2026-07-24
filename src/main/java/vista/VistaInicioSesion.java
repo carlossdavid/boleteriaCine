@@ -2,19 +2,22 @@ package vista;
 
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import javax.swing.JButton;
 import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import vista.util.*;
 /**
  *
  * @author carlo
  */
-public class InicioSesion extends javax.swing.JFrame {
+public class VistaInicioSesion extends javax.swing.JFrame {
     // Definicion de imagenes 
     private ImagenEnJLabel iconoOjo;
     private ImagenEnJLabel imagenFondoPrincipal;
@@ -35,7 +38,7 @@ public class InicioSesion extends javax.swing.JFrame {
     /**
      * Creates new form InicioSesion
      */
-    public InicioSesion() {
+    public VistaInicioSesion() {
         initComponents();
         configurarPropiedadesVentana();
         cargarImagenes();
@@ -88,8 +91,8 @@ public class InicioSesion extends javax.swing.JFrame {
         this.setTitle("Sistema de Gestion Night Cine - Acceso al Sistema");
         this.setSize(ANCHO_VENTANA, ALTO_VENTANA); // Tamaño fijo 
         this.setResizable(false); // Tamaño fijo 
+        this.setVisible(true);
     }
-    
     public void cargarImagenes() {
         //-- IMAGENES --// 
         // Añadir imagen de fondo 
@@ -113,15 +116,13 @@ public class InicioSesion extends javax.swing.JFrame {
         ManejadorEventosVisuales.eliminarPlaceHolder(campo, 
                 PLACEHOLDER, 
                 Tema.CREMA_CLARO);
-    }
-    
+    } 
     private void txtPierdeFoco(JTextField campo, String PLACEHOLDER) {
         ManejadorEventosVisuales.restaurarPlaceHolder(
                 campo, 
                 PLACEHOLDER, 
                 Tema.TEXTO_OPACO_FONDOGRIS);
     }
-    
     private void btnMostrarContraPresionado() {
         if (seVeLaContra) {
             txtContraCampo.setEchoChar('•'); 
@@ -136,8 +137,58 @@ public class InicioSesion extends javax.swing.JFrame {
         }
     }
     
+    // -- EVENTOS DATOS -- // 
+    public void addBtnIngresarListener (ActionListener l){
+        btnIngresar.addActionListener(l);
+    }
+    
+    public void addBtnRegistrateListener (ActionListener l){
+        btnRegistrate.addActionListener(l);
+    }
+    
+    public void addBtnSinSesionListener (ActionListener l){
+        btnSinSesion.addActionListener(l);
+    }
     
     
+    // -- GETTERS && SETTERS --//
+    public JButton getBtnIngresar() {
+        return btnIngresar;
+    }
+
+    public JButton getBtnRegistrate() {
+        return btnRegistrate;
+    }
+
+    public JButton getBtnSinSesion() {
+        return btnSinSesion;
+    }
+
+    public JPasswordField getTxtContraCampo() {
+        return txtContraCampo;
+    }
+
+    public JTextField getTxtUserCampo() {
+        return txtUserCampo;
+    }
+
+    public String getPLACEHOLDER_TXT_USUARIO() {
+        return PLACEHOLDER_TXT_USUARIO;
+    }
+
+    public String getPLACEHOLDER_TXT_CONTRA() {
+        return PLACEHOLDER_TXT_CONTRA;
+    }
+    
+    // Métodos de la vista
+    public void cerrar() {
+        dispose();
+    }
+    
+    // -- METODOS PARA MENSAJES DE ERROR -- // 
+    public void mostrarError(String ERROR) {
+        JOptionPane.showMessageDialog(this, ERROR, "Error", JOptionPane.ERROR_MESSAGE);
+    }
     
     // Método sobreescrito para establecer icono en la ventana 
     @Override
@@ -146,8 +197,6 @@ public class InicioSesion extends javax.swing.JFrame {
         return retValue;
     }
     
-    // -- EVENTOS VISUALES -- // 
-    // PLACE HOLDERS
     
 
     /**

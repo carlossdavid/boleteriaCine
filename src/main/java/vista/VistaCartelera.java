@@ -16,7 +16,7 @@ import vista.util.*;
  *
  * @author carlo
  */
-public class Cartelera extends javax.swing.JFrame {
+public class VistaCartelera extends javax.swing.JFrame {
     // Imagenes 
     private ImagenEnJLabel fondoPrincipal; 
     private ImagenEnJLabel iconoCartelera; 
@@ -30,11 +30,16 @@ public class Cartelera extends javax.swing.JFrame {
     /**
      * Creates new form Principal
      */
-    public Cartelera() {
+    public VistaCartelera() {
         initComponents();
         configurarPropiedadesVentana();
         configurarEventosVisuales();
         cargarImagenes();
+    }
+    
+    public VistaCartelera(boolean invitado) {
+        this();
+        
     }
     
     // IMAGENES 
@@ -66,6 +71,7 @@ public class Cartelera extends javax.swing.JFrame {
         this.setSize(ANCHO_VENTANA, ALTO_VENTANA); // Tamaño fijo 
         this.setResizable(false); // Tamaño fijo 
     }
+    
     public void configurarEventosVisuales() {
         
         MouseAdapter eventoTamanoCartelera = new MouseAdapter() {
@@ -113,6 +119,12 @@ public class Cartelera extends javax.swing.JFrame {
         btnCasete.addMouseListener(eventoTamanoCartelera);
         btnCompras.addMouseListener(eventoTamanoCompras);
         btnCuenta.addMouseListener(eventoTamanoCuenta);
+    }
+    
+    
+    // Métodos de la vista
+    public void cerrar() {
+        dispose();
     }
     
     // EVENTOS VISUALES 
