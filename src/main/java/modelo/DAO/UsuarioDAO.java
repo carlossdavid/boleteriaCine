@@ -5,8 +5,10 @@
 package modelo.DAO;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import modelo.entidad.*;
@@ -59,15 +61,34 @@ public class UsuarioDAO {
     // BUSQUEDA 
     public Usuario buscarPorCorreo(String correo) {
         ArrayList<Usuario> usuarios = this.getListaUsuarios();
-        System.out.println(usuarios);
+
         for (Usuario u: usuarios) {
-            System.out.println(u.getCorreo());
             if (u.getCorreo().equalsIgnoreCase(correo)) {
                 
                 return u;
             }
         }
         return null;
+    }
+    private int getUltimoID () {
+        ArrayList<Usuario> usuarios = this.getListaUsuarios();
+        
+        return usuarios.getLast().getId();
+    }
+    
+    public boolean agregarUsuario(Usuario usuario) {
+       usuario.setId(getUltimoID()+1); 
+        try(FileWriter fw = new FileWriter(archivo,true);
+                BufferedWriter bw = new BufferedWriter(fw)){
+            //Escribir el producto usando el método toCSV y añadimos una nueva linea
+            bw.write(usuario.toCSV());
+            bw.newLine();
+            return true;
+        }catch (IOException e){
+            e.printStackTrace();
+            return false;
+        }
+    
     }
     
 }

@@ -21,7 +21,7 @@ public class ControladorIniciarSesion implements ActionListener {
     private Autenticador autenticador; 
 
     public ControladorIniciarSesion(VistaInicioSesion vistaIniciarSesion, 
-            UsuarioDAO usuarioDAO, Autenticador autenticador) {
+        UsuarioDAO usuarioDAO, Autenticador autenticador) {
         this.vistaIniciarSesion = vistaIniciarSesion;
         this.usuarioDAO = usuarioDAO;
         this.autenticador = autenticador;
@@ -75,27 +75,25 @@ public class ControladorIniciarSesion implements ActionListener {
 
     private void abrirInterfazCliente() {
         VistaCartelera vista = new VistaCartelera();
-        vista.setVisible(true);
+        
     }
 
     private void abrirInterfazEmpelado() {
         VistaEmpleado vista = new VistaEmpleado();
-        vista.setVisible(true);
     }
 
     private void abrirInterfazAdmin() {
         VistaAdmin vista = new VistaAdmin();
-        vista.setVisible(true);
     }
     
     private void abrirInterfazAnonimo() {
-        VistaCartelera vista = new VistaCartelera(true); 
-        vista.setVisible(true);
+        VistaCartelera vista = new VistaCartelera(true);
     }
     
     private void abrirInterfazRegistrate() {
         VistaRegistrate vista = new VistaRegistrate();
-        vista.setVisible(true);
+        ControladorRegistro ctrl = new ControladorRegistro(usuarioDAO, vista);
+        ctrl.iniciar();
     }
     /** 
      * @return true si son válidos y false si son inválidos

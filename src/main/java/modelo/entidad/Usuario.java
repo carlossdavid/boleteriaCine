@@ -11,7 +11,7 @@ public class Usuario {
     private String nombre;
     private String apellido; 
     private String correo;
-    private String contraseña; 
+    private String contra; 
     private RolUsuario rol; 
 
     public Usuario(int id, String nombre, String apellido, String correo, String contraseña, RolUsuario rol) {
@@ -19,7 +19,7 @@ public class Usuario {
         this.nombre = nombre;
         this.apellido = apellido;
         this.correo = correo;
-        this.contraseña = contraseña;
+        this.contra = contraseña;
         this.rol = rol;
         
         
@@ -29,15 +29,34 @@ public class Usuario {
         return correo;
     }
 
-    public String getContraseña() {
-        return contraseña;
+    public String getContra() {
+        return contra;
     }
 
     public RolUsuario getRol() {
         return rol;
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public String getApellido() {
+        return apellido;
+    }
     
+    public String toCSV() {
+        return "" + id + "," + nombre + "," + apellido + "," + correo + "," +
+                contra + "," + rol;
+    }
     
+    public void setId(int id) {
+        this.id = id;
+    }
 
     
     

@@ -31,4 +31,9 @@ public class ManejadorEventosVisuales {
             campo.setFocusable(false);
         }
     }
+    
+    public static void vaciarCampo(JTextField campo, String placeHolder, Color color) {
+        campo.setText(placeHolder);
+        campo.setForeground(color);
+    }
 }

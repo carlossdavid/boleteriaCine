@@ -22,7 +22,7 @@ public class Autenticador {
             return null; 
         }
         
-        if (usuario.getContraseña().equals(contra)){
+        if (usuario.getContra().equals(contra)){
             return usuario;
         }
         return null; 

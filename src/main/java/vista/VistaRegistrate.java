@@ -4,12 +4,17 @@
  */
 package vista;
 
+import java.awt.Color;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.JButton;
+import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import vista.util.*;
 
@@ -23,10 +28,10 @@ public class VistaRegistrate extends javax.swing.JFrame {
     private final int ANCHO_VENTANA = 1011; 
     private final int ALTO_VENTANA = 645;
     
-    private final String PLACEHOLDER_TXT_NOMBRE    = "Ingresa tu primer nombre";
-    private final String PLACEHOLDER_TXT_APELLIDO = "Ingresa tu primer apellido";
-    private final String PLACEHOLDER_TXT_CORREO = "correo-ejemplo@algo.com";
-    private final String PLACEHOLDER_TXT_CONTRA     = "**********";
+    public final String PLACEHOLDER_TXT_NOMBRE    = "Ingresa tu primer nombre";
+    public final String PLACEHOLDER_TXT_APELLIDO = "Ingresa tu primer apellido";
+    public final String PLACEHOLDER_TXT_CORREO = "correo-ejemplo@algo.com";
+    public final String PLACEHOLDER_TXT_CONTRA     = "**********";
     
     private boolean seVeLaContra = false;
     
@@ -136,7 +141,7 @@ public class VistaRegistrate extends javax.swing.JFrame {
                 Tema.TEXTO_OPACO_FONDOGRIS);
     }
     
-     private void btnMostrarContraPresionado() {
+    private void btnMostrarContraPresionado() {
         if (seVeLaContra) {
             txtContraCampo.setEchoChar('•'); 
             jLabelMostrar.setText("Mostrar"); 
@@ -150,12 +155,69 @@ public class VistaRegistrate extends javax.swing.JFrame {
         }
     }
     
+    
+    // EVENTOS LOGICA 
+    public void addBtnRegistrarseListener(ActionListener l) {
+        btnRegistrarse.addActionListener(l);
+    }
+    
+    public void addBtnIniciarSesion(ActionListener l) {
+        btnIniciarSesion.addActionListener(l);
+    }
     // Icono Ventana 
     @Override
     public Image getIconImage() {
         Image retValue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("iconos/iconoLogo.jpg"));
         return retValue;
     }
+
+    // -- GETTERS && SETTERS -- // 
+    public JButton getBtnIniciarSesion() {
+        return btnIniciarSesion;
+    }
+
+    public JButton getBtnRegistrarse() {
+        return btnRegistrarse;
+    }
+
+    public JTextField getTxtApellidoCampo() {
+        return txtApellidoCampo;
+    }
+
+    public JPasswordField getTxtContraCampo() {
+        return txtContraCampo;
+    }
+
+    public JTextField getTxtCorreoCampo() {
+        return txtCorreoCampo;
+    }
+
+    public JTextField getTxtNombreCampo() {
+        return txtNombreCampo;
+    }
+    
+    
+    // Métodos de la vista
+    public void cerrar() {
+        dispose();
+    }
+    
+    public void mostrarError(String error) {
+        JOptionPane.showMessageDialog(this, error, "Error", JOptionPane.ERROR_MESSAGE);
+    }
+    
+    public void mostrarMensaje(String msg) {
+        JOptionPane.showMessageDialog(this, msg, "Usuario Registrado con Éxito", JOptionPane.INFORMATION_MESSAGE);
+    }
+    
+    public void resetearCampos() {
+        ManejadorEventosVisuales.vaciarCampo(txtNombreCampo, PLACEHOLDER_TXT_NOMBRE, Tema.TEXTO_OPACO_FONDOGRIS);
+        ManejadorEventosVisuales.vaciarCampo(txtApellidoCampo, PLACEHOLDER_TXT_APELLIDO, Tema.TEXTO_OPACO_FONDOGRIS);
+        ManejadorEventosVisuales.vaciarCampo(txtCorreoCampo, PLACEHOLDER_TXT_CORREO, Tema.TEXTO_OPACO_FONDOGRIS);
+        ManejadorEventosVisuales.vaciarCampo(txtContraCampo, PLACEHOLDER_TXT_CONTRA, Tema.TEXTO_OPACO_FONDOGRIS);
+    }
+    
+    
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
