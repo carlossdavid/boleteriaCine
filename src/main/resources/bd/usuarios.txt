@@ -3,3 +3,4 @@
 3,Lucia,Chavez,luci123@hotmail.com,luci123,EMPLEADO
 
 4,Naia,Castellanos,naia_83@hotmail.com,naia123,CLIENTE
+5,carlos,Ortega,carlos01@epn.edu.ec,carlos123,CLIENTE

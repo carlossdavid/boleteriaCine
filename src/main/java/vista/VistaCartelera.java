@@ -1,15 +1,19 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package vista;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import modelo.entidad.Pelicula;
 import vista.util.*;
 
 /**
@@ -24,9 +28,14 @@ public class VistaCartelera extends javax.swing.JFrame {
     private ImagenEnJLabel iconoCuenta; 
     private ImagenEnJLabel iconoLogo; 
     
+    // Panel Scroll
+    private JPanel panel; 
+    
     // CONSTANTES GLOBALES 
     private final int ANCHO_VENTANA = 1280; 
     private final int ALTO_VENTANA = 720;
+
+    
     /**
      * Creates new form Principal
      */
@@ -34,6 +43,7 @@ public class VistaCartelera extends javax.swing.JFrame {
         initComponents();
         configurarPropiedadesVentana();
         configurarEventosVisuales();
+        configurarCartelera();
         cargarImagenes();
     }
     
@@ -121,7 +131,39 @@ public class VistaCartelera extends javax.swing.JFrame {
         btnCuenta.addMouseListener(eventoTamanoCuenta);
     }
     
+    public void configurarCartelera() {
+        panelPeliculas.setLayout(
+            new GridLayout(0, 3, 35, 35)
+        );
+
+        scrollPeliculas.setVerticalScrollBarPolicy(
+            JScrollPane.VERTICAL_SCROLLBAR_NEVER
+        );
+
+        scrollPeliculas.setHorizontalScrollBarPolicy(
+            JScrollPane.HORIZONTAL_SCROLLBAR_NEVER
+        );
+
+        scrollPeliculas.getVerticalScrollBar().setUnitIncrement(16);
+        
+        scrollPeliculas.setOpaque(false);
+        scrollPeliculas.getViewport().setOpaque(false);
+        panelPeliculas.setOpaque(false);
+    }
     
+    
+    public void mostrarPeliculas(ArrayList<Pelicula> peliculas) {
+        panelPeliculas.removeAll();
+        
+        for (Pelicula pelicula : peliculas) {
+            TarjetaPelicula tarjeta = new TarjetaPelicula(pelicula);
+            panelPeliculas.add(tarjeta);
+        }
+
+        panelPeliculas.revalidate();
+        panelPeliculas.repaint();
+        
+    }
     // Métodos de la vista
     public void cerrar() {
         dispose();
@@ -172,6 +214,8 @@ public class VistaCartelera extends javax.swing.JFrame {
         iconoCompraJLabel = new javax.swing.JLabel();
         btnCuenta = new javax.swing.JButton();
         iconoCuentaJLabel = new javax.swing.JLabel();
+        scrollPeliculas = new javax.swing.JScrollPane();
+        panelPeliculas = new javax.swing.JPanel();
         fondoPrincipalJLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -239,6 +283,15 @@ public class VistaCartelera extends javax.swing.JFrame {
         iconoCuentaJLabel.setBackground(new java.awt.Color(204, 204, 204));
         iconoCuentaJLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         getContentPane().add(iconoCuentaJLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 430, 120, 120));
+
+        scrollPeliculas.setBorder(null);
+        scrollPeliculas.setOpaque(false);
+
+        panelPeliculas.setOpaque(false);
+        panelPeliculas.setLayout(new java.awt.GridLayout());
+        scrollPeliculas.setViewportView(panelPeliculas);
+
+        getContentPane().add(scrollPeliculas, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 240, 830, 460));
         getContentPane().add(fondoPrincipalJLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, 720));
 
         pack();
@@ -254,6 +307,8 @@ public class VistaCartelera extends javax.swing.JFrame {
     private javax.swing.JLabel iconoCompraJLabel;
     private javax.swing.JLabel iconoCuentaJLabel;
     private javax.swing.JLabel iconoLogoJLabel;
+    private javax.swing.JPanel panelPeliculas;
+    private javax.swing.JScrollPane scrollPeliculas;
     private javax.swing.JLabel txtBienvenidaJLabel;
     private javax.swing.JLabel txtBienvenidaNombre;
     private javax.swing.JLabel txtCarteleraJLabel;

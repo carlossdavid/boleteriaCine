@@ -26,7 +26,11 @@ public class BoleteriaCine {
         ControladorIniciarSesion ctlrIniciarSesion = new ControladorIniciarSesion(vistaInicioSesion, usuarioDAO, autenticador);
         
         ctlrIniciarSesion.iniciar();
-        
+       
+        /*
+        VistaCartelera vista = new VistaCartelera();
+        vista.setVisible(true);
+         */
         
         
     }
