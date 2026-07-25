@@ -19,6 +19,9 @@ public class Tema {
     public static final Font FUENTE_BOTON = new Font("Arial Black", Font.BOLD, 16); 
     public static final Font FUENTE_NORMAL_BOLD = new Font("Arial Narrow", Font.BOLD, 16);
     public static final Font FUENTE_ICONOS = new Font("Monospaced", Font.BOLD, 16);
+    public static final Font FUENTE_CLASIFICACION = new Font("Montserrat Light", Font.PLAIN, 12);
+    public static final Font FUENTE_DURACION_PELI = new Font("Montserrat", Font.PLAIN, 14);
+    public static final Font FUENTE_TITULO_PELI = new Font("Montserrat", Font.BOLD, 17);
     
     
 }

@@ -2,6 +2,7 @@ package controlador;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import modelo.DAO.PeliculaDAO;
 import vista.VistaInicioSesion;
 import modelo.DAO.UsuarioDAO;
 import modelo.entidad.Usuario;
@@ -75,7 +76,9 @@ public class ControladorIniciarSesion implements ActionListener {
 
     private void abrirInterfazCliente() {
         VistaCartelera vista = new VistaCartelera();
-        
+        PeliculaDAO peliculaDAO = new PeliculaDAO();
+        ControladorCartelera ctrl = new ControladorCartelera(vista, peliculaDAO);
+        ctrl.iniciar();
     }
 
     private void abrirInterfazEmpelado() {

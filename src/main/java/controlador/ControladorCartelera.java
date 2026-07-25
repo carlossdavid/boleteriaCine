@@ -18,10 +18,15 @@ public class ControladorCartelera {
         this.peliculaDAO = peliculaDAO;
     }
     
-    public void inciar() {
+    public void iniciar() {
         ArrayList<Pelicula> peliculas = new ArrayList<>();
-        peliculas = peliculaDAO.getListaPeliculas(); 
+        peliculas = peliculaDAO.getListaPeliculas();
+        if (peliculas == null) {
+            vistaCartelera.mostrarError("No se pudo cargar las películas");
+            return;
+        }
         vistaCartelera.mostrarPeliculas(peliculas);
+        vistaCartelera.setVisible(true);
     }
     
     

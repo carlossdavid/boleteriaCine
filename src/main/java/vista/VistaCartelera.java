@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import modelo.entidad.Pelicula;
@@ -188,6 +189,10 @@ public class VistaCartelera extends javax.swing.JFrame {
         jlabel.setBounds(posx-cantidad, posy-cantidad, width+(cantidad*2), height+(cantidad*2));
     }
    
+    // -- METODOS PARA MENSAJES DE ERROR -- // 
+    public void mostrarError(String ERROR) {
+        JOptionPane.showMessageDialog(this, ERROR, "Error", JOptionPane.ERROR_MESSAGE);
+    }
     
     
     @Override
@@ -288,10 +293,10 @@ public class VistaCartelera extends javax.swing.JFrame {
         scrollPeliculas.setOpaque(false);
 
         panelPeliculas.setOpaque(false);
-        panelPeliculas.setLayout(new java.awt.GridLayout());
+        panelPeliculas.setLayout(new java.awt.GridLayout(1, 0));
         scrollPeliculas.setViewportView(panelPeliculas);
 
-        getContentPane().add(scrollPeliculas, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 240, 830, 460));
+        getContentPane().add(scrollPeliculas, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 240, 830, 430));
         getContentPane().add(fondoPrincipalJLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, 720));
 
         pack();
