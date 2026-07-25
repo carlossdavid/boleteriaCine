@@ -6,7 +6,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import modelo.entidad.Pelicula;
-import modelo.entidad.Usuario;
+import modelo.entidad.usuarios.Usuario;
 import modelo.enums.RolUsuario;
 
 /**

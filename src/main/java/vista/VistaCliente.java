@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
@@ -21,7 +22,7 @@ import vista.util.*;
  *
  * @author carlo
  */
-public class VistaCartelera extends javax.swing.JFrame {
+public class VistaCliente extends javax.swing.JFrame {
     // Imagenes 
     private ImagenEnJLabel fondoPrincipal; 
     private ImagenEnJLabel iconoCartelera; 
@@ -40,7 +41,7 @@ public class VistaCartelera extends javax.swing.JFrame {
     /**
      * Creates new form Principal
      */
-    public VistaCartelera() {
+    public VistaCliente() {
         initComponents();
         configurarPropiedadesVentana();
         configurarEventosVisuales();
@@ -48,10 +49,6 @@ public class VistaCartelera extends javax.swing.JFrame {
         cargarImagenes();
     }
     
-    public VistaCartelera(boolean invitado) {
-        this();
-        
-    }
     
     // IMAGENES 
     public void cargarImagenes() {
@@ -194,12 +191,60 @@ public class VistaCartelera extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(this, ERROR, "Error", JOptionPane.ERROR_MESSAGE);
     }
     
+    // CONFIGURACIONES POR USUARIO 
+    public void configurarInvitado(){
+        
+    }
+    
+    public void addBtnCuentaListener(ActionListener l){
+        btnCuenta.addActionListener(l);
+    }
+    
+    public void addBtnComprasListener(ActionListener l) {
+        btnCompras.addActionListener(l);
+    }
+
+    public void addBtnCarteleraListener(ActionListener l) {
+        btnCasete.addActionListener(l);
+    }
+
+    public void addBtnCerrarSesionListener(ActionListener l) {
+        btnCerrarSesion.addActionListener(l);
+    }
+    
+    // GETTERS 
+
+    public JButton getBtnCasete() {
+        return btnCasete;
+    }
+
+    public JButton getBtnCerrarSesion() {
+        return btnCerrarSesion;
+    }
+
+    public JButton getBtnCompras() {
+        return btnCompras;
+    }
+
+    public JButton getBtnCuenta() {
+        return btnCuenta;
+    }
+
+    public JLabel getTxtBienvenidaNombre() {
+        return txtBienvenidaNombre;
+    }
+    
+    public void setTxtBienvenidaNombre(String nombre) {
+        txtBienvenidaJLabel.setText(nombre);
+    }
     
     @Override
     public Image getIconImage() {
         Image retValue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("iconos/iconoLogo.jpg"));
         return retValue;
     }
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -209,6 +254,7 @@ public class VistaCartelera extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btnCerrarSesion = new javax.swing.JButton();
         txtCarteleraJLabel = new javax.swing.JLabel();
         txtBienvenidaNombre = new javax.swing.JLabel();
         txtBienvenidaJLabel = new javax.swing.JLabel();
@@ -226,6 +272,16 @@ public class VistaCartelera extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setIconImage(getIconImage());
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btnCerrarSesion.setFont(Tema.FUENTE_ICONOS);
+        btnCerrarSesion.setForeground(new java.awt.Color(255, 0, 0));
+        btnCerrarSesion.setText("Cerrar Sesion X");
+        btnCerrarSesion.setBorderPainted(false);
+        btnCerrarSesion.setContentAreaFilled(false);
+        btnCerrarSesion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCerrarSesion.setFocusPainted(false);
+        btnCerrarSesion.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        getContentPane().add(btnCerrarSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 20, 140, 20));
 
         txtCarteleraJLabel.setBackground(Tema.ROJO_VIBRANTE);
         txtCarteleraJLabel.setFont(Tema.FUENTE_FUERTE_PLAIN);
@@ -305,6 +361,7 @@ public class VistaCartelera extends javax.swing.JFrame {
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCasete;
+    private javax.swing.JButton btnCerrarSesion;
     private javax.swing.JButton btnCompras;
     private javax.swing.JButton btnCuenta;
     private javax.swing.JLabel fondoPrincipalJLabel;

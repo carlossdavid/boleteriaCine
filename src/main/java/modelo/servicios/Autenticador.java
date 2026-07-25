@@ -5,7 +5,7 @@ package modelo.servicios;
  * @author carlo
  */
 import modelo.DAO.UsuarioDAO;
-import modelo.entidad.Usuario;
+import modelo.entidad.usuarios.Usuario;
 
 
 public class Autenticador {
@@ -22,7 +22,7 @@ public class Autenticador {
             return null; 
         }
         
-        if (usuario.getContra().equals(contra)){
+        if (usuario.getContrasena().equals(contra)){
             return usuario;
         }
         return null; 

@@ -1,5 +1,6 @@
 package modelo.DAO;
 
+import modelo.entidad.usuarios.Usuario;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -7,7 +8,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import modelo.entidad.*;
+import modelo.entidad.usuarios.*;
 import modelo.enums.RolUsuario;
 
 /**
@@ -36,15 +37,8 @@ public class UsuarioDAO {
                 String [] partes = linea.split(",");
                 if (partes.length == 6) {
                     RolUsuario rol = RolUsuario.valueOf(partes[5]);
-                    Usuario u = new Usuario(
-                            Integer.parseInt(partes[0]),
-                            partes[1],
-                            partes[2], 
-                            partes[3],
-                            partes[4],
-                            rol
-                    );
-                    usuarios.add(u);
+                    Usuario u = crearUsuarioPorRol(rol, partes);
+                    if (u != null) usuarios.add(u);
                 }
             }
         } catch (IOException e) {
@@ -52,6 +46,20 @@ public class UsuarioDAO {
         }
         
         return usuarios;
+    }
+    
+    // Devolver usuario por tipo de instancia 
+    public Usuario crearUsuarioPorRol(RolUsuario rol, String[] datos) {
+        return switch(rol) {
+            case CLIENTE->
+                new Cliente(datos[0], datos[1], datos[2], datos[3], datos[4]);
+            case ADMIN->
+                new Trabajador(datos[0], datos[1], datos[2], datos[3], datos[4], String.valueOf(rol));
+            case VENDEDOR->
+                new Trabajador(datos[0], datos[1], datos[2], datos[3], datos[4], String.valueOf(rol));
+            default->
+                null;
+        };       
     }
     
     // BUSQUEDA 
@@ -66,14 +74,19 @@ public class UsuarioDAO {
         }
         return null;
     }
-    private int getUltimoID () {
+    
+    private String getUltimoID () {
         ArrayList<Usuario> usuarios = this.getListaUsuarios();
         
         return usuarios.getLast().getId();
     }
     
+    private int idANumero(String id){
+        return Integer.parseInt(id.substring(1,id.length()));
+    }
+    
     public boolean agregarUsuario(Usuario usuario) {
-       usuario.setId(getUltimoID()+1); 
+       usuario.setId("U" + (idANumero(getUltimoID())+1)); 
         try(FileWriter fw = new FileWriter(archivo,true);
                 BufferedWriter bw = new BufferedWriter(fw)){
             //Escribir el producto usando el método toCSV y añadimos una nueva linea

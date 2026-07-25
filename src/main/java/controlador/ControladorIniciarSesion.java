@@ -5,11 +5,14 @@ import java.awt.event.ActionListener;
 import modelo.DAO.PeliculaDAO;
 import vista.VistaInicioSesion;
 import modelo.DAO.UsuarioDAO;
-import modelo.entidad.Usuario;
+import modelo.entidad.usuarios.Cliente;
+import modelo.entidad.usuarios.Trabajador;
+import modelo.entidad.usuarios.Usuario;
+import modelo.enums.RolUsuario;
 import modelo.servicios.Autenticador;
 import vista.VistaAdmin;
-import vista.VistaCartelera;
-import vista.VistaEmpleado;
+import vista.VistaCliente;
+import vista.VistaVendedor;
 import vista.VistaRegistrate;
 
 /**
@@ -67,22 +70,35 @@ public class ControladorIniciarSesion implements ActionListener {
     
     // Métodos 
     private void abrirVistaSegunRol(Usuario usuario) {
-        switch (usuario.getRol()) {
-            case CLIENTE -> abrirInterfazCliente();
-            case EMPLEADO -> abrirInterfazEmpelado();
-            case ADMINISTRADOR -> abrirInterfazAdmin();
+        if (usuario instanceof Cliente) {
+            abrirInterfazCliente();
+        } else if (usuario instanceof Trabajador) {
+            RolUsuario cargo = RolUsuario.valueOf(((Trabajador) usuario).getCargo());
+            switch (cargo) {
+                case ADMIN:
+                    abrirInterfazAdmin();
+                    break;
+                case CLIENTE:
+                    abrirInterfazCliente();
+                    break;
+                case VENDEDOR: 
+                    abrirInterfazVendedor();
+                    break;
+                default:
+                    
+            }
         }
     }
 
     private void abrirInterfazCliente() {
-        VistaCartelera vista = new VistaCartelera();
+        VistaCliente vista = new VistaCliente();
         PeliculaDAO peliculaDAO = new PeliculaDAO();
         ControladorCartelera ctrl = new ControladorCartelera(vista, peliculaDAO);
         ctrl.iniciar();
     }
 
-    private void abrirInterfazEmpelado() {
-        VistaEmpleado vista = new VistaEmpleado();
+    private void abrirInterfazVendedor() {
+        VistaVendedor vista = new VistaVendedor();
     }
 
     private void abrirInterfazAdmin() {
@@ -90,7 +106,10 @@ public class ControladorIniciarSesion implements ActionListener {
     }
     
     private void abrirInterfazAnonimo() {
-        VistaCartelera vista = new VistaCartelera(true);
+        VistaCliente vista = new VistaCliente();
+        PeliculaDAO peliculaDAO = new PeliculaDAO();
+        ControladorCartelera ctrl = new ControladorCartelera(vista, peliculaDAO);
+        ctrl.iniciarInvitado();
     }
     
     private void abrirInterfazRegistrate() {

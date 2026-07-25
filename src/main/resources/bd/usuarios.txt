@@ -1,5 +1,6 @@
-1,admin,sistema,admin@admin.com,admin123,ADMINISTRADOR
-2,Carlos,Ortega,carlos.ortega@outlook.com,carlos123,CLIENTE
-3,Lucia,Chavez,luci123@hotmail.com,luci123,EMPLEADO
-4,Naia,Castellanos,naia_83@hotmail.com,naia123,CLIENTE
-5,carlos,Ortega,carlos01@epn.edu.ec,carlos123,CLIENTE
+U1,admin,sistema,admin@admin.com,admin123,ADMIN
+U2,Carlos,Ortega,carlos.ortega@outlook.com,carlos123,CLIENTE
+U3,Lucia,Chavez,luci123@hotmail.com,luci123,VENDEDOR
+U4,Naia,Castellanos,naia_83@hotmail.com,naia123,CLIENTE
+U5,carlos,Ortega,carlos01@epn.edu.ec,carlos123,CLIENTE
+U6,Naia,Castellanos,naia,naia,CLIENTE
