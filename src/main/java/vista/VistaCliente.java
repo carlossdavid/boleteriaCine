@@ -1,5 +1,6 @@
 package vista;
 
+import vista.modular.TarjetaPelicula;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridLayout;
@@ -69,6 +70,12 @@ public class VistaCliente extends javax.swing.JFrame {
         
         this.repaint();
     }
+    
+    
+    // GETTERS 
+    
+    
+    
     
     
     // CONFIGURACIONES INICIALES 
@@ -150,22 +157,30 @@ public class VistaCliente extends javax.swing.JFrame {
     }
     
     
-    public void mostrarPeliculas(ArrayList<Pelicula> peliculas) {
+    public ArrayList<TarjetaPelicula> mostrarPeliculas(ArrayList<Pelicula> peliculas) {
         panelPeliculas.removeAll();
+        ArrayList<TarjetaPelicula> tarjetas = new ArrayList<>();
         
         for (Pelicula pelicula : peliculas) {
+            
             TarjetaPelicula tarjeta = new TarjetaPelicula(pelicula);
+            
             panelPeliculas.add(tarjeta);
+            tarjetas.add(tarjeta);
         }
 
         panelPeliculas.revalidate();
         panelPeliculas.repaint();
         
+        return tarjetas;
     }
+    
     // Métodos de la vista
     public void cerrar() {
         dispose();
     }
+    
+    
     
     // EVENTOS VISUALES 
     /**
@@ -235,7 +250,7 @@ public class VistaCliente extends javax.swing.JFrame {
     }
     
     public void setTxtBienvenidaNombre(String nombre) {
-        txtBienvenidaJLabel.setText(nombre);
+        txtBienvenidaNombre.setText(nombre);
     }
     
     @Override
@@ -281,7 +296,7 @@ public class VistaCliente extends javax.swing.JFrame {
         btnCerrarSesion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnCerrarSesion.setFocusPainted(false);
         btnCerrarSesion.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
-        getContentPane().add(btnCerrarSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 20, 140, 20));
+        getContentPane().add(btnCerrarSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 230, 20));
 
         txtCarteleraJLabel.setBackground(Tema.ROJO_VIBRANTE);
         txtCarteleraJLabel.setFont(Tema.FUENTE_FUERTE_PLAIN);

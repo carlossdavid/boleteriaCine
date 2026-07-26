@@ -9,7 +9,10 @@ public class Tema {
     public static final Color ROJO_VIBRANTE = new Color(210,57,53); 
     public static final Color ROJO_OPACO = new Color(170, 17, 13);
     public static final Color CREMA_CLARO = new Color(233,208,182); 
+    public static final Color CREMA = new Color(233, 208, 182);
     public static final Color TEXTO_OPACO_FONDOGRIS = new Color(93,86,79); 
+    public static final Color GRIS_FONDO = new Color(39, 39, 39);
+    public static final Color GIRS_FONDO_OSCURO = new Color(22, 24, 27);
     public static final Color BLANCO = Color.WHITE;
     
     // -- FUENTES -- // 
@@ -22,6 +25,10 @@ public class Tema {
     public static final Font FUENTE_CLASIFICACION = new Font("Montserrat Light", Font.PLAIN, 12);
     public static final Font FUENTE_DURACION_PELI = new Font("Montserrat", Font.PLAIN, 14);
     public static final Font FUENTE_TITULO_PELI = new Font("Montserrat", Font.BOLD, 17);
+    public static final Font FUENTE_TITULO_PELI_GRANDE = new Font("Montserrat", Font.BOLD, 20);
+    public static final Font FUENTE_DURACION_GRANDE = new Font("Montserrat Light", Font.PLAIN, 14);
+    public static final Font FUENTE_PEQUE = new Font("Montserrat Light", Font.PLAIN, 14);
+    public static final Font FUENTE_PEQUE__BOLD = new Font("Montserrat Light", Font.BOLD, 14);
     
     
 }

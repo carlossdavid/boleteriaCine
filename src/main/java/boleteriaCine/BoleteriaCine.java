@@ -4,7 +4,7 @@
 
 package boleteriaCine;
 
-import controlador.ControladorCartelera;
+import controlador.ControladorVistaCliente;
 import controlador.ControladorIniciarSesion;
 import modelo.DAO.PeliculaDAO;
 import modelo.DAO.UsuarioDAO;
@@ -32,7 +32,7 @@ public class BoleteriaCine {
          /*
         VistaCliente vista = new VistaCliente();
         PeliculaDAO peliculaDAO = new PeliculaDAO();
-        ControladorCartelera ctrl = new ControladorCartelera(vista, peliculaDAO);
+        ControladorVistaCliente ctrl = new ControladorVistaCliente(vista, peliculaDAO);
         ctrl.iniciar();*/
         
     }

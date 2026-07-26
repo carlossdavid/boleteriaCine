@@ -97,7 +97,41 @@ public class UsuarioDAO {
             e.printStackTrace();
             return false;
         }
-    
+    }
+
+    private boolean guardarTodos(ArrayList<Usuario> usuarios) {
+        try (FileWriter fw = new FileWriter(archivo, false);
+                BufferedWriter bw = new BufferedWriter(fw)) {
+            for (Usuario u : usuarios) {
+                bw.write(u.toCSV());
+                bw.newLine();
+            }
+            return true;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
     
+    //Actualiza la información de un usuario existente buscando su ID
+    public boolean actualizarUsuario(Usuario usuarioEditado) {
+        ArrayList<Usuario> usuarios = getListaUsuarios();
+        for (int i = 0; i < usuarios.size(); i++) {
+            if (usuarios.get(i).getId() == usuarioEditado.getId()) {
+                usuarios.set(i, usuarioEditado);
+                return guardarTodos(usuarios);
+            }
+        }
+        return false;
+    }
+    
+    //Elimina un Usiario por su Id
+    public boolean eliminarUsuario(int idUsuario) {
+        ArrayList<Usuario> usuarios = getListaUsuarios();
+        boolean eliminado = usuarios.removeIf(u -> u.getId().equals(idUsuario));
+        if (eliminado) {
+            return guardarTodos(usuarios);
+        }
+        return false;
+    }
 }

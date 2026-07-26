@@ -71,15 +71,12 @@ public class ControladorIniciarSesion implements ActionListener {
     // Métodos 
     private void abrirVistaSegunRol(Usuario usuario) {
         if (usuario instanceof Cliente) {
-            abrirInterfazCliente();
+            abrirInterfazCliente((Cliente) usuario);
         } else if (usuario instanceof Trabajador) {
             RolUsuario cargo = RolUsuario.valueOf(((Trabajador) usuario).getCargo());
             switch (cargo) {
                 case ADMIN:
                     abrirInterfazAdmin();
-                    break;
-                case CLIENTE:
-                    abrirInterfazCliente();
                     break;
                 case VENDEDOR: 
                     abrirInterfazVendedor();
@@ -90,10 +87,11 @@ public class ControladorIniciarSesion implements ActionListener {
         }
     }
 
-    private void abrirInterfazCliente() {
+    private void abrirInterfazCliente(Cliente cliente) {
         VistaCliente vista = new VistaCliente();
         PeliculaDAO peliculaDAO = new PeliculaDAO();
-        ControladorCartelera ctrl = new ControladorCartelera(vista, peliculaDAO);
+        
+        ControladorVistaCliente ctrl = new ControladorVistaCliente(vista, peliculaDAO, cliente);
         ctrl.iniciar();
     }
 
@@ -103,12 +101,14 @@ public class ControladorIniciarSesion implements ActionListener {
 
     private void abrirInterfazAdmin() {
         VistaAdmin vista = new VistaAdmin();
+        ControladorAdmin ctrl = new ControladorAdmin(vista);
+        ctrl.iniciar();
     }
     
     private void abrirInterfazAnonimo() {
         VistaCliente vista = new VistaCliente();
         PeliculaDAO peliculaDAO = new PeliculaDAO();
-        ControladorCartelera ctrl = new ControladorCartelera(vista, peliculaDAO);
+        ControladorVistaCliente ctrl = new ControladorVistaCliente(vista, peliculaDAO, null);
         ctrl.iniciarInvitado();
     }
     

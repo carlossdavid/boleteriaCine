@@ -1,5 +1,7 @@
-package vista;
+package vista.modular;
 
+import java.awt.event.MouseListener;
+import javax.swing.JButton;
 import modelo.entidad.Pelicula;
 import vista.util.*;
 
@@ -11,6 +13,7 @@ public class TarjetaPelicula extends javax.swing.JPanel {
 
     
     private ImagenEnJLabel imagenPelicula;
+    private Pelicula pelicula; 
     /**
      * Creates new form TarjetaPelicula
      */
@@ -20,13 +23,29 @@ public class TarjetaPelicula extends javax.swing.JPanel {
         this.setVisible(true);
         this.setOpaque(false);
         
+       this.pelicula = pelicula;
+       cargarDatos(); 
+    }
+    
+    public void agregarListener(MouseListener listener) {
+        btnAccion.addMouseListener(listener);
+    }
+    
+    public void cargarDatos() {
         jPanel1.setOpaque(false);
         imagenPeliculaJLabel.setSize(200,270);
         imagenPelicula = new ImagenEnJLabel(imagenPeliculaJLabel, pelicula.getRutaImagen());
         txtClasificacionPeli.setText(pelicula.getClasificacion());
         txtDuracionPeli.setText(pelicula.obtenerDuracionFormateada());
         txtNombrePeli.setText(pelicula.getTitulo().toUpperCase());
-        
+    }
+    
+    public Pelicula getPelicula() {
+        return pelicula;
+    }
+    
+    public JButton getBtnAccion() {
+        return btnAccion;
     }
 
     
@@ -35,7 +54,7 @@ public class TarjetaPelicula extends javax.swing.JPanel {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        btnPeliCartelera = new javax.swing.JButton();
+        btnAccion = new javax.swing.JButton();
         txtNombrePeli = new javax.swing.JLabel();
         txtClasificacionPeli = new javax.swing.JLabel();
         txtDuracionPeli = new javax.swing.JLabel();
@@ -47,12 +66,12 @@ public class TarjetaPelicula extends javax.swing.JPanel {
         jPanel1.setBackground(new java.awt.Color(255, 255, 102));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btnPeliCartelera.setBorder(null);
-        btnPeliCartelera.setBorderPainted(false);
-        btnPeliCartelera.setContentAreaFilled(false);
-        btnPeliCartelera.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnPeliCartelera.setFocusPainted(false);
-        jPanel1.add(btnPeliCartelera, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 240, 320));
+        btnAccion.setBorder(null);
+        btnAccion.setBorderPainted(false);
+        btnAccion.setContentAreaFilled(false);
+        btnAccion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnAccion.setFocusPainted(false);
+        jPanel1.add(btnAccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 240, 320));
 
         txtNombrePeli.setFont(Tema.FUENTE_TITULO_PELI);
         txtNombrePeli.setForeground(Tema.CREMA_CLARO);
@@ -75,7 +94,7 @@ public class TarjetaPelicula extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnPeliCartelera;
+    private javax.swing.JButton btnAccion;
     private javax.swing.JLabel imagenPeliculaJLabel;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel txtClasificacionPeli;
