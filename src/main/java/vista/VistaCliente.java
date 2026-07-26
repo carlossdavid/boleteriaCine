@@ -162,7 +162,7 @@ public class VistaCliente extends javax.swing.JFrame {
         ArrayList<TarjetaPelicula> tarjetas = new ArrayList<>();
         
         for (Pelicula pelicula : peliculas) {
-            
+            if(!pelicula.isActiva()) continue;
             TarjetaPelicula tarjeta = new TarjetaPelicula(pelicula);
             
             panelPeliculas.add(tarjeta);

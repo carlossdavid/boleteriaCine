@@ -4,6 +4,8 @@
  */
 package vista;
 
+import java.awt.event.ActionListener;
+
 /**
  *
  * @author carlo
@@ -17,6 +19,46 @@ public class VistaAdminPeliculas extends javax.swing.JFrame {
         initComponents();
     }
 
+        public void addBtnRegresar (ActionListener l){btnRegresar.addActionListener(l);}
+        public void addBtnAnadir (ActionListener l){btnAnadir.addActionListener(l);}
+        public void addBtnActualizar (ActionListener l){btnActualizar.addActionListener(l);}
+        public void addBtnEliminar (ActionListener l){btnEliminar.addActionListener(l);}
+        public void addBtnSeleccionarPortada(ActionListener l){btnSeleccionarPortada.addActionListener(l);}
+    
+    
+        public javax.swing.JTextField getTxtID() { return txtID; }
+        public javax.swing.JTextField getTxtTitulo() { return txtTitulo; }
+        public javax.swing.JTextField getTxtGenero() { return txtGenero; }
+        public javax.swing.JTextField getTxtDuracion() { return txtDuracion; }
+        public javax.swing.JTextField getTxtClasificacion() { return txtClasificacion; }
+        public javax.swing.JTextArea getTxtSinopsiss() { return txtSinopsiss; }
+        public javax.swing.JTextField getTxtUrlTrailer() { return txtUrlTrailer; }
+        public javax.swing.JCheckBox getChkActiva() { return chkActiva; }
+        public javax.swing.JLabel getLblRutaPortada() { return lblRutaPortada; }
+
+        
+        public javax.swing.JButton getBtnSeleccionarPortada() { return btnSeleccionarPortada; }
+        public javax.swing.JButton getBtnAnadir() { return btnAnadir; }
+        public javax.swing.JButton getBtnActualizar() { return btnActualizar; }
+        public javax.swing.JButton getBtnEliminar() { return btnEliminar; }
+        public javax.swing.JButton getBtnRegresar() { return btnRegresar; }
+
+       
+        public javax.swing.JTable getTblPeliculas() { return tblPeliculas; }
+
+        public void limpiarCampos() {
+            if (txtID != null) txtID.setText("");
+            if (txtTitulo != null) txtTitulo.setText("");
+            if (txtGenero != null) txtGenero.setText("");
+            if (txtDuracion != null) txtDuracion.setText("");
+            if (txtClasificacion != null) txtClasificacion.setText("");
+            if (txtSinopsiss != null) txtSinopsiss.setText("");
+            if (txtUrlTrailer != null) txtUrlTrailer.setText("");
+            if (chkActiva != null) chkActiva.setSelected(true);
+            if (lblRutaPortada != null) lblRutaPortada.setText("Sin portada seleccionada");
+        }
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -26,21 +68,246 @@ public class VistaAdminPeliculas extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextPane1 = new javax.swing.JTextPane();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        txtSinopsis = new javax.swing.JTextField();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        txtID = new javax.swing.JTextField();
+        txtTitulo = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        txtGenero = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        txtDuracion = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        txtClasificacion = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        txtUrlTrailer = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        btnSeleccionarPortada = new javax.swing.JButton();
+        lblRutaPortada = new javax.swing.JLabel();
+        chkActiva = new javax.swing.JCheckBox();
+        btnEliminar = new javax.swing.JButton();
+        btnActualizar = new javax.swing.JButton();
+        btnAnadir = new javax.swing.JButton();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tblPeliculas = new javax.swing.JTable();
+        btnRegresar = new javax.swing.JButton();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        txtSinopsiss = new javax.swing.JTextArea();
+
+        jScrollPane1.setViewportView(jTextPane1);
+
+        txtSinopsis.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        txtSinopsis.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtSinopsisActionPerformed(evt);
+            }
+        });
+        jScrollPane2.setViewportView(txtSinopsis);
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jLabel1.setText("Titulo");
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jLabel2.setText("ID");
+
+        txtID.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+
+        txtTitulo.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jLabel3.setText("Género");
+
+        txtGenero.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jLabel4.setText("Duración ");
+
+        txtDuracion.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jLabel5.setText("Clasificación");
+
+        txtClasificacion.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jLabel6.setText("URL Trailer");
+
+        txtUrlTrailer.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jLabel7.setText("Sinopsis");
+
+        btnSeleccionarPortada.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        btnSeleccionarPortada.setText("Seleccionar Portada");
+
+        lblRutaPortada.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        lblRutaPortada.setText("Ruta");
+
+        chkActiva.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        chkActiva.setSelected(true);
+        chkActiva.setText("Pelicula Activa");
+
+        btnEliminar.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        btnEliminar.setText("Eliminar");
+
+        btnActualizar.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        btnActualizar.setText("Actualizar");
+
+        btnAnadir.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        btnAnadir.setText("Añadir");
+
+        tblPeliculas.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane3.setViewportView(tblPeliculas);
+
+        jScrollPane4.setViewportView(jScrollPane3);
+
+        btnRegresar.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        btnRegresar.setText("Regresar");
+
+        txtSinopsiss.setColumns(20);
+        txtSinopsiss.setRows(5);
+        jScrollPane5.setViewportView(txtSinopsiss);
+
+        jScrollPane6.setViewportView(jScrollPane5);
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(49, 49, 49)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(chkActiva)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(btnActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnAnadir, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnRegresar, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(btnSeleccionarPortada)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(lblRutaPortada, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(txtGenero, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addGap(69, 69, 69)
+                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(txtDuracion, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(txtTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(txtUrlTrailer, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(txtClasificacion, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jScrollPane6))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
+                                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 530, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(27, 27, 27))))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(99, 99, 99)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtGenero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtDuracion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel6))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtClasificacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtUrlTrailer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel7)
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 358, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(21, 21, 21)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnSeleccionarPortada)
+                    .addComponent(lblRutaPortada))
+                .addGap(18, 18, 18)
+                .addComponent(chkActiva)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnActualizar)
+                    .addComponent(btnEliminar)
+                    .addComponent(btnAnadir)
+                    .addComponent(btnRegresar))
+                .addGap(81, 81, 81))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void txtSinopsisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSinopsisActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtSinopsisActionPerformed
 
     /**
      * @param args the command line arguments
@@ -78,5 +345,36 @@ public class VistaAdminPeliculas extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnActualizar;
+    private javax.swing.JButton btnAnadir;
+    private javax.swing.JButton btnEliminar;
+    private javax.swing.JButton btnRegresar;
+    private javax.swing.JButton btnSeleccionarPortada;
+    private javax.swing.JCheckBox chkActiva;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JTextPane jTextPane1;
+    private javax.swing.JLabel lblRutaPortada;
+    private javax.swing.JTable tblPeliculas;
+    private javax.swing.JTextField txtClasificacion;
+    private javax.swing.JTextField txtDuracion;
+    private javax.swing.JTextField txtGenero;
+    private javax.swing.JTextField txtID;
+    private javax.swing.JTextField txtSinopsis;
+    private javax.swing.JTextArea txtSinopsiss;
+    private javax.swing.JTextField txtTitulo;
+    private javax.swing.JTextField txtUrlTrailer;
     // End of variables declaration//GEN-END:variables
 }

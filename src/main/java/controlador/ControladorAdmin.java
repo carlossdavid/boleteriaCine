@@ -2,8 +2,12 @@ package controlador;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import modelo.DAO.UsuarioDAO;
+import modelo.servicios.Autenticador;
 import vista.VistaAdmin;
+import vista.VistaAdminPeliculas;
 import vista.VistaGestionEmpleados;
+import vista.VistaInicioSesion;
 
 public class ControladorAdmin implements ActionListener {
 
@@ -12,9 +16,15 @@ public class ControladorAdmin implements ActionListener {
     public ControladorAdmin(VistaAdmin vistaAdmin) {
         this.vistaAdmin = vistaAdmin;
 
-        // Escuchar el clic en btnEmpleados
+        
         if (this.vistaAdmin.getBtnEmpleados() != null) {
             this.vistaAdmin.getBtnEmpleados().addActionListener(this);
+        }
+        if (this.vistaAdmin.getBtnPeliculas() != null) {
+            this.vistaAdmin.getBtnPeliculas().addActionListener(this);
+        }
+        if (this.vistaAdmin.getBtnCerrarSesion() != null) {
+            this.vistaAdmin.getBtnCerrarSesion().addActionListener(this);
         }
     }
 
@@ -22,22 +32,44 @@ public class ControladorAdmin implements ActionListener {
     public void actionPerformed(ActionEvent l) {
         if (l.getSource() == vistaAdmin.getBtnEmpleados()) {
             abrirGestionEmpleados();
-        }
-    }
-
-    private void abrirGestionEmpleados() {
-        // Cierra la vista actual
-        vistaAdmin.dispose();
-
-        // Crea la nueva vista y su controlador
-        VistaGestionEmpleados vistaGestion = new VistaGestionEmpleados();
-        ControladorGestionEmpleados ctrlGestion = new ControladorGestionEmpleados(vistaGestion);
+        }else if (l.getSource() == vistaAdmin.getBtnPeliculas()) {
+            abrirGestionPeliculas();
+        }else if (l.getSource() == vistaAdmin.getBtnCerrarSesion()) {
+            cerrarSesion();
+        } 
+    }    
         
-        // Centra y muestra la ventana
+    private void abrirGestionEmpleados() {
+        
+        vistaAdmin.dispose(); 
+        VistaGestionEmpleados vistaGestion = new VistaGestionEmpleados();
+        ControladorGestionEmpleados ctrlGestion = new ControladorGestionEmpleados(vistaGestion); 
         vistaGestion.setLocationRelativeTo(null);
         vistaGestion.setVisible(true);
     }
+    
+    private void abrirGestionPeliculas() {
+        vistaAdmin.dispose();
+        VistaAdminPeliculas vistaPeliculas = new VistaAdminPeliculas();
+        ControladorAdminPeliculas ctrlPeliculas = new ControladorAdminPeliculas(vistaPeliculas);
+        vistaPeliculas.setLocationRelativeTo(null);
+        vistaPeliculas.setVisible(true);
+    }
+    
+    private void cerrarSesion() {
+        // Cierra la vista actual
+        vistaAdmin.dispose();
 
+        // Inyección de dependencias necesarias para la ventana de Inicio de Sesión
+        UsuarioDAO usuarioDAO = new UsuarioDAO();
+        Autenticador autenticador = new Autenticador();
+
+        VistaInicioSesion vistaLogin = new VistaInicioSesion();
+        ControladorIniciarSesion ctrlLogin = new ControladorIniciarSesion(vistaLogin, usuarioDAO, autenticador);
+        
+        ctrlLogin.iniciar();
+    }
+    
     void iniciar() {
         vistaAdmin.setVisible(true);
     }

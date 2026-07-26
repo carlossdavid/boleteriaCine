@@ -78,6 +78,10 @@ public class Pelicula {
         this.activa = activa;
     }
 
+    public void setRutaImagen(String rutaImagen) {
+        this.rutaImagen = rutaImagen;
+    }
+
     public String obtenerDuracionFormateada() {
         int horas = duracionMinutos / 60;
         int minutos = duracionMinutos % 60;
