@@ -138,7 +138,7 @@ public class VistaCliente extends javax.swing.JFrame {
     
     public void configurarCartelera() {
         panelPeliculas.setLayout(
-            new GridLayout(0, 3, 35, 35)
+            new GridLayout(0, 3, 35, 15)
         );
 
         scrollPeliculas.setVerticalScrollBarPolicy(
@@ -367,7 +367,7 @@ public class VistaCliente extends javax.swing.JFrame {
         panelPeliculas.setLayout(new java.awt.GridLayout(1, 0));
         scrollPeliculas.setViewportView(panelPeliculas);
 
-        getContentPane().add(scrollPeliculas, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 240, 830, 430));
+        getContentPane().add(scrollPeliculas, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 190, 830, 510));
         getContentPane().add(fondoPrincipalJLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, 720));
 
         pack();

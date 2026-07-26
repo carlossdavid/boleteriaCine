@@ -10,12 +10,19 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Image;
+import java.awt.Insets;
 import java.awt.Toolkit;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import javax.swing.BorderFactory;
 import javax.swing.DefaultListCellRenderer;
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JSpinner;
 import javax.swing.JTextField;
 import modelo.entidad.Pelicula;
 import vista.modular.ComboOscuro;
@@ -35,22 +42,37 @@ public class VistaCompraBoleto extends javax.swing.JFrame {
     private ImagenEnJLabel fondoPrincipal;
     private ImagenEnJLabel portadaPeli;
     
+    private Pelicula peli;
+    
     public VistaCompraBoleto() {
         initComponents();
         configurarPropiedadesVentana();
         cargarImagenes();
+        
+        // Estilos JCOMBO BOX 
         configurarEstilosJComboBox(jcbboxFecha);
+        configurarEstilosJComboBox(jcbboxHorario);
+        configurarEstilosJComboBox(jcbboxSala);
+        
+        // Estilos JSPINER 
+        configurarEstilosSpiner(seleccionNBoletosAdulto);
+        configurarEstilosSpiner(seleccionNBoletosNino);
+        
+        // Estructura básica de selectores (nada seleccionado) 
+        selectoresReset();
     }
     
     // IMAGENES 
-    public void cargarImagenes() {
+    public final void cargarImagenes() {
         //-- IMAGENES --// 
         // Añadir imagen de fondo 
         fondoPrincipal = new ImagenEnJLabel(fondoPrincipalJLabel, 
                 "imagenesDeFondo/fondoPelicula.png");
     }
     
+    // CARGAR DATOS DESDE EL CONTROLADOR 
     public void cargarDatosPeli(Pelicula pelicula) {
+        peli = pelicula;
         portadaPeli = new ImagenEnJLabel(imagenPeliculaJLabel, pelicula.getRutaImagen());
         txtGeneroPeli.setText(pelicula.getGenero());
         txtClasificacionPeli.setText(pelicula.getClasificacion());
@@ -60,15 +82,159 @@ public class VistaCompraBoleto extends javax.swing.JFrame {
         txtSinopsisContenedor.getViewport().setOpaque(false);
     }
     
-    // IA 
-    public void configurarEstilosJComboBox(JComboBox cb){
-        cb.removeAllItems();
+    public final void selectoresReset() {
+        // Desabilitar campos Horario, Sala y Cantidad de Boletos 
+        activarDesactivarJCBHorario(false);
+        activarDesactivarJCBSala(false);
+        activarDesactivarCantBoletos(false);
+    }
+    
+    public void cargarFechas(ArrayList<LocalDate> fechas) {
+        jcbboxFecha.removeAllItems();
 
         //EJEMPLOS DE PRUEBA 
-        cb.addItem("dd/mm/aa");
-        cb.addItem("26/07/26");
-        cb.addItem("27/07/26");
-        cb.addItem("28/07/26");
+        jcbboxFecha.addItem("dd/mm/aa");
+        
+        for (LocalDate fecha : fechas) {
+            jcbboxFecha.addItem(fecha.toString());
+        }
+    }
+    
+    
+    public void activarDesactivarJCBHorario(boolean activo) {
+        jcbboxHorario.setEnabled(activo);
+        labelHorarios.setEnabled(activo);
+        if (activo) {
+            lineaHorario.setBackground(Tema.CREMA_CLARO);
+        } else {
+            lineaHorario.setBackground(Tema.TEXTO_OPACO_FONDOGRIS);
+        }
+    }
+    
+    public void activarDesactivarJCBSala(boolean activo) {
+        jcbboxSala.setEnabled(activo);
+        labelSalas.setEnabled(activo);
+        if (activo) {
+            lineaSalas.setBackground(Tema.CREMA_CLARO);
+        } else {
+            lineaSalas.setBackground(Tema.TEXTO_OPACO_FONDOGRIS);
+        }
+    }
+    
+    public void activarDesactivarCantBoletos(boolean activo) {
+        seleccionNBoletosAdulto.setEnabled(activo);
+        seleccionNBoletosNino.setEnabled(activo);
+        labelninos.setEnabled(activo);
+        labelAdultos.setEnabled(activo);
+        labelCantBoletos.setEnabled(activo);
+        
+        if (activo) {
+            lineaNino.setBackground(Tema.CREMA_CLARO);
+            lineaAdultos.setBackground(Tema.CREMA_CLARO);
+        } else {
+            lineaNino.setBackground(Tema.TEXTO_OPACO_FONDOGRIS);
+            lineaAdultos.setBackground(Tema.TEXTO_OPACO_FONDOGRIS);
+        }
+    }
+    
+    
+    
+    
+    // ESTILOS VISUALES DE SPINNER Y JCOMBOBOX
+    public final void configurarEstilosSpiner(JSpinner spiner) {
+        Color fondo = Tema.GRIS_OSCURO;
+        Color texto = Tema.CREMA_CLARO;
+
+        spiner.setPreferredSize(new Dimension(80, 38));
+        spiner.setMinimumSize(new Dimension(80, 38));
+        spiner.setBackground(new Color(0, 0, 0, 0));
+        spiner.setForeground(texto);
+        spiner.setFocusable(false);
+        spiner.setOpaque(false);
+        spiner.setBorder(null);
+        
+        JSpinner.DefaultEditor editor =
+                (JSpinner.DefaultEditor) spiner.getEditor();
+
+        editor.setOpaque(false);
+        editor.setBorder(null);
+        
+        JTextField campo = editor.getTextField();
+
+        //campo.setBackground(fondo);
+        campo.setHorizontalAlignment(JTextField.CENTER);
+
+        campo.setFocusable(false);
+        campo.setEditable(false);
+        campo.setOpaque(false);
+        campo.setBorder(null);
+        campo.setForeground(texto);
+        campo.setCaretColor(texto);
+        campo.setBackground(new Color(0, 0, 0, 0));
+        campo.setFont(Tema.FUENTE_NORMAL);
+        
+        personalizarBotonesSpinner(spiner);
+    }
+    
+    private final void personalizarBotonesSpinner(JSpinner spiner) {
+
+    for (Component componente : spiner.getComponents()) {
+
+        if (componente instanceof JButton boton) {
+
+            String nombre = boton.getName();
+            boton.setForeground(Tema.CREMA_CLARO);
+
+            if ("Spinner.nextButton".equals(nombre)) {
+                boton.setText("▲");
+            }
+
+            if ("Spinner.previousButton".equals(nombre)) {
+                boton.setText("▼");
+            }
+
+            configurarBotonSpinner(boton);
+        }
+    }
+}
+    
+    private final void configurarBotonSpinner(JButton boton) {
+
+        Color normal = Tema.GRIS_FONDO;
+        Color hover = Tema.GIRS_FONDO_OSCURO;
+        Color presionado = Tema.GRIS_FONDO;
+        Color flecha = Tema.CREMA_CLARO;
+
+        boton.setBackground(normal);
+        boton.setForeground(flecha);
+        boton.setOpaque(true);
+        boton.setContentAreaFilled(true);
+
+        boton.setBorder(BorderFactory.createEmptyBorder());
+        boton.setBorderPainted(false);
+        boton.setFocusPainted(false);
+        boton.setFocusable(false);
+
+        boton.setPreferredSize(new Dimension(30, 22));
+        boton.setMinimumSize(new Dimension(30, 22));
+        boton.setMargin(new Insets(0, 0, 0, 0));
+
+        boton.getModel().addChangeListener(e -> {
+
+            if (boton.getModel().isPressed()) {
+                boton.setBackground(presionado);
+
+            } else if (boton.getModel().isRollover()) {
+                boton.setBackground(hover);
+
+            } else {
+                boton.setBackground(normal);
+            }
+        });
+    }
+    
+    public final void configurarEstilosJComboBox(JComboBox cb){
+        
         
         // ESTILOS JCOMBOBOX
         cb.setEditable(true);
@@ -110,17 +276,28 @@ public class VistaCompraBoleto extends javax.swing.JFrame {
                 label.setBorder(
                         BorderFactory.createEmptyBorder(0, 10, 0, 10)
                 );
+                
+                label.addMouseListener(new MouseAdapter() {
+                    @Override
+                    public void mouseEntered(MouseEvent e) {
+                        label.setBackground(Tema.GRIS_FONDO);
+                    }
+
+                    @Override
+                    public void mouseExited(MouseEvent e) {
+                        label.setBackground(Tema.GRIS_OSCURO);
+                    }
+                
+                });
 
                 return label;
             }
         });
-  
-        
     }
 
     
     // CONFIGURACIONES INICIALES 
-    public void configurarPropiedadesVentana() {
+    public final void configurarPropiedadesVentana() {
         //-- PROPIEDADES DE LA VENTANA --//
         this.setLocationRelativeTo(null); // Centrado
         this.setTitle("Sistema de Gestion Night Cine - Compra de Boletos");
@@ -139,17 +316,30 @@ public class VistaCompraBoleto extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btnComprarBoleto = new javax.swing.JButton();
+        btnRegresar = new javax.swing.JButton();
+        panelButacas = new javax.swing.JPanel();
+        labelButaca = new javax.swing.JLabel();
+        labelCantBoletos = new javax.swing.JLabel();
+        labelninos = new javax.swing.JLabel();
+        seleccionNBoletosNinoContenedor = new javax.swing.JPanel();
+        lineaNino = new javax.swing.JPanel();
+        seleccionNBoletosNino = new javax.swing.JSpinner();
+        labelAdultos = new javax.swing.JLabel();
+        seleccionNBoletosAdultoContenedor = new javax.swing.JPanel();
+        lineaAdultos = new javax.swing.JPanel();
+        seleccionNBoletosAdulto = new javax.swing.JSpinner();
         labelHorarios = new javax.swing.JLabel();
         jcbboxHorarioContenedor = new javax.swing.JPanel();
-        baseLinetxt3 = new javax.swing.JPanel();
-        jcbboxFecha2 = new javax.swing.JComboBox<>();
+        lineaHorario = new javax.swing.JPanel();
+        jcbboxHorario = new javax.swing.JComboBox<>();
         labelSalas = new javax.swing.JLabel();
         jcbboxSalaContenedor = new javax.swing.JPanel();
-        baseLinetxt2 = new javax.swing.JPanel();
-        jcbboxFecha1 = new javax.swing.JComboBox<>();
+        lineaSalas = new javax.swing.JPanel();
+        jcbboxSala = new javax.swing.JComboBox<>();
         labelFecha = new javax.swing.JLabel();
         jcbboxFechaContenedor = new javax.swing.JPanel();
-        baseLinetxt1 = new javax.swing.JPanel();
+        lineaFecha = new javax.swing.JPanel();
         jcbboxFecha = new javax.swing.JComboBox<>();
         btnIngresar = new javax.swing.JButton();
         tituloSinopsis = new javax.swing.JLabel();
@@ -166,6 +356,89 @@ public class VistaCompraBoleto extends javax.swing.JFrame {
         setIconImage(getIconImage());
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        btnComprarBoleto.setBackground(Tema.ROJO_VIBRANTE);
+        btnComprarBoleto.setFont(new java.awt.Font("Montserrat Medium", 0, 14)); // NOI18N
+        btnComprarBoleto.setForeground(Tema.BLANCO);
+        btnComprarBoleto.setText("REALIZAR COMPRA");
+        btnComprarBoleto.setToolTipText("");
+        btnComprarBoleto.setAlignmentY(-0.5F);
+        btnComprarBoleto.setBorder(null);
+        btnComprarBoleto.setContentAreaFilled(false);
+        btnComprarBoleto.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnComprarBoleto.setFocusPainted(false);
+        btnComprarBoleto.setOpaque(true);
+        btnComprarBoleto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnComprarBoletoActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnComprarBoleto, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 40, 180, 40));
+
+        btnRegresar.setBackground(Tema.ROJO_VIBRANTE);
+        btnRegresar.setFont(new java.awt.Font("Montserrat Medium", 0, 14)); // NOI18N
+        btnRegresar.setForeground(Tema.BLANCO);
+        btnRegresar.setText("REGRESAR");
+        btnRegresar.setToolTipText("");
+        btnRegresar.setAlignmentY(-0.5F);
+        btnRegresar.setBorder(null);
+        btnRegresar.setContentAreaFilled(false);
+        btnRegresar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnRegresar.setFocusPainted(false);
+        btnRegresar.setOpaque(true);
+        btnRegresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegresarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 110, 180, 40));
+        getContentPane().add(panelButacas, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 340, 600, 340));
+
+        labelButaca.setFont(Tema.FUENTE_NORMAL_BOLD);
+        labelButaca.setForeground(Tema.BLANCO);
+        labelButaca.setText("Selecciona tus Asientos");
+        getContentPane().add(labelButaca, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 300, 140, -1));
+
+        labelCantBoletos.setFont(Tema.FUENTE_NORMAL_BOLD);
+        labelCantBoletos.setForeground(Tema.BLANCO);
+        labelCantBoletos.setText("Cantidad de Boletos");
+        getContentPane().add(labelCantBoletos, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 160, 140, -1));
+
+        labelninos.setFont(Tema.FUENTE_NORMAL_BOLD);
+        labelninos.setForeground(Tema.CREMA_CLARO);
+        labelninos.setText("Niños/ 3ra Edad");
+        getContentPane().add(labelninos, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 190, 140, -1));
+
+        seleccionNBoletosNinoContenedor.setBackground(Tema.GRIS_OSCURO);
+        seleccionNBoletosNinoContenedor.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lineaNino.setBackground(Tema.CREMA_CLARO);
+        seleccionNBoletosNinoContenedor.add(lineaNino, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 38, 400, 2));
+
+        seleccionNBoletosNino.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
+        seleccionNBoletosNino.setBorder(null);
+        seleccionNBoletosNino.setFocusable(false);
+        seleccionNBoletosNinoContenedor.add(seleccionNBoletosNino, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, -1, 40));
+
+        getContentPane().add(seleccionNBoletosNinoContenedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 210, 90, 40));
+
+        labelAdultos.setFont(Tema.FUENTE_NORMAL_BOLD);
+        labelAdultos.setForeground(Tema.CREMA_CLARO);
+        labelAdultos.setText("Adultos");
+        getContentPane().add(labelAdultos, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 190, 140, -1));
+
+        seleccionNBoletosAdultoContenedor.setBackground(Tema.GRIS_OSCURO);
+        seleccionNBoletosAdultoContenedor.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lineaAdultos.setBackground(Tema.CREMA_CLARO);
+        seleccionNBoletosAdultoContenedor.add(lineaAdultos, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 38, 400, 2));
+
+        seleccionNBoletosAdulto.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
+        seleccionNBoletosAdulto.setBorder(null);
+        seleccionNBoletosAdulto.setFocusable(false);
+        seleccionNBoletosAdultoContenedor.add(seleccionNBoletosAdulto, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, -1, 40));
+
+        getContentPane().add(seleccionNBoletosAdultoContenedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 210, 90, 40));
+
         labelHorarios.setFont(Tema.FUENTE_NORMAL_BOLD);
         labelHorarios.setForeground(Tema.BLANCO);
         labelHorarios.setText("Horarios Disponibles");
@@ -174,15 +447,15 @@ public class VistaCompraBoleto extends javax.swing.JFrame {
         jcbboxHorarioContenedor.setBackground(Tema.GRIS_OSCURO);
         jcbboxHorarioContenedor.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        baseLinetxt3.setBackground(Tema.CREMA_CLARO);
-        jcbboxHorarioContenedor.add(baseLinetxt3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 38, 400, 2));
+        lineaHorario.setBackground(Tema.CREMA_CLARO);
+        jcbboxHorarioContenedor.add(lineaHorario, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 38, 400, 2));
 
-        jcbboxFecha2.setBackground(Tema.GRIS_FONDO);
-        jcbboxFecha2.setForeground(Tema.CREMA);
-        jcbboxFecha2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jcbboxFecha2.setBorder(null);
-        jcbboxFecha2.setFocusable(false);
-        jcbboxHorarioContenedor.add(jcbboxFecha2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 130, 38));
+        jcbboxHorario.setBackground(Tema.GRIS_FONDO);
+        jcbboxHorario.setForeground(Tema.CREMA);
+        jcbboxHorario.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jcbboxHorario.setBorder(null);
+        jcbboxHorario.setFocusable(false);
+        jcbboxHorarioContenedor.add(jcbboxHorario, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 130, 38));
 
         getContentPane().add(jcbboxHorarioContenedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 210, 150, 40));
 
@@ -194,15 +467,15 @@ public class VistaCompraBoleto extends javax.swing.JFrame {
         jcbboxSalaContenedor.setBackground(Tema.GRIS_OSCURO);
         jcbboxSalaContenedor.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        baseLinetxt2.setBackground(Tema.CREMA_CLARO);
-        jcbboxSalaContenedor.add(baseLinetxt2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 38, 400, 2));
+        lineaSalas.setBackground(Tema.CREMA_CLARO);
+        jcbboxSalaContenedor.add(lineaSalas, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 38, 400, 2));
 
-        jcbboxFecha1.setBackground(Tema.GRIS_FONDO);
-        jcbboxFecha1.setForeground(Tema.CREMA);
-        jcbboxFecha1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jcbboxFecha1.setBorder(null);
-        jcbboxFecha1.setFocusable(false);
-        jcbboxSalaContenedor.add(jcbboxFecha1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 130, 38));
+        jcbboxSala.setBackground(Tema.GRIS_FONDO);
+        jcbboxSala.setForeground(Tema.CREMA);
+        jcbboxSala.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jcbboxSala.setBorder(null);
+        jcbboxSala.setFocusable(false);
+        jcbboxSalaContenedor.add(jcbboxSala, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 130, 38));
 
         getContentPane().add(jcbboxSalaContenedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 100, 150, 40));
 
@@ -214,8 +487,8 @@ public class VistaCompraBoleto extends javax.swing.JFrame {
         jcbboxFechaContenedor.setBackground(Tema.GRIS_OSCURO);
         jcbboxFechaContenedor.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        baseLinetxt1.setBackground(Tema.CREMA_CLARO);
-        jcbboxFechaContenedor.add(baseLinetxt1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 38, 400, 2));
+        lineaFecha.setBackground(Tema.CREMA_CLARO);
+        jcbboxFechaContenedor.add(lineaFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 38, 400, 2));
 
         jcbboxFecha.setBackground(Tema.GRIS_FONDO);
         jcbboxFecha.setForeground(Tema.CREMA);
@@ -298,6 +571,14 @@ public class VistaCompraBoleto extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnIngresarActionPerformed
 
+    private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnRegresarActionPerformed
+
+    private void btnComprarBoletoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnComprarBoletoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnComprarBoletoActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -335,21 +616,34 @@ public class VistaCompraBoleto extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel baseLinetxt1;
-    private javax.swing.JPanel baseLinetxt2;
-    private javax.swing.JPanel baseLinetxt3;
+    private javax.swing.JButton btnComprarBoleto;
     private javax.swing.JButton btnIngresar;
+    private javax.swing.JButton btnRegresar;
     private javax.swing.JLabel fondoPrincipalJLabel;
     private javax.swing.JLabel imagenPeliculaJLabel;
     private javax.swing.JComboBox<String> jcbboxFecha;
-    private javax.swing.JComboBox<String> jcbboxFecha1;
-    private javax.swing.JComboBox<String> jcbboxFecha2;
     private javax.swing.JPanel jcbboxFechaContenedor;
+    private javax.swing.JComboBox<String> jcbboxHorario;
     private javax.swing.JPanel jcbboxHorarioContenedor;
+    private javax.swing.JComboBox<String> jcbboxSala;
     private javax.swing.JPanel jcbboxSalaContenedor;
+    private javax.swing.JLabel labelAdultos;
+    private javax.swing.JLabel labelButaca;
+    private javax.swing.JLabel labelCantBoletos;
     private javax.swing.JLabel labelFecha;
     private javax.swing.JLabel labelHorarios;
     private javax.swing.JLabel labelSalas;
+    private javax.swing.JLabel labelninos;
+    private javax.swing.JPanel lineaAdultos;
+    private javax.swing.JPanel lineaFecha;
+    private javax.swing.JPanel lineaHorario;
+    private javax.swing.JPanel lineaNino;
+    private javax.swing.JPanel lineaSalas;
+    private javax.swing.JPanel panelButacas;
+    private javax.swing.JSpinner seleccionNBoletosAdulto;
+    private javax.swing.JPanel seleccionNBoletosAdultoContenedor;
+    private javax.swing.JSpinner seleccionNBoletosNino;
+    private javax.swing.JPanel seleccionNBoletosNinoContenedor;
     private javax.swing.JLabel tituloSinopsis;
     private javax.swing.JLabel txtClasificacionPeli;
     private javax.swing.JLabel txtDuracionPeli;
