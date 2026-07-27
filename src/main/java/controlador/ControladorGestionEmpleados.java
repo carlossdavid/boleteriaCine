@@ -193,7 +193,7 @@ public class ControladorGestionEmpleados implements ActionListener {
 
     private void eliminarEmpleado() {
         try {
-            int id = Integer.parseInt(vista.getTxtId().getText().trim());
+            String id = vista.getTxtId().getText().trim();
             int confirm = JOptionPane.showConfirmDialog(vista, 
                     "¿Está seguro de eliminar al empleado con ID " + id + "?", 
                     "Confirmar eliminación", JOptionPane.YES_NO_OPTION);

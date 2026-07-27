@@ -5,6 +5,8 @@
 package vista;
 
 import java.awt.event.ActionListener;
+import vista.util.ImagenEnJLabel;
+import vista.util.Tema;
 
 /**
  *
@@ -12,16 +14,36 @@ import java.awt.event.ActionListener;
  */
 public class VistaAdminPeliculas extends javax.swing.JFrame {
 
-    /**
-     * Creates new form VistaAdminPeliculas
-     */
+    private ImagenEnJLabel fondoPrincipal;
+    
+    public final int ANCHO_VENTANA = 1250;
+    public final int ALTO_VENTANA = 730;
     public VistaAdminPeliculas() {
         initComponents();
+        configurarVentana();
+        cargarImagenes();
+        
+    }
+    
+    public void configurarVentana() {
+        //-- PROPIEDADES DE LA VENTANA --//
+        this.setLocationRelativeTo(null); // Centrado
+        this.setTitle("Sistema de Gestion Night Cine - Gestion de Películas");
+        this.setSize(ANCHO_VENTANA, ALTO_VENTANA); // Tamaño fijo 
+        this.setResizable(false); // Tamaño fijo
+    }
+    
+    public void cargarImagenes() {
+        //-- IMAGENES --// 
+        // Añadir imagen de fondo 
+        fondoPrincipal = new ImagenEnJLabel(fondoImagen, 
+                "imagenesDeFondo/fondoAdmin.png");
+        this.repaint();
     }
 
         public void addBtnRegresar (ActionListener l){btnRegresar.addActionListener(l);}
         public void addBtnAnadir (ActionListener l){btnAnadir.addActionListener(l);}
-        public void addBtnActualizar (ActionListener l){btnActualizar.addActionListener(l);}
+        public void addBtnActualizar (ActionListener l){btnRegresar.addActionListener(l);}
         public void addBtnEliminar (ActionListener l){btnEliminar.addActionListener(l);}
         public void addBtnSeleccionarPortada(ActionListener l){btnSeleccionarPortada.addActionListener(l);}
     
@@ -39,7 +61,7 @@ public class VistaAdminPeliculas extends javax.swing.JFrame {
         
         public javax.swing.JButton getBtnSeleccionarPortada() { return btnSeleccionarPortada; }
         public javax.swing.JButton getBtnAnadir() { return btnAnadir; }
-        public javax.swing.JButton getBtnActualizar() { return btnActualizar; }
+        public javax.swing.JButton getBtnActualizar() { return btnRegresar; }
         public javax.swing.JButton getBtnEliminar() { return btnEliminar; }
         public javax.swing.JButton getBtnRegresar() { return btnRegresar; }
 
@@ -73,32 +95,44 @@ public class VistaAdminPeliculas extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         txtSinopsis = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
+        btnAnadir = new javax.swing.JButton();
+        btnEliminar = new javax.swing.JButton();
+        btnRegresar = new javax.swing.JButton();
+        txtIdPelicula5 = new javax.swing.JPanel();
+        baseLinetxt7 = new javax.swing.JPanel();
+        txtUrlTrailer = new javax.swing.JTextField();
+        txtIdPelicula4 = new javax.swing.JPanel();
+        baseLinetxt6 = new javax.swing.JPanel();
+        txtClasificacion = new javax.swing.JTextField();
+        txtIdPelicula3 = new javax.swing.JPanel();
+        baseLinetxt5 = new javax.swing.JPanel();
+        txtDuracion = new javax.swing.JTextField();
+        txtIdPelicula2 = new javax.swing.JPanel();
+        baseLinetxt4 = new javax.swing.JPanel();
+        txtGenero = new javax.swing.JTextField();
+        txtIdPelicula1 = new javax.swing.JPanel();
+        baseLinetxt3 = new javax.swing.JPanel();
+        txtTitulo = new javax.swing.JTextField();
+        txtIdPelicula = new javax.swing.JPanel();
+        baseLinetxt2 = new javax.swing.JPanel();
+        txtID = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        txtID = new javax.swing.JTextField();
-        txtTitulo = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        txtGenero = new javax.swing.JTextField();
+        btnActualizar = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
-        txtDuracion = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        txtClasificacion = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        txtUrlTrailer = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
         btnSeleccionarPortada = new javax.swing.JButton();
         lblRutaPortada = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
         chkActiva = new javax.swing.JCheckBox();
-        btnEliminar = new javax.swing.JButton();
-        btnActualizar = new javax.swing.JButton();
-        btnAnadir = new javax.swing.JButton();
         jScrollPane4 = new javax.swing.JScrollPane();
         jScrollPane3 = new javax.swing.JScrollPane();
         tblPeliculas = new javax.swing.JTable();
-        btnRegresar = new javax.swing.JButton();
-        jScrollPane6 = new javax.swing.JScrollPane();
         jScrollPane5 = new javax.swing.JScrollPane();
         txtSinopsiss = new javax.swing.JTextArea();
+        fondoImagen = new javax.swing.JLabel();
 
         jScrollPane1.setViewportView(jTextPane1);
 
@@ -112,58 +146,258 @@ public class VistaAdminPeliculas extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jPanel1.setOpaque(false);
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btnAnadir.setBackground(Tema.ROJO_VIBRANTE);
+        btnAnadir.setFont(new java.awt.Font("Montserrat Medium", 0, 14)); // NOI18N
+        btnAnadir.setForeground(Tema.BLANCO);
+        btnAnadir.setText("AÑADIR");
+        btnAnadir.setToolTipText("");
+        btnAnadir.setAlignmentY(-0.5F);
+        btnAnadir.setBorder(null);
+        btnAnadir.setContentAreaFilled(false);
+        btnAnadir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnAnadir.setFocusPainted(false);
+        btnAnadir.setOpaque(true);
+        btnAnadir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAnadirActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnAnadir, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 600, 180, 40));
+
+        btnEliminar.setBackground(Tema.ROJO_VIBRANTE);
+        btnEliminar.setFont(new java.awt.Font("Montserrat Medium", 0, 14)); // NOI18N
+        btnEliminar.setForeground(Tema.BLANCO);
+        btnEliminar.setText("ELIMINAR");
+        btnEliminar.setToolTipText("");
+        btnEliminar.setAlignmentY(-0.5F);
+        btnEliminar.setBorder(null);
+        btnEliminar.setContentAreaFilled(false);
+        btnEliminar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnEliminar.setFocusPainted(false);
+        btnEliminar.setOpaque(true);
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 600, 180, 40));
+
+        btnRegresar.setBackground(Tema.ROJO_VIBRANTE);
+        btnRegresar.setFont(new java.awt.Font("Montserrat Medium", 0, 14)); // NOI18N
+        btnRegresar.setForeground(Tema.BLANCO);
+        btnRegresar.setText("REGRESAR");
+        btnRegresar.setToolTipText("");
+        btnRegresar.setAlignmentY(-0.5F);
+        btnRegresar.setBorder(null);
+        btnRegresar.setContentAreaFilled(false);
+        btnRegresar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnRegresar.setFocusPainted(false);
+        btnRegresar.setOpaque(true);
+        btnRegresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegresarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 630, 180, 40));
+
+        txtIdPelicula5.setBackground(Tema.GRIS_OSCURO);
+        txtIdPelicula5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        baseLinetxt7.setBackground(Tema.CREMA_CLARO);
+        txtIdPelicula5.add(baseLinetxt7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 38, 400, 2));
+
+        txtUrlTrailer.setBackground(Tema.GRIS_OSCURO);
+        txtUrlTrailer.setFont(Tema.FUENTE_NORMAL);
+        txtUrlTrailer.setForeground(Tema.CREMA_CLARO);
+        txtUrlTrailer.setBorder(null);
+        txtUrlTrailer.setOpaque(true);
+        txtUrlTrailer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtUrlTrailerActionPerformed(evt);
+            }
+        });
+        txtIdPelicula5.add(txtUrlTrailer, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 150, 37));
+
+        jPanel1.add(txtIdPelicula5, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 310, 200, 40));
+
+        txtIdPelicula4.setBackground(Tema.GRIS_OSCURO);
+        txtIdPelicula4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        baseLinetxt6.setBackground(Tema.CREMA_CLARO);
+        txtIdPelicula4.add(baseLinetxt6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 38, 400, 2));
+
+        txtClasificacion.setBackground(Tema.GRIS_OSCURO);
+        txtClasificacion.setFont(Tema.FUENTE_NORMAL);
+        txtClasificacion.setForeground(Tema.CREMA_CLARO);
+        txtClasificacion.setBorder(null);
+        txtClasificacion.setOpaque(true);
+        txtClasificacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtClasificacionActionPerformed(evt);
+            }
+        });
+        txtIdPelicula4.add(txtClasificacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 150, 37));
+
+        jPanel1.add(txtIdPelicula4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 310, 200, 40));
+
+        txtIdPelicula3.setBackground(Tema.GRIS_OSCURO);
+        txtIdPelicula3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        baseLinetxt5.setBackground(Tema.CREMA_CLARO);
+        txtIdPelicula3.add(baseLinetxt5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 38, 400, 2));
+
+        txtDuracion.setBackground(Tema.GRIS_OSCURO);
+        txtDuracion.setFont(Tema.FUENTE_NORMAL);
+        txtDuracion.setForeground(Tema.CREMA_CLARO);
+        txtDuracion.setBorder(null);
+        txtDuracion.setOpaque(true);
+        txtDuracion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtDuracionActionPerformed(evt);
+            }
+        });
+        txtIdPelicula3.add(txtDuracion, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 140, 37));
+
+        jPanel1.add(txtIdPelicula3, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 220, 180, 40));
+
+        txtIdPelicula2.setBackground(Tema.GRIS_OSCURO);
+        txtIdPelicula2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        baseLinetxt4.setBackground(Tema.CREMA_CLARO);
+        txtIdPelicula2.add(baseLinetxt4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 38, 400, 2));
+
+        txtGenero.setBackground(Tema.GRIS_OSCURO);
+        txtGenero.setFont(Tema.FUENTE_NORMAL);
+        txtGenero.setForeground(Tema.CREMA_CLARO);
+        txtGenero.setBorder(null);
+        txtGenero.setOpaque(true);
+        txtGenero.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtGeneroActionPerformed(evt);
+            }
+        });
+        txtIdPelicula2.add(txtGenero, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 140, 37));
+
+        jPanel1.add(txtIdPelicula2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 220, 160, 40));
+
+        txtIdPelicula1.setBackground(Tema.GRIS_OSCURO);
+        txtIdPelicula1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        baseLinetxt3.setBackground(Tema.CREMA_CLARO);
+        txtIdPelicula1.add(baseLinetxt3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 38, 400, 2));
+
+        txtTitulo.setBackground(Tema.GRIS_OSCURO);
+        txtTitulo.setFont(Tema.FUENTE_NORMAL);
+        txtTitulo.setForeground(Tema.CREMA_CLARO);
+        txtTitulo.setBorder(null);
+        txtTitulo.setOpaque(true);
+        txtIdPelicula1.add(txtTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 270, 37));
+
+        jPanel1.add(txtIdPelicula1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 130, 330, 40));
+
+        txtIdPelicula.setBackground(Tema.GRIS_OSCURO);
+        txtIdPelicula.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        baseLinetxt2.setBackground(Tema.CREMA_CLARO);
+        txtIdPelicula.add(baseLinetxt2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 38, 400, 2));
+
+        txtID.setBackground(Tema.GRIS_OSCURO);
+        txtID.setFont(Tema.FUENTE_NORMAL);
+        txtID.setForeground(Tema.CREMA_CLARO);
+        txtID.setBorder(null);
+        txtID.setOpaque(true);
+        txtIdPelicula.add(txtID, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 90, 37));
+
+        jPanel1.add(txtIdPelicula, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, 120, 40));
+
+        jLabel1.setFont(Tema.FUENTE_NORMAL_BOLD);
+        jLabel1.setForeground(Tema.CREMA_CLARO);
         jLabel1.setText("Titulo");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 100, 147, -1));
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jLabel2.setFont(Tema.FUENTE_NORMAL_BOLD);
+        jLabel2.setForeground(Tema.CREMA_CLARO);
         jLabel2.setText("ID");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(49, 99, 147, -1));
 
-        txtID.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-
-        txtTitulo.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jLabel3.setFont(Tema.FUENTE_NORMAL_BOLD);
+        jLabel3.setForeground(Tema.CREMA_CLARO);
         jLabel3.setText("Género");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 190, 147, -1));
 
-        txtGenero.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        btnActualizar.setBackground(Tema.ROJO_VIBRANTE);
+        btnActualizar.setFont(new java.awt.Font("Montserrat Medium", 0, 14)); // NOI18N
+        btnActualizar.setForeground(Tema.BLANCO);
+        btnActualizar.setText("REGRESAR");
+        btnActualizar.setToolTipText("");
+        btnActualizar.setAlignmentY(-0.5F);
+        btnActualizar.setBorder(null);
+        btnActualizar.setContentAreaFilled(false);
+        btnActualizar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnActualizar.setFocusPainted(false);
+        btnActualizar.setOpaque(true);
+        btnActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnActualizarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 600, 180, 40));
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jLabel4.setFont(Tema.FUENTE_NORMAL_BOLD);
+        jLabel4.setForeground(Tema.CREMA_CLARO);
         jLabel4.setText("Duración ");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 190, 147, -1));
 
-        txtDuracion.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jLabel5.setFont(Tema.FUENTE_NORMAL_BOLD);
+        jLabel5.setForeground(Tema.CREMA_CLARO);
         jLabel5.setText("Clasificación");
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 280, 147, -1));
 
-        txtClasificacion.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jLabel6.setFont(Tema.FUENTE_NORMAL_BOLD);
+        jLabel6.setForeground(Tema.CREMA_CLARO);
+        jLabel6.setText("Sinopsis");
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 370, 147, -1));
 
-        jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        jLabel6.setText("URL Trailer");
-
-        txtUrlTrailer.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-
-        jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        jLabel7.setText("Sinopsis");
-
-        btnSeleccionarPortada.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        btnSeleccionarPortada.setBackground(Tema.ROJO_VIBRANTE);
+        btnSeleccionarPortada.setFont(Tema.FUENTE_NORMAL);
+        btnSeleccionarPortada.setForeground(Tema.CREMA_CLARO);
         btnSeleccionarPortada.setText("Seleccionar Portada");
+        btnSeleccionarPortada.setBorder(null);
+        btnSeleccionarPortada.setBorderPainted(false);
+        btnSeleccionarPortada.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnSeleccionarPortada.setFocusable(false);
+        jPanel1.add(btnSeleccionarPortada, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 510, 150, 30));
 
-        lblRutaPortada.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        lblRutaPortada.setFont(Tema.FUENTE_NORMAL);
+        lblRutaPortada.setForeground(Tema.CREMA_CLARO);
         lblRutaPortada.setText("Ruta");
+        jPanel1.add(lblRutaPortada, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 516, 283, 20));
 
-        chkActiva.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jLabel8.setFont(Tema.FUENTE_NORMAL_BOLD);
+        jLabel8.setForeground(Tema.CREMA_CLARO);
+        jLabel8.setText("URL Trailer");
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 280, 147, -1));
+
+        chkActiva.setFont(Tema.FUENTE_NORMAL);
+        chkActiva.setForeground(Tema.CREMA_CLARO);
         chkActiva.setSelected(true);
         chkActiva.setText("Pelicula Activa");
+        chkActiva.setBorder(null);
+        chkActiva.setContentAreaFilled(false);
+        jPanel1.add(chkActiva, new org.netbeans.lib.awtextra.AbsoluteConstraints(49, 565, -1, -1));
 
-        btnEliminar.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        btnEliminar.setText("Eliminar");
+        jScrollPane4.setBorder(null);
+        jScrollPane4.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPane4.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+        jScrollPane4.setOpaque(false);
 
-        btnActualizar.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        btnActualizar.setText("Actualizar");
+        jScrollPane3.setOpaque(false);
 
-        btnAnadir.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        btnAnadir.setText("Añadir");
-
+        tblPeliculas.setBackground(Tema.CREMA);
+        tblPeliculas.setFont(Tema.FUENTE_NORMAL);
         tblPeliculas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -175,127 +409,35 @@ public class VistaAdminPeliculas extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tblPeliculas.setOpaque(false);
         jScrollPane3.setViewportView(tblPeliculas);
 
         jScrollPane4.setViewportView(jScrollPane3);
 
-        btnRegresar.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        btnRegresar.setText("Regresar");
+        jPanel1.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 160, 510, 358));
 
+        jScrollPane5.setBorder(null);
+        jScrollPane5.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPane5.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+        jScrollPane5.setMaximumSize(new java.awt.Dimension(200, 200));
+
+        txtSinopsiss.setBackground(Tema.GRIS_FONDO);
         txtSinopsiss.setColumns(20);
+        txtSinopsiss.setFont(Tema.FUENTE_NORMAL);
+        txtSinopsiss.setForeground(Tema.CREMA_CLARO);
+        txtSinopsiss.setLineWrap(true);
         txtSinopsiss.setRows(5);
+        txtSinopsiss.setBorder(null);
         jScrollPane5.setViewportView(txtSinopsiss);
 
-        jScrollPane6.setViewportView(jScrollPane5);
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(49, 49, 49)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(chkActiva)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(btnActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnAnadir, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnRegresar, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(btnSeleccionarPortada)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(lblRutaPortada, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(txtGenero, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addGap(69, 69, 69)
-                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(txtDuracion, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(txtTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(txtUrlTrailer, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                    .addComponent(txtClasificacion, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jScrollPane6))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
-                                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 530, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(27, 27, 27))))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(99, 99, 99)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtGenero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtDuracion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel6))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtClasificacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtUrlTrailer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel7)
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 358, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(21, 21, 21)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnSeleccionarPortada)
-                    .addComponent(lblRutaPortada))
-                .addGap(18, 18, 18)
-                .addComponent(chkActiva)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnActualizar)
-                    .addComponent(btnEliminar)
-                    .addComponent(btnAnadir)
-                    .addComponent(btnRegresar))
-                .addGap(81, 81, 81))
-        );
+        jPanel1.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 400, 467, 98));
+        jPanel1.add(fondoImagen, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1250, 730));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -308,6 +450,38 @@ public class VistaAdminPeliculas extends javax.swing.JFrame {
     private void txtSinopsisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSinopsisActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtSinopsisActionPerformed
+
+    private void txtGeneroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtGeneroActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtGeneroActionPerformed
+
+    private void txtDuracionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDuracionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtDuracionActionPerformed
+
+    private void txtClasificacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtClasificacionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtClasificacionActionPerformed
+
+    private void txtUrlTrailerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUrlTrailerActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtUrlTrailerActionPerformed
+
+    private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnRegresarActionPerformed
+
+    private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnActualizarActionPerformed
+
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void btnAnadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnadirActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAnadirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -345,26 +519,32 @@ public class VistaAdminPeliculas extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel baseLinetxt2;
+    private javax.swing.JPanel baseLinetxt3;
+    private javax.swing.JPanel baseLinetxt4;
+    private javax.swing.JPanel baseLinetxt5;
+    private javax.swing.JPanel baseLinetxt6;
+    private javax.swing.JPanel baseLinetxt7;
     private javax.swing.JButton btnActualizar;
     private javax.swing.JButton btnAnadir;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnRegresar;
     private javax.swing.JButton btnSeleccionarPortada;
     private javax.swing.JCheckBox chkActiva;
+    private javax.swing.JLabel fondoImagen;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JTextPane jTextPane1;
     private javax.swing.JLabel lblRutaPortada;
     private javax.swing.JTable tblPeliculas;
@@ -372,6 +552,12 @@ public class VistaAdminPeliculas extends javax.swing.JFrame {
     private javax.swing.JTextField txtDuracion;
     private javax.swing.JTextField txtGenero;
     private javax.swing.JTextField txtID;
+    private javax.swing.JPanel txtIdPelicula;
+    private javax.swing.JPanel txtIdPelicula1;
+    private javax.swing.JPanel txtIdPelicula2;
+    private javax.swing.JPanel txtIdPelicula3;
+    private javax.swing.JPanel txtIdPelicula4;
+    private javax.swing.JPanel txtIdPelicula5;
     private javax.swing.JTextField txtSinopsis;
     private javax.swing.JTextArea txtSinopsiss;
     private javax.swing.JTextField txtTitulo;

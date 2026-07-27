@@ -7,18 +7,50 @@ package vista;
 import javax.swing.JButton;
 import javax.swing.JList;
 import javax.swing.JTextArea;
+import vista.util.ImagenEnJLabel;
+import vista.util.Tema;
 
 /**
  *
  * @author carlo
  */
 public class VistaCompras extends javax.swing.JFrame {
-
+    private ImagenEnJLabel fondoPrincipal; 
+    private ImagenEnJLabel iconoCartelera; 
+    private ImagenEnJLabel iconoCompras; 
+    private ImagenEnJLabel iconoCuenta;
+    
+    
+    private final int ANCHO_VENTANA = 1280; 
+    private final int ALTO_VENTANA = 720;
+    
     /**
      * Creates new form VistaCompras
      */
     public VistaCompras() {
         initComponents();
+        configurarVentana();
+        cargarImagenes();
+    }
+    
+    public void configurarVentana(){
+        this.setLocationRelativeTo(null); // Centrado
+        this.setTitle("Sistema de Gestion Night Cine - Vista Administrador");
+        this.setSize(ANCHO_VENTANA, ALTO_VENTANA); // Tamaño fijo 
+        this.setResizable(false); // Tamaño fijo 
+    }
+    
+    public void cargarImagenes() {
+        // Añadir imagen de fondo 
+        fondoPrincipal = new ImagenEnJLabel(fondoPrincipalJLabel, 
+                "imagenesDeFondo/fondoPrincipalPrincipal.png");
+         // Iconos Menu 
+        iconoCartelera = new ImagenEnJLabel(iconoCaseteJLabel,
+                "iconos/cartelera.png");
+        iconoCompras = new ImagenEnJLabel(iconoCompraJLabel,
+                "iconos/carrito.png");
+        iconoCuenta = new ImagenEnJLabel(iconoCuentaJLabel,
+                "iconos/cuenta.png");
     }
 
     public JButton getBtnCasete() {
@@ -53,7 +85,12 @@ public class VistaCompras extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        iconoCaseteJLabel = new javax.swing.JLabel();
+        iconoCompraJLabel = new javax.swing.JLabel();
+        iconoCuentaJLabel = new javax.swing.JLabel();
         btnCasete = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         btnCompras = new javax.swing.JButton();
         btnCuenta = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -62,17 +99,66 @@ public class VistaCompras extends javax.swing.JFrame {
         jScrollPane4 = new javax.swing.JScrollPane();
         jScrollPane3 = new javax.swing.JScrollPane();
         txtFactura = new javax.swing.JTextArea();
+        txtCarteleraJLabel = new javax.swing.JLabel();
+        fondoPrincipalJLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        btnCasete.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        iconoCaseteJLabel.setBackground(new java.awt.Color(204, 204, 204));
+        iconoCaseteJLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        iconoCaseteJLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jPanel1.add(iconoCaseteJLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 110, 120, 120));
+
+        iconoCompraJLabel.setBackground(new java.awt.Color(204, 204, 204));
+        iconoCompraJLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        iconoCompraJLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jPanel1.add(iconoCompraJLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 270, 120, 120));
+
+        iconoCuentaJLabel.setBackground(new java.awt.Color(204, 204, 204));
+        iconoCuentaJLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        iconoCuentaJLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jPanel1.add(iconoCuentaJLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 430, 120, 120));
+
+        btnCasete.setFont(Tema.FUENTE_ICONOS);
         btnCasete.setText("Cartelera");
+        btnCasete.setBorderPainted(false);
+        btnCasete.setContentAreaFilled(false);
+        btnCasete.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCasete.setFocusPainted(false);
+        btnCasete.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        jPanel1.add(btnCasete, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 110, 140, 140));
 
-        btnCompras.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jLabel3.setFont(Tema.FUENTE_NORMAL_BOLD);
+        jLabel3.setForeground(Tema.CREMA_CLARO);
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setText("FACTURA PREVIEW");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 140, 150, -1));
+
+        jLabel2.setFont(Tema.FUENTE_NORMAL_BOLD);
+        jLabel2.setForeground(Tema.CREMA_CLARO);
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("HISTORIAL");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 140, 130, -1));
+
+        btnCompras.setFont(Tema.FUENTE_ICONOS);
         btnCompras.setText("Compras");
+        btnCompras.setBorderPainted(false);
+        btnCompras.setContentAreaFilled(false);
+        btnCompras.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCompras.setFocusPainted(false);
+        btnCompras.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        jPanel1.add(btnCompras, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 270, 140, 140));
 
-        btnCuenta.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        btnCuenta.setFont(Tema.FUENTE_ICONOS);
         btnCuenta.setText("Mi Cuenta");
+        btnCuenta.setBorderPainted(false);
+        btnCuenta.setContentAreaFilled(false);
+        btnCuenta.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCuenta.setFocusPainted(false);
+        btnCuenta.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        jPanel1.add(btnCuenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 430, 140, 140));
 
         listaCompras.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -83,47 +169,27 @@ public class VistaCompras extends javax.swing.JFrame {
 
         jScrollPane2.setViewportView(jScrollPane1);
 
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 180, 160, 290));
+
+        txtFactura.setBackground(Tema.GRIS_OSCURO);
         txtFactura.setColumns(20);
+        txtFactura.setForeground(Tema.BLANCO);
         txtFactura.setRows(5);
+        txtFactura.setBorder(null);
         jScrollPane3.setViewportView(txtFactura);
 
         jScrollPane4.setViewportView(jScrollPane3);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(63, 63, 63)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnCompras, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnCasete, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 166, Short.MAX_VALUE)
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(139, 139, 139)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(216, 216, 216))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(85, 85, 85)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnCasete, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(23, 23, 23)
-                        .addComponent(btnCompras, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(btnCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(211, Short.MAX_VALUE))
-        );
+        jPanel1.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 180, 320, 430));
+
+        txtCarteleraJLabel.setBackground(Tema.ROJO_VIBRANTE);
+        txtCarteleraJLabel.setFont(Tema.FUENTE_FUERTE_PLAIN);
+        txtCarteleraJLabel.setForeground(Tema.CREMA_CLARO);
+        txtCarteleraJLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        txtCarteleraJLabel.setText("HISTORIAL DE COMPRAS");
+        txtCarteleraJLabel.setOpaque(true);
+        jPanel1.add(txtCarteleraJLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 40, 430, 50));
+        jPanel1.add(fondoPrincipalJLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, 720));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -178,12 +244,19 @@ public class VistaCompras extends javax.swing.JFrame {
     private javax.swing.JButton btnCasete;
     private javax.swing.JButton btnCompras;
     private javax.swing.JButton btnCuenta;
+    private javax.swing.JLabel fondoPrincipalJLabel;
+    private javax.swing.JLabel iconoCaseteJLabel;
+    private javax.swing.JLabel iconoCompraJLabel;
+    private javax.swing.JLabel iconoCuentaJLabel;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JList<String> listaCompras;
+    private javax.swing.JLabel txtCarteleraJLabel;
     private javax.swing.JTextArea txtFactura;
     // End of variables declaration//GEN-END:variables
 }

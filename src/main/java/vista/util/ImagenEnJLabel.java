@@ -33,7 +33,7 @@ public class ImagenEnJLabel extends JFrame {
         this.setIcono(ruta);
     }
     
-    public void setIcono(String ruta) {
+    public final void setIcono(String ruta) {
         ImageIcon original = new ImageIcon(getClass().getResource("/" + ruta));
        
         ImageIcon icono = new ImageIcon(original.getImage().getScaledInstance(label.getWidth(), label.getHeight(), Image.SCALE_DEFAULT));

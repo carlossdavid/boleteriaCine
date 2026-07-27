@@ -12,7 +12,6 @@ import modelo.enums.RolUsuario;
 import modelo.servicios.Autenticador;
 import vista.VistaAdmin;
 import vista.VistaCliente;
-import vista.VistaVendedor;
 import vista.VistaRegistrate;
 
 /**
@@ -79,7 +78,7 @@ public class ControladorIniciarSesion implements ActionListener {
                     abrirInterfazAdmin();
                     break;
                 case VENDEDOR: 
-                    abrirInterfazVendedor();
+                    //abrirInterfazVendedor();
                     break;
                 default:
                     
@@ -95,9 +94,9 @@ public class ControladorIniciarSesion implements ActionListener {
         ctrl.iniciar();
     }
 
-    private void abrirInterfazVendedor() {
+    /*private void abrirInterfazVendedor() {
         VistaVendedor vista = new VistaVendedor();
-    }
+    }*/
 
     private void abrirInterfazAdmin() {
         VistaAdmin vista = new VistaAdmin();

@@ -122,11 +122,11 @@ public class VistaCuenta extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         btnGuardar = new javax.swing.JButton();
         txtNombre = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
+        txtCarteleraJLabel = new javax.swing.JLabel();
         txtCorreo = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         txtApellido = new javax.swing.JTextField();
@@ -145,11 +145,6 @@ public class VistaCuenta extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel1.setFont(Tema.FUENTE_FUERTE);
-        jLabel1.setForeground(Tema.BLANCO);
-        jLabel1.setText("CONFIGURACIÓN DE CUENTA");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 80, -1, -1));
 
         jLabel2.setFont(Tema.FUENTE_NORMAL_BOLD);
         jLabel2.setForeground(Tema.CREMA_CLARO);
@@ -181,6 +176,14 @@ public class VistaCuenta extends javax.swing.JFrame {
         jLabel3.setForeground(Tema.CREMA_CLARO);
         jLabel3.setText("Correo Electrónico");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 330, 160, -1));
+
+        txtCarteleraJLabel.setBackground(Tema.ROJO_VIBRANTE);
+        txtCarteleraJLabel.setFont(Tema.FUENTE_FUERTE_PLAIN);
+        txtCarteleraJLabel.setForeground(Tema.CREMA_CLARO);
+        txtCarteleraJLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        txtCarteleraJLabel.setText("MI CUENTA");
+        txtCarteleraJLabel.setOpaque(true);
+        jPanel1.add(txtCarteleraJLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 40, 170, 50));
 
         txtCorreo.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jPanel1.add(txtCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 370, 160, -1));
@@ -340,13 +343,13 @@ public class VistaCuenta extends javax.swing.JFrame {
     private javax.swing.JLabel iconoCaseteJLabel;
     private javax.swing.JLabel iconoCompraJLabel;
     private javax.swing.JLabel iconoCuentaJLabel;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField txtApellido;
+    private javax.swing.JLabel txtCarteleraJLabel;
     private javax.swing.JTextField txtContrasena;
     private javax.swing.JTextField txtCorreo;
     private javax.swing.JTextField txtNombre;

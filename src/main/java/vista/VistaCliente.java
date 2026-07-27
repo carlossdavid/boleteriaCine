@@ -289,7 +289,7 @@ public class VistaCliente extends javax.swing.JFrame {
         btnCerrarSesion.setText("Cerrar Sesion X");
         btnCerrarSesion.setBorderPainted(false);
         btnCerrarSesion.setContentAreaFilled(false);
-        btnCerrarSesion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCerrarSesion.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnCerrarSesion.setFocusPainted(false);
         btnCerrarSesion.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         getContentPane().add(btnCerrarSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 230, 20));
@@ -321,7 +321,7 @@ public class VistaCliente extends javax.swing.JFrame {
         btnCasete.setText("Cartelera");
         btnCasete.setBorderPainted(false);
         btnCasete.setContentAreaFilled(false);
-        btnCasete.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCasete.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnCasete.setFocusPainted(false);
         btnCasete.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         getContentPane().add(btnCasete, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 110, 140, 140));
@@ -334,7 +334,7 @@ public class VistaCliente extends javax.swing.JFrame {
         btnCompras.setText("Compras");
         btnCompras.setBorderPainted(false);
         btnCompras.setContentAreaFilled(false);
-        btnCompras.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCompras.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnCompras.setFocusPainted(false);
         btnCompras.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         getContentPane().add(btnCompras, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 270, 140, 140));
@@ -347,7 +347,7 @@ public class VistaCliente extends javax.swing.JFrame {
         btnCuenta.setText("Mi Cuenta");
         btnCuenta.setBorderPainted(false);
         btnCuenta.setContentAreaFilled(false);
-        btnCuenta.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCuenta.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnCuenta.setFocusPainted(false);
         btnCuenta.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         getContentPane().add(btnCuenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 430, 140, 140));

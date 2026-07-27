@@ -115,7 +115,7 @@ public class UsuarioDAO {
     
    
     //Elimina un Usiario por su Id
-    public boolean eliminarUsuario(int idUsuario) {
+    public boolean eliminarUsuario(String idUsuario) {
         ArrayList<Usuario> usuarios = getListaUsuarios();
         boolean eliminado = usuarios.removeIf(u -> u.getId().equals(idUsuario));
         if (eliminado) {
