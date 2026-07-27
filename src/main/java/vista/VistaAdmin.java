@@ -3,15 +3,36 @@ package vista;
 
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
+import vista.util.ImagenEnJLabel;
+import vista.util.Tema;
 
 
 public class VistaAdmin extends javax.swing.JFrame {
 
+    private ImagenEnJLabel fondo;
+    private ImagenEnJLabel iconoEmpleados;
+    private ImagenEnJLabel iconoPeliculas;
    
+    private final int ANCHO_VENTANA = 1280; 
+    private final int ALTO_VENTANA = 720;
     
     public VistaAdmin() {
         initComponents();
-        
+        configurarVentana();
+        cargarImagenes();
+        this.repaint();
+    }
+    
+    public void configurarVentana() {
+        this.setLocationRelativeTo(null); // Centrado
+        this.setTitle("Sistema de Gestion Night Cine - Vista Administrador");
+        this.setSize(ANCHO_VENTANA, ALTO_VENTANA); // Tamaño fijo 
+        this.setResizable(false); // Tamaño fijo 
+    }
+    public void cargarImagenes() {
+        fondo = new ImagenEnJLabel(fondoPrincipal, "imagenesDeFondo/fondoAdmin.png");
+        iconoEmpleados = new ImagenEnJLabel(icono1, "iconos/btnAdmin1.png");
+        iconoPeliculas = new ImagenEnJLabel(icono2, "iconos/btnAdmin2.png");
     }
 
     public void addBtnEmpleados (ActionListener l){
@@ -20,9 +41,7 @@ public class VistaAdmin extends javax.swing.JFrame {
     public void addBtnPeliculas(ActionListener l){
         btnPeliculas.addActionListener(l);
     }
-    public void addBtnOtros (ActionListener l){
-        btnOtros.addActionListener(l);
-    }
+
     public void addBtnCerrarSesion (ActionListener l){
         btnCerrarSesion.addActionListener(l);
     }
@@ -41,13 +60,7 @@ public class VistaAdmin extends javax.swing.JFrame {
         this.btnEmpleados = btnEmpleados;
     }
 
-    public JButton getBtnOtros() {
-        return btnOtros;
-    }
 
-    public void setBtnOtros(JButton btnOtros) {
-        this.btnOtros = btnOtros;
-    }
 
     public JButton getBtnPeliculas() {
         return btnPeliculas;
@@ -69,10 +82,12 @@ public class VistaAdmin extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        btnOtros = new javax.swing.JButton();
         btnEmpleados = new javax.swing.JButton();
         btnPeliculas = new javax.swing.JButton();
         btnCerrarSesion = new javax.swing.JButton();
+        icono2 = new javax.swing.JLabel();
+        icono1 = new javax.swing.JLabel();
+        fondoPrincipal = new javax.swing.JLabel();
 
         jButton1.setFont(new java.awt.Font("Arial Black", 1, 16)); // NOI18N
         jButton1.setText("jButton1");
@@ -90,53 +105,46 @@ public class VistaAdmin extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        btnOtros.setFont(new java.awt.Font("Arial Black", 1, 16)); // NOI18N
-        btnOtros.setText("Otros");
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btnEmpleados.setFont(new java.awt.Font("Arial Black", 1, 16)); // NOI18N
-        btnEmpleados.setText("Empleados");
+        btnEmpleados.setFont(Tema.FUENTE_BOTON);
+        btnEmpleados.setForeground(Tema.CREMA_CLARO);
+        btnEmpleados.setText("EMPLEADOS");
+        btnEmpleados.setBorder(null);
+        btnEmpleados.setBorderPainted(false);
+        btnEmpleados.setContentAreaFilled(false);
+        btnEmpleados.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnEmpleados.setFocusPainted(false);
+        btnEmpleados.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        jPanel2.add(btnEmpleados, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 270, 166, 145));
 
-        btnPeliculas.setFont(new java.awt.Font("Arial Black", 1, 16)); // NOI18N
-        btnPeliculas.setText("Peliculas");
+        btnPeliculas.setBackground(Tema.ROJO_VIBRANTE);
+        btnPeliculas.setFont(Tema.FUENTE_BOTON);
+        btnPeliculas.setForeground(Tema.CREMA_CLARO);
+        btnPeliculas.setText("PELICULAS");
+        btnPeliculas.setBorder(null);
+        btnPeliculas.setBorderPainted(false);
+        btnPeliculas.setContentAreaFilled(false);
+        btnPeliculas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnPeliculas.setFocusPainted(false);
+        btnPeliculas.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        jPanel2.add(btnPeliculas, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 270, 166, 145));
 
-        btnCerrarSesion.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        btnCerrarSesion.setBackground(Tema.ROJO_VIBRANTE);
+        btnCerrarSesion.setFont(Tema.FUENTE_BOTON);
+        btnCerrarSesion.setForeground(Tema.BLANCO);
         btnCerrarSesion.setText("Cerrar Sesion X");
+        btnCerrarSesion.setBorder(null);
+        btnCerrarSesion.setBorderPainted(false);
         btnCerrarSesion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCerrarSesionActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(155, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(btnEmpleados, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(40, 40, 40)
-                        .addComponent(btnPeliculas, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(48, 48, 48)
-                        .addComponent(btnOtros, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(184, 184, 184))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(btnCerrarSesion)
-                        .addGap(51, 51, 51))))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(272, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnEmpleados, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnPeliculas, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnOtros, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(123, 123, 123)
-                .addComponent(btnCerrarSesion)
-                .addGap(46, 46, 46))
-        );
+        jPanel2.add(btnCerrarSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 590, 190, 50));
+        jPanel2.add(icono2, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 280, 170, 170));
+        jPanel2.add(icono1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 270, 170, 170));
+        jPanel2.add(fondoPrincipal, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, 720));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -198,8 +206,10 @@ public class VistaAdmin extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCerrarSesion;
     private javax.swing.JButton btnEmpleados;
-    private javax.swing.JButton btnOtros;
     private javax.swing.JButton btnPeliculas;
+    private javax.swing.JLabel fondoPrincipal;
+    private javax.swing.JLabel icono1;
+    private javax.swing.JLabel icono2;
     private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
