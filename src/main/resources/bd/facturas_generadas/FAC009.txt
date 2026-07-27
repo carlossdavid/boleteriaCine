@@ -1,16 +1,16 @@
-NÚMERO DE FACTURA: FAC006
+NÚMERO DE FACTURA: FAC009
 ========================================
               NIGHT CINE
 ========================================
-Compra: C006
-Cliente: Sofía Paredes
-Fecha de compra: 2026-07-27T12:45:00
+Compra: C009
+Cliente: Joel Molina
+Fecha de compra: 2026-07-27T14:00:00
 ----------------------------------------
-Película: Transformers
+Película: Independence Day Resurgence
 Sala: Sala 3D
-Fecha de función: 2026-07-27
-Horario: 19:30
-Butacas: E8, E9
+Fecha de función: 2026-07-28
+Horario: 20:30
+Butacas: C8, C9
 ----------------------------------------
 Adultos: 1
 Niños/3ra edad: 1

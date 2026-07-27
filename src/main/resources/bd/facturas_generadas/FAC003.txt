@@ -1,19 +1,19 @@
-NÚMERO DE FACTURA: FAC006
+NÚMERO DE FACTURA: FAC003
 ========================================
               NIGHT CINE
 ========================================
-Compra: C006
-Cliente: Sofía Paredes
-Fecha de compra: 2026-07-27T12:45:00
+Compra: C003
+Cliente: Joel Molina
+Fecha de compra: 2026-07-27T11:05:00
 ----------------------------------------
-Película: Transformers
-Sala: Sala 3D
+Película: Crocodail
+Sala: Sala 2
 Fecha de función: 2026-07-27
-Horario: 19:30
-Butacas: E8, E9
+Horario: 18:00
+Butacas: F5, F6, F7
 ----------------------------------------
-Adultos: 1
-Niños/3ra edad: 1
-TOTAL: $10.50
+Adultos: 3
+Niños/3ra edad: 0
+TOTAL: $16.50
 ========================================
         Gracias por su compra

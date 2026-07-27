@@ -25,11 +25,15 @@ public class ControladorGestionEmpleados implements ActionListener {
     private DefaultTableModel modeloTabla;
     private TableRowSorter<DefaultTableModel> sorter;
 
+    
+    private final int ANCHO_VENTANA = 1280;
+    private final int ALTO_VENTANA = 720;
+    
     public ControladorGestionEmpleados(VistaGestionEmpleados vista) {
         this.vista = vista;
         this.usuarioDAO = new UsuarioDAO();
 
-       
+
         if (this.vista.getBtnRegresar() != null) this.vista.getBtnRegresar().addActionListener(this);
         if (this.vista.getBtnAnadir() != null) this.vista.getBtnAnadir().addActionListener(this);
         if (this.vista.getBtnActualizar() != null) this.vista.getBtnActualizar().addActionListener(this);
@@ -60,7 +64,7 @@ public class ControladorGestionEmpleados implements ActionListener {
             }
         });
     }
-
+    
     private void inicializarTabla() {
         String[] columnas = {"ID", "Nombre", "Apellido", "Correo"};
         modeloTabla = new DefaultTableModel(columnas, 0) {

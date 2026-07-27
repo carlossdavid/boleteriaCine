@@ -43,7 +43,7 @@ public class VistaAdminPeliculas extends javax.swing.JFrame {
 
         public void addBtnRegresar (ActionListener l){btnRegresar.addActionListener(l);}
         public void addBtnAnadir (ActionListener l){btnAnadir.addActionListener(l);}
-        public void addBtnActualizar (ActionListener l){btnRegresar.addActionListener(l);}
+        public void addBtnActualizar (ActionListener l){btnActualizar.addActionListener(l);}
         public void addBtnEliminar (ActionListener l){btnEliminar.addActionListener(l);}
         public void addBtnSeleccionarPortada(ActionListener l){btnSeleccionarPortada.addActionListener(l);}
     
@@ -61,7 +61,7 @@ public class VistaAdminPeliculas extends javax.swing.JFrame {
         
         public javax.swing.JButton getBtnSeleccionarPortada() { return btnSeleccionarPortada; }
         public javax.swing.JButton getBtnAnadir() { return btnAnadir; }
-        public javax.swing.JButton getBtnActualizar() { return btnRegresar; }
+        public javax.swing.JButton getBtnActualizar() { return btnActualizar; }
         public javax.swing.JButton getBtnEliminar() { return btnEliminar; }
         public javax.swing.JButton getBtnRegresar() { return btnRegresar; }
 
@@ -331,7 +331,7 @@ public class VistaAdminPeliculas extends javax.swing.JFrame {
         btnActualizar.setBackground(Tema.ROJO_VIBRANTE);
         btnActualizar.setFont(new java.awt.Font("Montserrat Medium", 0, 14)); // NOI18N
         btnActualizar.setForeground(Tema.BLANCO);
-        btnActualizar.setText("REGRESAR");
+        btnActualizar.setText("Actualizar");
         btnActualizar.setToolTipText("");
         btnActualizar.setAlignmentY(-0.5F);
         btnActualizar.setBorder(null);

@@ -1,19 +1,19 @@
-NÚMERO DE FACTURA: FAC006
+NÚMERO DE FACTURA: FAC012
 ========================================
               NIGHT CINE
 ========================================
-Compra: C006
+Compra: C012
 Cliente: Sofía Paredes
-Fecha de compra: 2026-07-27T12:45:00
+Fecha de compra: 2026-07-27T15:00:00
 ----------------------------------------
 Película: Transformers
 Sala: Sala 3D
-Fecha de función: 2026-07-27
-Horario: 19:30
-Butacas: E8, E9
+Fecha de función: 2026-07-29
+Horario: 21:30
+Butacas: E3, E4, E5
 ----------------------------------------
-Adultos: 1
-Niños/3ra edad: 1
-TOTAL: $10.50
+Adultos: 3
+Niños/3ra edad: 0
+TOTAL: $21.00
 ========================================
         Gracias por su compra

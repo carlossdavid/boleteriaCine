@@ -3,18 +3,17 @@ NÚMERO DE FACTURA: FAC004
               NIGHT CINE
 ========================================
 Compra: C004
-Cliente: Invitado
-Fecha de compra: 2026-07-26T23:32:28.360859700
+Cliente: Daniela Ruiz
+Fecha de compra: 2026-07-27T11:20:00
 ----------------------------------------
-Película: Crocodail
+Película: Cheemtanic
 Sala: Sala 1
 Fecha de función: 2026-07-27
-Horario: 14:00
-Butacas: F3, F5
+Horario: 16:00
+Butacas: C3, C4, C5
 ----------------------------------------
-Adultos: 2 x $5,50
-Niños/3ra edad: 0 x $2,75
-----------------------------------------
-TOTAL: $11,00
+Adultos: 2
+Niños/3ra edad: 1
+TOTAL: $13.75
 ========================================
         Gracias por su compra

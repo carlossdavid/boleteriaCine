@@ -1,0 +1,20 @@
+NÚMERO DE FACTURA: FAC013
+========================================
+              NIGHT CINE
+========================================
+Compra: C013
+Cliente: Mateo Vega
+Fecha de compra: 2026-07-27T04:40:23.192928400
+----------------------------------------
+Película: Crocodail
+Sala: Sala 1
+Fecha de función: 2026-07-30
+Horario: 17:00
+Butacas: F7, E5, D5, C5
+----------------------------------------
+Adultos: 4 x $5,50
+Niños/3ra edad: 0 x $2,75
+----------------------------------------
+TOTAL: $22,00
+========================================
+        Gracias por su compra

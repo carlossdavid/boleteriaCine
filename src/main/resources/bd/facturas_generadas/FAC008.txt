@@ -1,19 +1,19 @@
-NÚMERO DE FACTURA: FAC006
+NÚMERO DE FACTURA: FAC008
 ========================================
               NIGHT CINE
 ========================================
-Compra: C006
-Cliente: Sofía Paredes
-Fecha de compra: 2026-07-27T12:45:00
+Compra: C008
+Cliente: Naia Castellanos
+Fecha de compra: 2026-07-27T13:30:00
 ----------------------------------------
-Película: Transformers
-Sala: Sala 3D
-Fecha de función: 2026-07-27
-Horario: 19:30
-Butacas: E8, E9
+Película: The Truman Show
+Sala: Sala VIP
+Fecha de función: 2026-07-28
+Horario: 18:30
+Butacas: B6, B7, B8
 ----------------------------------------
-Adultos: 1
+Adultos: 2
 Niños/3ra edad: 1
-TOTAL: $10.50
+TOTAL: $20.00
 ========================================
         Gracias por su compra

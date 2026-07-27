@@ -1,19 +1,19 @@
-NÚMERO DE FACTURA: FAC006
+NÚMERO DE FACTURA: FAC011
 ========================================
               NIGHT CINE
 ========================================
-Compra: C006
-Cliente: Sofía Paredes
-Fecha de compra: 2026-07-27T12:45:00
+Compra: C011
+Cliente: Mateo Vega
+Fecha de compra: 2026-07-27T14:40:00
 ----------------------------------------
-Película: Transformers
-Sala: Sala 3D
-Fecha de función: 2026-07-27
-Horario: 19:30
-Butacas: E8, E9
+Película: Fly Me to the Moon
+Sala: Sala 1
+Fecha de función: 2026-07-29
+Horario: 19:00
+Butacas: D3, D4, D5, D6
 ----------------------------------------
-Adultos: 1
-Niños/3ra edad: 1
-TOTAL: $10.50
+Adultos: 2
+Niños/3ra edad: 2
+TOTAL: $16.50
 ========================================
         Gracias por su compra

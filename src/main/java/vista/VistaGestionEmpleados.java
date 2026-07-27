@@ -17,6 +17,8 @@ public class VistaGestionEmpleados extends javax.swing.JFrame {
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(VistaGestionEmpleados.class.getName());
 
     
+    private final int ANCHO_VENTANA = 1280;
+    private final int ALTO_VENTANA = 720;
     
     public VistaGestionEmpleados() {
         initComponents();
@@ -26,8 +28,18 @@ public class VistaGestionEmpleados extends javax.swing.JFrame {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
 
-        
+        configucionVentana();
     }
+    
+    
+    public void configucionVentana() {
+        //-- PROPIEDADES DE LA VENTANA --//
+        this.setLocationRelativeTo(null); // Centrado
+        this.setTitle("Sistema de Gestion Night Cine - Gestion de Películas");
+        this.setSize(ANCHO_VENTANA, ALTO_VENTANA); // Tamaño fijo 
+        this.setResizable(false); // Tamaño fijo
+    }
+
     
     public void addBtnRegresar (ActionListener l){btnRegresar.addActionListener(l);}
     public void addBtnAnadir (ActionListener l){btnAnadir.addActionListener(l);}
