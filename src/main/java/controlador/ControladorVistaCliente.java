@@ -18,11 +18,7 @@ import vista.VistaCompras;
 import vista.VistaCuenta;
 import vista.VistaInicioSesion;
 
-/**
- *
- * @author carlo
- */
-public class ControladorVistaCliente implements ActionListener{
+public class ControladorVistaCliente implements ActionListener {
     private VistaCliente vistaCartelera; 
     private PeliculaDAO peliculaDAO;
     private Cliente clienteUsuario; 
@@ -32,52 +28,82 @@ public class ControladorVistaCliente implements ActionListener{
         this.peliculaDAO = peliculaDAO;
         this.clienteUsuario = clienteUsuario;
         
-        vistaCartelera.addBtnCuentaListener(this);
-        vistaCartelera.addBtnComprasListener(this);
-        vistaCartelera.addBtnCarteleraListener(this);
-        vistaCartelera.addBtnCerrarSesionListener(this);
-    }
-    
-    public void iniciar() {
-        
-        // Cargar Nombre usuario Bienvenida 
-        if (clienteUsuario!= null) vistaCartelera.setTxtBienvenidaNombre(clienteUsuario.getNombre());
-        // Cargar Películas 
-        ArrayList<Pelicula> peliculas = new ArrayList<>();
-        peliculas = peliculaDAO.getListaPeliculas();
-        if (peliculas == null) {
-            vistaCartelera.mostrarError("No se pudo cargar las películas");
-            return;
+        if (vistaCartelera != null) {
+            vistaCartelera.addBtnCuentaListener(this);
+            vistaCartelera.addBtnComprasListener(this);
+            vistaCartelera.addBtnCarteleraListener(this);
+            vistaCartelera.addBtnCerrarSesionListener(this);
         }
-        ArrayList<TarjetaPelicula> tarjetas = vistaCartelera.mostrarPeliculas(peliculas);
-        agregarListenersTarjetas(tarjetas); 
-        vistaCartelera.setVisible(true);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (vistaCartelera != null) {
+            // Cerrar Sesión
+            if (e.getSource() == vistaCartelera.getBtnCerrarSesion()) {
+                regresarInicioSesion();
+                vistaCartelera.cerrar();
+                return;
+            }
+            
+            // Verificación de sesión invitada vs logueada
+            if (clienteUsuario == null) {
+                if (e.getSource() == vistaCartelera.getBtnCompras() 
+                        || e.getSource() == vistaCartelera.getBtnCuenta()) {
+                    vistaCartelera.mostrarError("Por favor inicia sesión para acceder a la función");
+                }
+            } else {
+                if (e.getSource() == vistaCartelera.getBtnCuenta()) {
+                    abrirVistaCuenta();
+                    vistaCartelera.cerrar();
+                } else if (e.getSource() == vistaCartelera.getBtnCompras()) {
+                    abrirVistaCompras();
+                    vistaCartelera.cerrar();
+                }
+            }
+        }
+    }
+
+    public void iniciar() {
+        if (clienteUsuario != null && vistaCartelera != null) {
+            vistaCartelera.setTxtBienvenidaNombre(clienteUsuario.getNombre());
+        }
+        
+        if (peliculaDAO != null && vistaCartelera != null) {
+            ArrayList<Pelicula> peliculas = peliculaDAO.getListaPeliculas();
+            if (peliculas == null || peliculas.isEmpty()) {
+                vistaCartelera.mostrarError("No se pudieron cargar las películas");
+                return;
+            }
+            ArrayList<TarjetaPelicula> tarjetas = vistaCartelera.mostrarPeliculas(peliculas);
+            agregarListenersTarjetas(tarjetas); 
+            vistaCartelera.setVisible(true);
+        }
         
     }
     
     public void agregarListenersTarjetas(ArrayList<TarjetaPelicula> tarjetas) {
-         for (TarjetaPelicula tarjeta : tarjetas) {
+        if (tarjetas == null) return;
+        for (TarjetaPelicula tarjeta : tarjetas) {
             tarjeta.agregarListener(new MouseAdapter() {
-
+                
                 @Override
                 public void mousePressed(MouseEvent e) {
-                    Pelicula pelicula =
-                            tarjeta.getPelicula();
-                    
+                    Pelicula pelicula = tarjeta.getPelicula();
                     abrirVistaComprar(pelicula);
-                    vistaCartelera.cerrar();
+                    if (vistaCartelera != null) vistaCartelera.cerrar();
                 }
             });
         }
     }
 
     public void abrirVistaComprar(Pelicula pelicula) {
-        VistaCompraBoleto vista = new VistaCompraBoleto();
+        VistaCompraBoleto vistaBoleto = new VistaCompraBoleto();
         CompraDAO compraDAO = new CompraDAO(); 
         
-        ControladorVistaCompraBoleto ctrl = new ControladorVistaCompraBoleto(vista, clienteUsuario, compraDAO, pelicula);
+        ControladorVistaCompraBoleto ctrl = new ControladorVistaCompraBoleto(vistaBoleto, clienteUsuario, compraDAO, pelicula);
         
-        if (clienteUsuario == null) {
+        if (clienteUsuario != null) {
             ctrl.iniciar();
         } else {
             ctrl.iniciarInvitado();
@@ -87,53 +113,27 @@ public class ControladorVistaCliente implements ActionListener{
     
     public void iniciarInvitado() {
         this.iniciar();
-        vistaCartelera.configurarInvitado();
+        if (vistaCartelera != null) vistaCartelera.configurarInvitado();
     }
-  
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        //Cerrar Sesion
-        if(e.getSource() == vistaCartelera.getBtnCerrarSesion()) {
-            regresarInicioSesion();
-            vistaCartelera.cerrar();
-        }
-        
-        // 
-        if (clienteUsuario == null) {
-            if (e.getSource() == vistaCartelera.getBtnCompras() 
-                    || e.getSource() == vistaCartelera.getBtnCuenta()){
-                vistaCartelera.mostrarError("Por favor inicia sesión para acceder a la función");
-            }
-        } else {
-            if (e.getSource() == vistaCartelera.getBtnCuenta()) {
-                abrirVistaCuenta();
-                vistaCartelera.cerrar();
-            } else if (e.getSource() == vistaCartelera.getBtnCompras()) {
-                abrirVistaCompras();
-                vistaCartelera.cerrar();
-            }
-        }
-    }
-        
     
-    public void regresarInicioSesion(){
-        VistaInicioSesion vista = new VistaInicioSesion();
-        UsuarioDAO usuarioDAO  = new UsuarioDAO();
+    public void regresarInicioSesion() {
+        VistaInicioSesion vistaIni = new VistaInicioSesion();
+        UsuarioDAO usuarioDAO = new UsuarioDAO();
         Autenticador autenticador = new Autenticador();
-        ControladorIniciarSesion ctrl = new ControladorIniciarSesion(vista, usuarioDAO, autenticador);
+        ControladorIniciarSesion ctrl = new ControladorIniciarSesion(vistaIni, usuarioDAO, autenticador);
         ctrl.iniciar();
     }
     
     public void abrirVistaCuenta() {
-        VistaCuenta vista = new VistaCuenta();
-        ControladorVistaCuenta ctrl = new ControladorVistaCuenta(vista, clienteUsuario);
+        VistaCuenta vistaC = new VistaCuenta();
+        ControladorVistaCuenta ctrl = new ControladorVistaCuenta(vistaC, clienteUsuario);
         ctrl.iniciar();
     }
     
     public void abrirVistaCompras() {
-        VistaCompras vista = new VistaCompras();
+        VistaCompras vistaComp = new VistaCompras();
         CompraDAO compraDAO = new CompraDAO();
-        ControladorVistaCompras ctrl = new ControladorVistaCompras(vista, compraDAO, clienteUsuario);
+        ControladorVistaCompras ctrl = new ControladorVistaCompras(vistaComp, compraDAO, clienteUsuario);
         ctrl.iniciar();
     }
     

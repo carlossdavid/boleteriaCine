@@ -113,17 +113,44 @@ public class UsuarioDAO {
         }
     }
     
-    //Actualiza la información de un usuario existente buscando su ID
+        // 1. Método que usa ControladorGestionEmpleados (recibe el objeto Usuario completo)
     public boolean actualizarUsuario(Usuario usuarioEditado) {
         ArrayList<Usuario> usuarios = getListaUsuarios();
+
         for (int i = 0; i < usuarios.size(); i++) {
-            if (usuarios.get(i).getId() == usuarioEditado.getId()) {
+            // Usamos .equals() porque getId() devuelve String
+            if (usuarios.get(i).getId().equals(usuarioEditado.getId())) {
                 usuarios.set(i, usuarioEditado);
-                return guardarTodos(usuarios);
+                return guardarTodos(usuarios); // Guardar en el archivo .txt
             }
         }
         return false;
     }
+
+    // 2. Método que usa ControladorVistaCuenta (para editar perfil del cliente usando el correo original)
+    public boolean actualizarUsuario(String correoOriginal, String nuevoNombre, String nuevoApellido, String nuevoCorreo, String nuevaContra) {
+        ArrayList<Usuario> usuarios = getListaUsuarios();
+        boolean encontrado = false;
+
+        for (Usuario u : usuarios) {
+            if (u.getCorreo().equalsIgnoreCase(correoOriginal)) {
+                u.setNombre(nuevoNombre);
+                u.setApellido(nuevoApellido);
+                u.setCorreo(nuevoCorreo);
+                u.setContrasena(nuevaContra);
+                encontrado = true;
+                break;
+            }
+        }
+
+        if (encontrado) {
+            return guardarTodos(usuarios);
+        }
+        return false;
+    }
+    
+    
+    
     
     //Elimina un Usiario por su Id
     public boolean eliminarUsuario(int idUsuario) {

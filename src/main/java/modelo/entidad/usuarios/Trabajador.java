@@ -32,15 +32,15 @@ public class Trabajador extends Usuario {
         
         return "" 
                 + id 
-                + ""
+                + ","
                 + nombre
-                + ""
+                + ","
                 + apellido
-                + ""
+                + ","
                 + correo
-                + ""
+                + ","
                 + contrasena
-                + ""
+                + ","
                 + cargo;
     }
 

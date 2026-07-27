@@ -57,6 +57,22 @@ public abstract class Usuario {
     
     public abstract String toCSV(); 
 
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+   
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = correo;
+    }
+
+    public void setContrasena(String contrasena) {
+        this.contrasena = contrasena;
+    }
+
     
     
     
