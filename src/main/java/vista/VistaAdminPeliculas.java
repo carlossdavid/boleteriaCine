@@ -201,7 +201,7 @@ public class VistaAdminPeliculas extends javax.swing.JFrame {
                 btnRegresarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 630, 180, 40));
+        jPanel1.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 610, 180, 40));
 
         txtIdPelicula5.setBackground(Tema.GRIS_OSCURO);
         txtIdPelicula5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -395,6 +395,7 @@ public class VistaAdminPeliculas extends javax.swing.JFrame {
         jScrollPane4.setOpaque(false);
 
         jScrollPane3.setOpaque(false);
+        jScrollPane3.setPreferredSize(new java.awt.Dimension(480, 402));
 
         tblPeliculas.setBackground(Tema.CREMA);
         tblPeliculas.setFont(Tema.FUENTE_NORMAL);
@@ -414,7 +415,7 @@ public class VistaAdminPeliculas extends javax.swing.JFrame {
 
         jScrollPane4.setViewportView(jScrollPane3);
 
-        jPanel1.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 160, 510, 358));
+        jPanel1.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 160, 470, 358));
 
         jScrollPane5.setBorder(null);
         jScrollPane5.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);

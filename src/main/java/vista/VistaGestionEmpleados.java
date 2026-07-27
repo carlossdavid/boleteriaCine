@@ -7,6 +7,8 @@ import javax.swing.JFrame;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
+import vista.util.ImagenEnJLabel;
+import vista.util.Tema;
 
 /**
  *
@@ -17,8 +19,10 @@ public class VistaGestionEmpleados extends javax.swing.JFrame {
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(VistaGestionEmpleados.class.getName());
 
     
-    private final int ANCHO_VENTANA = 1280;
-    private final int ALTO_VENTANA = 720;
+    private final int ANCHO_VENTANA = 1011; 
+    private final int ALTO_VENTANA = 645;
+    
+    private ImagenEnJLabel imagenFondoPrincipal;
     
     public VistaGestionEmpleados() {
         initComponents();
@@ -29,6 +33,9 @@ public class VistaGestionEmpleados extends javax.swing.JFrame {
         setLocationRelativeTo(null);
 
         configucionVentana();
+        // Añadir imagen de fondo 
+        imagenFondoPrincipal = new ImagenEnJLabel(bgPrincipalJLabel, 
+                "imagenesDeFondo/fondoPrincipalLogin.png");
     }
     
     
@@ -82,13 +89,6 @@ public class VistaGestionEmpleados extends javax.swing.JFrame {
         return tblEmpleados;
     }
 
-   
-    public void limpiarCampos() {
-        txtNombre.setText("");
-        txtApellido.setText("");
-        txtCorreo.setText("");
-        if (txtId != null) txtId.setText("");
-    }
     
     public void setModeloTabla(DefaultTableModel modelo) {
         tblEmpleados.setModel(modelo);
@@ -106,21 +106,30 @@ public class VistaGestionEmpleados extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
-        btnRegresar = new javax.swing.JButton();
-        txtNombre = new javax.swing.JTextField();
-        txtApellido = new javax.swing.JTextField();
-        txtCorreo = new javax.swing.JTextField();
         txtId = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        jlabelNombreContainer = new javax.swing.JLabel();
+        txtNombreContainer = new javax.swing.JPanel();
+        baseLinetxt2 = new javax.swing.JPanel();
+        txtNombre = new javax.swing.JTextField();
+        jlabelApellidoContainer = new javax.swing.JLabel();
+        txtApellidoContainer = new javax.swing.JPanel();
+        baseLinetxt3 = new javax.swing.JPanel();
+        txtApellido = new javax.swing.JTextField();
+        jlabelCorreoContainer = new javax.swing.JLabel();
+        txtcorreoContainer = new javax.swing.JPanel();
+        baseLinetxt5 = new javax.swing.JPanel();
+        txtCorreo = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        btnAnadir = new javax.swing.JButton();
-        btnEliminar = new javax.swing.JButton();
-        btnActualizar = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jScrollPane3 = new javax.swing.JScrollPane();
         tblEmpleados = new javax.swing.JTable();
+        btnRegresar = new javax.swing.JButton();
+        btnActualizar = new javax.swing.JButton();
+        btnEliminar = new javax.swing.JButton();
+        btnAnadir = new javax.swing.JButton();
+        jlabelCorreoContainer1 = new javax.swing.JLabel();
+        bgPrincipalJLabel = new javax.swing.JLabel();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -137,37 +146,76 @@ public class VistaGestionEmpleados extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        btnRegresar.setFont(new java.awt.Font("Arial Black", 1, 16)); // NOI18N
-        btnRegresar.setText("Regresar");
-
-        txtNombre.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-
-        txtApellido.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-
-        txtCorreo.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jPanel1.setOpaque(false);
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         txtId.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jPanel1.add(txtId, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 360, 80, -1));
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        jLabel1.setText("Nombre");
+        jlabelNombreContainer.setFont(Tema.FUENTE_NORMAL_BOLD);
+        jlabelNombreContainer.setForeground(Tema.CREMA_CLARO);
+        jlabelNombreContainer.setText("Nombre");
+        jPanel1.add(jlabelNombreContainer, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 60, -1, -1));
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        jLabel2.setText("Apellido");
+        txtNombreContainer.setBackground(Tema.GRIS_OSCURO);
+        txtNombreContainer.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        baseLinetxt2.setBackground(Tema.CREMA_CLARO);
+        txtNombreContainer.add(baseLinetxt2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 38, 400, 2));
+
+        txtNombre.setBackground(Tema.GRIS_OSCURO);
+        txtNombre.setFont(Tema.FUENTE_NORMAL);
+        txtNombre.setForeground(Tema.CREMA_CLARO);
+        txtNombre.setBorder(null);
+        txtNombreContainer.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 250, 37));
+
+        jPanel1.add(txtNombreContainer, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 90, 340, 40));
+
+        jlabelApellidoContainer.setFont(Tema.FUENTE_NORMAL_BOLD);
+        jlabelApellidoContainer.setForeground(Tema.CREMA_CLARO);
+        jlabelApellidoContainer.setText("Apellido");
+        jPanel1.add(jlabelApellidoContainer, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 150, -1, -1));
+
+        txtApellidoContainer.setBackground(Tema.GRIS_OSCURO);
+        txtApellidoContainer.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        baseLinetxt3.setBackground(Tema.CREMA_CLARO);
+        txtApellidoContainer.add(baseLinetxt3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 38, 400, 2));
+
+        txtApellido.setBackground(Tema.GRIS_OSCURO);
+        txtApellido.setFont(Tema.FUENTE_NORMAL);
+        txtApellido.setForeground(Tema.CREMA_CLARO);
+        txtApellido.setBorder(null);
+        txtApellidoContainer.add(txtApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 250, 37));
+
+        jPanel1.add(txtApellidoContainer, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 180, 340, 40));
+
+        jlabelCorreoContainer.setFont(Tema.FUENTE_NORMAL_BOLD);
+        jlabelCorreoContainer.setForeground(Tema.CREMA_CLARO);
+        jlabelCorreoContainer.setText("ID");
+        jPanel1.add(jlabelCorreoContainer, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 330, -1, -1));
+
+        txtcorreoContainer.setBackground(Tema.GRIS_OSCURO);
+        txtcorreoContainer.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        baseLinetxt5.setBackground(Tema.CREMA_CLARO);
+        txtcorreoContainer.add(baseLinetxt5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 38, 400, 2));
+
+        txtCorreo.setBackground(Tema.GRIS_OSCURO);
+        txtCorreo.setFont(Tema.FUENTE_NORMAL);
+        txtCorreo.setForeground(Tema.CREMA_CLARO);
+        txtCorreo.setBorder(null);
+        txtcorreoContainer.add(txtCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 250, 37));
+
+        jPanel1.add(txtcorreoContainer, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 270, 340, 40));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jLabel3.setText("Correo");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 200, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jLabel4.setText("ID");
-
-        btnAnadir.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        btnAnadir.setText("Añadir");
-
-        btnEliminar.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        btnEliminar.setText("Eliminar");
-
-        btnActualizar.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        btnActualizar.setText("Actualizar");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 290, -1, -1));
 
         tblEmpleados.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -184,73 +232,71 @@ public class VistaGestionEmpleados extends javax.swing.JFrame {
 
         jScrollPane2.setViewportView(jScrollPane3);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnRegresar))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(86, 86, 86)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel3)
-                                    .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel2)
-                                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel1)
-                                    .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(btnAnadir, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(btnActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 461, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(46, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(11, 11, 11)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(21, 21, 21)
-                        .addComponent(jLabel2)
-                        .addGap(20, 20, 20)
-                        .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel3)
-                        .addGap(23, 23, 23)
-                        .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel4)
-                        .addGap(19, 19, 19)
-                        .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(25, 25, 25)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnAnadir)
-                            .addComponent(btnActualizar))
-                        .addGap(18, 18, 18)
-                        .addComponent(btnEliminar)
-                        .addContainerGap(176, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnRegresar)
-                        .addGap(48, 48, 48))))
-        );
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 180, 461, 370));
+
+        btnRegresar.setBackground(Tema.ROJO_VIBRANTE);
+        btnRegresar.setFont(new java.awt.Font("Montserrat Medium", 0, 14)); // NOI18N
+        btnRegresar.setForeground(Tema.BLANCO);
+        btnRegresar.setText("REGRESAR");
+        btnRegresar.setToolTipText("");
+        btnRegresar.setAlignmentY(-0.5F);
+        btnRegresar.setBorder(null);
+        btnRegresar.setContentAreaFilled(false);
+        btnRegresar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnRegresar.setFocusPainted(false);
+        btnRegresar.setOpaque(true);
+        btnRegresar.addActionListener(this::btnRegresarActionPerformed);
+        jPanel1.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 470, 180, 40));
+
+        btnActualizar.setBackground(Tema.ROJO_VIBRANTE);
+        btnActualizar.setFont(new java.awt.Font("Montserrat Medium", 0, 14)); // NOI18N
+        btnActualizar.setForeground(Tema.BLANCO);
+        btnActualizar.setText("Actualizar");
+        btnActualizar.setToolTipText("");
+        btnActualizar.setAlignmentY(-0.5F);
+        btnActualizar.setBorder(null);
+        btnActualizar.setContentAreaFilled(false);
+        btnActualizar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnActualizar.setFocusPainted(false);
+        btnActualizar.setOpaque(true);
+        btnActualizar.addActionListener(this::btnActualizarActionPerformed);
+        jPanel1.add(btnActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 470, 180, 40));
+
+        btnEliminar.setBackground(Tema.ROJO_VIBRANTE);
+        btnEliminar.setFont(new java.awt.Font("Montserrat Medium", 0, 14)); // NOI18N
+        btnEliminar.setForeground(Tema.BLANCO);
+        btnEliminar.setText("ELIMINAR");
+        btnEliminar.setToolTipText("");
+        btnEliminar.setAlignmentY(-0.5F);
+        btnEliminar.setBorder(null);
+        btnEliminar.setContentAreaFilled(false);
+        btnEliminar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnEliminar.setFocusPainted(false);
+        btnEliminar.setOpaque(true);
+        btnEliminar.addActionListener(this::btnEliminarActionPerformed);
+        jPanel1.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 410, 180, 40));
+
+        btnAnadir.setBackground(Tema.ROJO_VIBRANTE);
+        btnAnadir.setFont(new java.awt.Font("Montserrat Medium", 0, 14)); // NOI18N
+        btnAnadir.setForeground(Tema.BLANCO);
+        btnAnadir.setText("AÑADIR");
+        btnAnadir.setToolTipText("");
+        btnAnadir.setAlignmentY(-0.5F);
+        btnAnadir.setBorder(null);
+        btnAnadir.setContentAreaFilled(false);
+        btnAnadir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnAnadir.setFocusPainted(false);
+        btnAnadir.setOpaque(true);
+        btnAnadir.addActionListener(this::btnAnadirActionPerformed);
+        jPanel1.add(btnAnadir, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 410, 180, 40));
+
+        jlabelCorreoContainer1.setFont(Tema.FUENTE_NORMAL_BOLD);
+        jlabelCorreoContainer1.setForeground(Tema.CREMA_CLARO);
+        jlabelCorreoContainer1.setText("Correo");
+        jPanel1.add(jlabelCorreoContainer1, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 240, -1, -1));
+
+        bgPrincipalJLabel.setBackground(new java.awt.Color(102, 102, 102));
+        jPanel1.add(bgPrincipalJLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1060, 645));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -265,6 +311,22 @@ public class VistaGestionEmpleados extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnRegresarActionPerformed
+
+    private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnActualizarActionPerformed
+
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void btnAnadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnadirActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAnadirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -292,12 +354,14 @@ public class VistaGestionEmpleados extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel baseLinetxt2;
+    private javax.swing.JPanel baseLinetxt3;
+    private javax.swing.JPanel baseLinetxt5;
+    private javax.swing.JLabel bgPrincipalJLabel;
     private javax.swing.JButton btnActualizar;
     private javax.swing.JButton btnAnadir;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnRegresar;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
@@ -305,10 +369,17 @@ public class VistaGestionEmpleados extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable jTable1;
+    private javax.swing.JLabel jlabelApellidoContainer;
+    private javax.swing.JLabel jlabelCorreoContainer;
+    private javax.swing.JLabel jlabelCorreoContainer1;
+    private javax.swing.JLabel jlabelNombreContainer;
     private javax.swing.JTable tblEmpleados;
     private javax.swing.JTextField txtApellido;
+    private javax.swing.JPanel txtApellidoContainer;
     private javax.swing.JTextField txtCorreo;
     private javax.swing.JTextField txtId;
     private javax.swing.JTextField txtNombre;
+    private javax.swing.JPanel txtNombreContainer;
+    private javax.swing.JPanel txtcorreoContainer;
     // End of variables declaration//GEN-END:variables
 }

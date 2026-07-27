@@ -154,7 +154,7 @@ public class ControladorGestionEmpleados implements ActionListener {
             if (usuarioDAO.agregarUsuario(nuevo)) {
                 JOptionPane.showMessageDialog(vista, "Empleado añadido correctamente.");
                 cargarEmpleadosEnTabla();
-                vista.limpiarCampos();
+                //vista.limpiarCampos();
             } else {
                 JOptionPane.showMessageDialog(vista, "Error al guardar el empleado.");
             }
@@ -186,7 +186,7 @@ public class ControladorGestionEmpleados implements ActionListener {
         if (usuarioDAO.actualizarUsuario(editado)) {
             JOptionPane.showMessageDialog(vista, "Empleado actualizado correctamente.");
             cargarEmpleadosEnTabla();
-            vista.limpiarCampos();
+            //vista.limpiarCampos();
         } else {
             JOptionPane.showMessageDialog(vista, "No se encontró el empleado para actualizar.");
         }
@@ -206,7 +206,7 @@ public class ControladorGestionEmpleados implements ActionListener {
                 if (usuarioDAO.eliminarUsuario(id)) {
                     JOptionPane.showMessageDialog(vista, "Empleado eliminado correctamente.");
                     cargarEmpleadosEnTabla();
-                    vista.limpiarCampos();
+//                    vista.limpiarCampos();
                 } else {
                     JOptionPane.showMessageDialog(vista, "Error al eliminar el empleado.");
                 }

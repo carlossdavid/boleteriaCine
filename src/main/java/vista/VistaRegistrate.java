@@ -247,6 +247,7 @@ public class VistaRegistrate extends javax.swing.JFrame {
         btnIniciarSesion = new javax.swing.JButton();
         iconoLogoJLagel = new javax.swing.JLabel();
         imagenFondoJLabel = new javax.swing.JLabel();
+        bgPrincipalJLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setIconImage(getIconImage());
@@ -393,6 +394,9 @@ public class VistaRegistrate extends javax.swing.JFrame {
         getContentPane().add(iconoLogoJLagel, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 10, 100, 100));
         getContentPane().add(imagenFondoJLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1010, 650));
 
+        bgPrincipalJLabel.setBackground(new java.awt.Color(102, 102, 102));
+        getContentPane().add(bgPrincipalJLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1011, 645));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -409,6 +413,7 @@ public class VistaRegistrate extends javax.swing.JFrame {
     private javax.swing.JPanel baseLinetxt2;
     private javax.swing.JPanel baseLinetxt3;
     private javax.swing.JPanel baseLinetxt5;
+    private javax.swing.JLabel bgPrincipalJLabel;
     private javax.swing.JButton btnIniciarSesion;
     private javax.swing.JButton btnMostrarContra;
     private javax.swing.JButton btnRegistrarse;

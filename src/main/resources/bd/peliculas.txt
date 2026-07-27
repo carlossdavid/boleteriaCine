@@ -1,6 +1,6 @@
 P001,Crocodail,Aventura,95,Todo público,Un cocodrilo misterioso aparece en la ciudad y provoca una inesperada aventura,portadasPeliculas/crocodail.png,https://www.youtube.com/watch?v=trailer_crocodail,true
 P002,Cheemtanic,Comedia,95,Mayores de 14,Una parodia romántica ambientada en un viaje marítimo lleno de situaciones absurdas,portadasPeliculas/cheemtanic.png,https://www.youtube.com/watch?v=trailer_cheemtanic,true
-P003,Transformers,Acción,135,Todo público,Robots alienígenas llegan a la Tierra y luchan por el destino del planeta,portadasPeliculas/transformers.png,https://www.youtube.com/watch?v=trailer_transformers,true
+P003,Transformers,Ficcion,135,Todo público,Robots alienígenas llegan a la Tierra y luchan por el destino del planeta,portadasPeliculas/transformers.png,https://www.youtube.com/watch?v=trailer_transformers,true
 P004,The Truman Show,Drama,103,Mayores de 12,Un hombre descubre que toda su vida forma parte de un programa de televisión,portadasPeliculas/truman_show.png,https://www.youtube.com/watch?v=dlnmQbPGuls,true
 P005,Independence Day Resurgence,Ciencia ficción,120,Mayores de 12,La humanidad vuelve a enfrentarse a una invasión extraterrestre de escala mundial,portadasPeliculas/independence_day_resurgence.png,https://www.youtube.com/watch?v=NCe_JshWOZ0,true
 P006,No Puedo,Miedo,110,Mayores de 14,Una serie de objetos inquietantes conduce a una investigación cada vez más peligrosa,portadasPeliculas/no_puedo.png,https://www.youtube.com/watch?v=trailer_no_puedo,true
