@@ -1,10 +1,9 @@
-U1,admin,sistema,admin,admin123,ADMIN
+U1,admin,admin,admin,admin,ADMIN
 U2,Carlos,Ortega,carlos.ortega@outlook.com,carlos123,CLIENTE
-U3,Lucia,Chavez,luci123@hotmail.com,luci123,VENDEDOR
+U3LuciaChavezluci123@hotmail.comluci123VENDEDOR
 U4,Naia,Castellanos,naia_83@hotmail.com,naia123,CLIENTE
 U5,carlos,Ortega,carlos01@epn.edu.ec,carlos123,CLIENTE
 U6,Naia,Castellanos,naia,naia,CLIENTE
-U7,car,los,car,car,CLIENTE
-U8,Joel,Molina,joel.molina@gmail.com,joel123,CLIENTE
-U9,Jennifer,Sapa,jennifer@gmail.com,1234,VENDEDOR
-U10,Eso,Tilin,eso.tilin@hotmail.com,1234,VENDEDOR
+U7,Carlitos,Ortega,car,car1,CLIENTE
+U8,joel,molina,joel.molina@gmail.com,joel123,CLIENTE
+U9,Carllos,Ortega,car,1234,VENDEDOR

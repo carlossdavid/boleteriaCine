@@ -21,8 +21,6 @@ public class PeliculaDAO {
     private File archivo;
     private final String carpetaPortadas = "src/main/resources/portadasPeliculas/";
     
-    
-    
     public PeliculaDAO( ) {
         archivo = new File("src\\main\\resources\\bd\\peliculas.txt");
     }
@@ -148,6 +146,22 @@ public class PeliculaDAO {
         return false;
     }
     
+    
+    public Pelicula buscarPorId(String id) {
+        if (id == null || id.isEmpty()) {
+            return null;
+        }
+
+        ArrayList<Pelicula> peliculas = getListaPeliculas();
+
+        for (Pelicula p : peliculas) {
+            if (p.getId().equalsIgnoreCase(id.trim())) {
+                return p;
+            }
+        }
+
+        return null;
+    }
     
     
 }

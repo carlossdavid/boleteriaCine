@@ -177,7 +177,7 @@ public class VistaCliente extends javax.swing.JFrame {
     
     // Métodos de la vista
     public void cerrar() {
-        dispose();
+        this.setVisible(false);
     }
     
     

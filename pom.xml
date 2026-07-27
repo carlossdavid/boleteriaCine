@@ -17,4 +17,5 @@
         <maven.compiler.release>25</maven.compiler.release>
         <exec.mainClass>boleteriaCine.BoleteriaCine</exec.mainClass>
     </properties>
+    <name>boleteriaCine</name>
 </project>

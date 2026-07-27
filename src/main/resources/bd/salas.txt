@@ -1,0 +1,4 @@
+S001,Sala 1,40,GENERAL,true
+S002,Sala 2,30,GENERAL,true
+S003,Sala VIP,20,VIP,true
+S004,Sala 3D,35,TRES_D,true

@@ -1,0 +1,20 @@
+NÚMERO DE FACTURA: FAC004
+========================================
+              NIGHT CINE
+========================================
+Compra: C004
+Cliente: Invitado
+Fecha de compra: 2026-07-26T23:32:28.360859700
+----------------------------------------
+Película: Crocodail
+Sala: Sala 1
+Fecha de función: 2026-07-27
+Horario: 14:00
+Butacas: F3, F5
+----------------------------------------
+Adultos: 2 x $5,50
+Niños/3ra edad: 0 x $2,75
+----------------------------------------
+TOTAL: $11,00
+========================================
+        Gracias por su compra

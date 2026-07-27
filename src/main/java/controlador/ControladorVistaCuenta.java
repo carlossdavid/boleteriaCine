@@ -9,6 +9,7 @@ import modelo.entidad.usuarios.Cliente;
 import vista.VistaCliente;
 import vista.VistaCuenta;
 
+
 public class ControladorVistaCuenta implements ActionListener {
     private VistaCuenta vista;
     private Cliente clienteUsuario;
@@ -18,7 +19,6 @@ public class ControladorVistaCuenta implements ActionListener {
         this.vista = vista;
         this.clienteUsuario = clienteUsuario;
         this.usuarioDAO = new UsuarioDAO();
-
         if (this.vista.getBtnGuardar() != null) {
             this.vista.getBtnGuardar().addActionListener(this);
         }

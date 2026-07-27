@@ -9,12 +9,15 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.Insets;
 import java.awt.Toolkit;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import javax.swing.BorderFactory;
 import javax.swing.DefaultListCellRenderer;
@@ -22,9 +25,15 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
+import modelo.DAO.SalaDAO;
+import modelo.entidad.Butaca;
 import modelo.entidad.Pelicula;
+import modelo.entidad.Sala;
+import modelo.enums.EstadoButaca;
+import vista.modular.BotonButaca;
 import vista.modular.ComboOscuro;
 import vista.util.*;
 
@@ -41,6 +50,8 @@ public class VistaCompraBoleto extends javax.swing.JFrame {
     // Imagenes 
     private ImagenEnJLabel fondoPrincipal;
     private ImagenEnJLabel portadaPeli;
+    private ArrayList<BotonButaca> botonesButacas = new ArrayList<>();
+    
     
     private Pelicula peli;
     
@@ -62,12 +73,133 @@ public class VistaCompraBoleto extends javax.swing.JFrame {
         selectoresReset();
     }
     
+
+    
     // IMAGENES 
     public final void cargarImagenes() {
         //-- IMAGENES --// 
         // Añadir imagen de fondo 
         fondoPrincipal = new ImagenEnJLabel(fondoPrincipalJLabel, 
                 "imagenesDeFondo/fondoPelicula.png");
+    }
+    
+    // GETTERS BOTONES 
+   
+    public ArrayList<BotonButaca> getBotonesButacas() {
+        return botonesButacas;
+    }
+    
+    public JButton getBtnComprarBoleto() {
+        return btnComprarBoleto;
+    }
+
+    public JButton getBtnTrailer() {
+        return btnTrailer;
+    }
+
+    public JButton getBtnRegresar() {
+        return btnRegresar;
+    }
+    
+    public int getIndiceFechaSeleccionada() {
+        return jcbboxFecha.getSelectedIndex();
+    }
+    
+    public int getIndiceSalaSeleccionada() {
+        return jcbboxSala.getSelectedIndex();
+    }
+    
+    public int getIndiceHorarioSeleccionado() {
+        return jcbboxHorario.getSelectedIndex();
+    }
+    public int getNBoletosAdultosSeleccionados() {
+        return (int) seleccionNBoletosAdulto.getValue();
+    }
+    public int getNBoletosNinosSeleccionados() {
+        return (int) seleccionNBoletosNino.getValue();
+    }
+    
+    public LocalDate getFechaSeleccionada() {
+        Object item = jcbboxFecha.getSelectedItem();
+
+        if (item == null) {
+            return null;
+        }
+
+        String fecha = item.toString();
+
+        if (fecha.equals("dd-mm-aa")
+                || fecha.equals("dd/mm/aa")) {
+
+            return null;
+        }
+
+        try {
+            return LocalDate.parse(fecha);
+
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    public LocalTime getHorarioSeleccionado() {
+        Object item =
+                jcbboxHorario.getSelectedItem();
+
+        if (item == null) {
+            return null;
+        }
+
+        String horario = item.toString();
+
+        if (horario.equals("--Selecciona--")
+                || horario.equals("hh:mm")) {
+
+            return null;
+        }
+
+        try {
+            return LocalTime.parse(horario);
+
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    public Sala getSalaSeleccionada() {
+        Object item = jcbboxSala.getSelectedItem();
+
+        if (item == null) {
+            return null;
+        }
+
+        String nombreSala = item.toString();
+
+        if (nombreSala.equals("--Selecciona--")) {
+            return null;
+        }
+
+        SalaDAO salaDAO = new SalaDAO();
+
+        return salaDAO.buscarPorNombre(nombreSala);
+    }
+
+    
+    // LISTENERS 
+    public void agregarListenerFecha(ActionListener listener) {
+        jcbboxFecha.addActionListener(listener);
+    }
+    
+    public void agregarListenerSala(ActionListener listener) {
+        jcbboxSala.addActionListener(listener);
+    }
+    
+    public void agregarListenerHorario (ActionListener listener) {
+        jcbboxHorario.addActionListener(listener);
+    }
+    
+    public void agregarListenerRegresar(ActionListener listener) {
+        btnRegresar.addActionListener(listener);
     }
     
     // CARGAR DATOS DESDE EL CONTROLADOR 
@@ -83,23 +215,261 @@ public class VistaCompraBoleto extends javax.swing.JFrame {
     }
     
     public final void selectoresReset() {
-        // Desabilitar campos Horario, Sala y Cantidad de Boletos 
+
+        jcbboxFecha.removeAllItems();
+        jcbboxHorario.removeAllItems();
+        jcbboxSala.removeAllItems();
+
+        jcbboxFecha.addItem("dd-mm-aa");
+        jcbboxHorario.addItem("--Selecciona--");
+        jcbboxSala.addItem("--Selecciona--");
+
+        seleccionNBoletosAdulto.setValue(0);
+        seleccionNBoletosNino.setValue(0);
+
         activarDesactivarJCBHorario(false);
         activarDesactivarJCBSala(false);
         activarDesactivarCantBoletos(false);
+        activarDesactivarSelectorButacas(false);
     }
     
-    public void cargarFechas(ArrayList<LocalDate> fechas) {
+    public void reiniciarCantidadBoletos() {
+        seleccionNBoletosAdulto.setValue(0);
+        seleccionNBoletosNino.setValue(0);
+    }
+    
+    public void cargarHorarios(
+        ArrayList<LocalTime> horarios
+    ) {
+        jcbboxHorario.removeAllItems();
+
+        jcbboxHorario.addItem("--Selecciona--");
+
+        for (LocalTime horario : horarios) {
+            jcbboxHorario.addItem(
+                    horario.toString()
+            );
+        }
+
+        jcbboxHorario.setSelectedIndex(0);
+    }
+    public void cargarSalas(
+        ArrayList<Sala> salas
+    ) {
+        jcbboxSala.removeAllItems();
+
+        jcbboxSala.addItem("--Selecciona--");
+
+        for (Sala sala : salas) {
+            jcbboxSala.addItem(
+                    sala.getNombre()
+            );
+        }
+
+        jcbboxSala.setSelectedIndex(0);
+    }
+    
+    public void cargarFechas(
+        ArrayList<LocalDate> fechas
+    ) {
         jcbboxFecha.removeAllItems();
 
-        //EJEMPLOS DE PRUEBA 
-        jcbboxFecha.addItem("dd/mm/aa");
-        
+        jcbboxFecha.addItem("dd-mm-aa");
+
         for (LocalDate fecha : fechas) {
             jcbboxFecha.addItem(fecha.toString());
         }
+
+        jcbboxFecha.setSelectedIndex(0);
     }
     
+    public void cargarButacas(ArrayList<Butaca> butacas) {
+
+        panelButacas.removeAll();
+        botonesButacas.clear();
+
+        panelButacas.setOpaque(false);
+
+        panelButacas.setLayout(
+                new javax.swing.BoxLayout(
+                        panelButacas,
+                        javax.swing.BoxLayout.Y_AXIS
+                )
+        );
+
+        String[] filas = {"F", "E", "D", "C", "B", "A"};
+
+        for (String fila : filas) {
+
+            JPanel panelFila = new JPanel();
+
+            panelFila.setOpaque(false);
+
+            panelFila.setLayout(
+                    new javax.swing.BoxLayout(
+                            panelFila,
+                            javax.swing.BoxLayout.X_AXIS
+                    )
+            );
+
+            JLabel labelFila = new JLabel(fila);
+
+            labelFila.setForeground(Tema.BLANCO);
+            labelFila.setFont(Tema.FUENTE_NORMAL_BOLD);
+
+            labelFila.setPreferredSize(
+                    new Dimension(25, 32)
+            );
+
+            labelFila.setMinimumSize(
+                    new Dimension(25, 32)
+            );
+
+            labelFila.setMaximumSize(
+                    new Dimension(25, 32)
+            );
+
+            labelFila.setHorizontalAlignment(
+                    JLabel.CENTER
+            );
+
+            panelFila.add(labelFila);
+
+            if (fila.equals("F")) {
+
+                // Fila F: 12 butacas continuas
+                for (int numero = 1; numero <= 12; numero++) {
+
+                    Butaca butaca = buscarButaca(
+                            butacas,
+                            fila,
+                            numero
+                    );
+
+                    agregarButacaAlPanel(
+                            panelFila,
+                            butaca
+                    );
+                }
+
+            } else {
+
+                // Primer bloque: 2 butacas
+                for (int numero = 1; numero <= 2; numero++) {
+
+                    Butaca butaca = buscarButaca(
+                            butacas,
+                            fila,
+                            numero
+                    );
+
+                    agregarButacaAlPanel(
+                            panelFila,
+                            butaca
+                    );
+                }
+
+                // Pasillo vacío
+                panelFila.add(
+                        javax.swing.Box.createRigidArea(
+                                new Dimension(45, 0)
+                        )
+                );
+
+                // Segundo bloque: 7 butacas
+                for (int numero = 3; numero <= 9; numero++) {
+
+                    Butaca butaca = buscarButaca(
+                            butacas,
+                            fila,
+                            numero
+                    );
+
+                    agregarButacaAlPanel(
+                            panelFila,
+                            butaca
+                    );
+                }
+            }
+
+            panelButacas.add(panelFila);
+
+            panelButacas.add(
+                    javax.swing.Box.createRigidArea(
+                            new Dimension(0, 5)
+                    )
+            );
+        }
+
+        panelButacas.revalidate();
+        panelButacas.repaint();
+    }
+    
+    private Butaca buscarButaca(
+        ArrayList<Butaca> butacas,
+        String fila,
+        int numero
+    ) {
+        for (Butaca butaca : butacas) {
+
+            boolean mismaFila =
+                    butaca.getFila().equalsIgnoreCase(fila);
+
+            boolean mismoNumero =
+                    butaca.getNumero() == numero;
+
+            if (mismaFila && mismoNumero) {
+                return butaca;
+            }
+        }
+
+        return null;
+    }
+    
+    private void agregarButacaAlPanel(
+        JPanel panelFila,
+        Butaca butaca
+    ) {
+        if (butaca == null) {
+
+            JPanel espacioVacio = new JPanel();
+
+            espacioVacio.setOpaque(false);
+
+            espacioVacio.setPreferredSize(
+                    new Dimension(38, 30)
+            );
+
+            espacioVacio.setMinimumSize(
+                    new Dimension(38, 30)
+            );
+
+            espacioVacio.setMaximumSize(
+                    new Dimension(38, 30)
+            );
+
+            panelFila.add(espacioVacio);
+
+        } else {
+
+            BotonButaca boton =
+                    new BotonButaca(butaca);
+
+            botonesButacas.add(boton);
+            panelFila.add(boton);
+        }
+
+        // Separación entre butacas
+        panelFila.add(
+                javax.swing.Box.createRigidArea(
+                        new Dimension(5, 0)
+                )
+        );
+    }
+    
+    public void agregarListenerTrailer(ActionListener listener) {
+        btnTrailer.addActionListener(listener);
+    }
     
     public void activarDesactivarJCBHorario(boolean activo) {
         jcbboxHorario.setEnabled(activo);
@@ -137,7 +507,53 @@ public class VistaCompraBoleto extends javax.swing.JFrame {
         }
     }
     
+    public void activarDesactivarSelectorButacas(
+        boolean activo
+    ) {
+        panelButacas.setEnabled(activo);
+        labelButaca.setEnabled(activo);
+
+        for (BotonButaca boton : botonesButacas) {
+
+            if (boton.getButaca().getEstado()
+                    == EstadoButaca.OCUPADA) {
+
+                boton.setEnabled(false);
+
+            } else {
+                boton.setEnabled(activo);
+            }
+        }
+    }
     
+    public void mostrarMensaje(String mensaje) {
+        javax.swing.JOptionPane.showMessageDialog(
+                this,
+                mensaje
+        );
+    }
+    public void limpiarSalas() {
+        jcbboxSala.removeAllItems();
+        jcbboxSala.addItem("--Selecciona--");
+        jcbboxSala.setSelectedIndex(0);
+    }
+    
+    
+    
+    public void limpiarHorarios() {
+        jcbboxHorario.removeAllItems();
+        jcbboxHorario.addItem("--Selecciona--");
+        jcbboxHorario.setSelectedIndex(0);
+    }
+    
+    
+    public void limpiarButacas() {
+        panelButacas.removeAll();
+        botonesButacas.clear();
+
+        panelButacas.revalidate();
+        panelButacas.repaint();
+    }
     
     
     // ESTILOS VISUALES DE SPINNER Y JCOMBOBOX
@@ -233,6 +649,51 @@ public class VistaCompraBoleto extends javax.swing.JFrame {
         });
     }
     
+    public void agregarListenerComprarBoleto(
+        ActionListener listener
+    ) {
+        btnComprarBoleto.addActionListener(listener);
+    }
+    
+    public boolean confirmarCompra(String mensaje) {
+        int opcion =
+                javax.swing.JOptionPane.showConfirmDialog(
+                        this,
+                        mensaje,
+                        "Confirmar compra",
+                        javax.swing.JOptionPane.YES_NO_OPTION,
+                        javax.swing.JOptionPane.QUESTION_MESSAGE
+                );
+
+        return opcion
+                == javax.swing.JOptionPane.YES_OPTION;
+    }
+    public void mostrarFactura(String factura) {
+
+        javax.swing.JTextArea areaFactura =
+                new javax.swing.JTextArea(factura);
+
+        areaFactura.setEditable(false);
+        areaFactura.setOpaque(false);
+        areaFactura.setFont(
+                new Font(
+                        "Monospaced",
+                        Font.PLAIN,
+                        13
+                )
+        );
+
+        javax.swing.JOptionPane.showMessageDialog(
+                this,
+                areaFactura,
+                "Factura generada",
+                javax.swing.JOptionPane.INFORMATION_MESSAGE
+        );
+    }
+    
+    public void activarDesactivarBotonComprar(boolean activo) {
+        btnComprarBoleto.setEnabled(activo);
+    }
     public final void configurarEstilosJComboBox(JComboBox cb){
         
         
@@ -316,6 +777,11 @@ public class VistaCompraBoleto extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
+        txtGeneroPeli1 = new javax.swing.JLabel();
+        jcbboxSalaContenedor = new javax.swing.JPanel();
+        lineaSalas = new javax.swing.JPanel();
+        jcbboxSala = new javax.swing.JComboBox<>();
         btnComprarBoleto = new javax.swing.JButton();
         btnRegresar = new javax.swing.JButton();
         panelButacas = new javax.swing.JPanel();
@@ -334,14 +800,11 @@ public class VistaCompraBoleto extends javax.swing.JFrame {
         lineaHorario = new javax.swing.JPanel();
         jcbboxHorario = new javax.swing.JComboBox<>();
         labelSalas = new javax.swing.JLabel();
-        jcbboxSalaContenedor = new javax.swing.JPanel();
-        lineaSalas = new javax.swing.JPanel();
-        jcbboxSala = new javax.swing.JComboBox<>();
         labelFecha = new javax.swing.JLabel();
         jcbboxFechaContenedor = new javax.swing.JPanel();
         lineaFecha = new javax.swing.JPanel();
         jcbboxFecha = new javax.swing.JComboBox<>();
-        btnIngresar = new javax.swing.JButton();
+        btnTrailer = new javax.swing.JButton();
         tituloSinopsis = new javax.swing.JLabel();
         txtSinopsisContenedor = new javax.swing.JScrollPane();
         txtSinopsis = new javax.swing.JTextArea();
@@ -355,6 +818,31 @@ public class VistaCompraBoleto extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setIconImage(getIconImage());
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel1.setBackground(Tema.ROJO_VIBRANTE);
+        jLabel1.setOpaque(true);
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 600, 450, 10));
+
+        txtGeneroPeli1.setBackground(Tema.GRIS_OSCURO);
+        txtGeneroPeli1.setFont(new java.awt.Font("Montserrat Medium", 0, 10)); // NOI18N
+        txtGeneroPeli1.setForeground(Tema.TEXTO_OPACO_FONDOGRIS);
+        txtGeneroPeli1.setText("Pantalla");
+        getContentPane().add(txtGeneroPeli1, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 610, 80, -1));
+
+        jcbboxSalaContenedor.setBackground(Tema.GRIS_OSCURO);
+        jcbboxSalaContenedor.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lineaSalas.setBackground(Tema.CREMA_CLARO);
+        jcbboxSalaContenedor.add(lineaSalas, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 38, 400, 2));
+
+        jcbboxSala.setBackground(Tema.GRIS_FONDO);
+        jcbboxSala.setForeground(Tema.CREMA);
+        jcbboxSala.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jcbboxSala.setBorder(null);
+        jcbboxSala.setFocusable(false);
+        jcbboxSalaContenedor.add(jcbboxSala, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 130, 38));
+
+        getContentPane().add(jcbboxSalaContenedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 100, 150, 40));
 
         btnComprarBoleto.setBackground(Tema.ROJO_VIBRANTE);
         btnComprarBoleto.setFont(new java.awt.Font("Montserrat Medium", 0, 14)); // NOI18N
@@ -391,12 +879,14 @@ public class VistaCompraBoleto extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 110, 180, 40));
-        getContentPane().add(panelButacas, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 340, 600, 340));
+
+        panelButacas.setOpaque(false);
+        getContentPane().add(panelButacas, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 340, 600, 240));
 
         labelButaca.setFont(Tema.FUENTE_NORMAL_BOLD);
         labelButaca.setForeground(Tema.BLANCO);
         labelButaca.setText("Selecciona tus Asientos");
-        getContentPane().add(labelButaca, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 300, 140, -1));
+        getContentPane().add(labelButaca, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 280, 260, -1));
 
         labelCantBoletos.setFont(Tema.FUENTE_NORMAL_BOLD);
         labelCantBoletos.setForeground(Tema.BLANCO);
@@ -464,21 +954,6 @@ public class VistaCompraBoleto extends javax.swing.JFrame {
         labelSalas.setText("Salas Disponibles");
         getContentPane().add(labelSalas, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 70, 150, -1));
 
-        jcbboxSalaContenedor.setBackground(Tema.GRIS_OSCURO);
-        jcbboxSalaContenedor.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        lineaSalas.setBackground(Tema.CREMA_CLARO);
-        jcbboxSalaContenedor.add(lineaSalas, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 38, 400, 2));
-
-        jcbboxSala.setBackground(Tema.GRIS_FONDO);
-        jcbboxSala.setForeground(Tema.CREMA);
-        jcbboxSala.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jcbboxSala.setBorder(null);
-        jcbboxSala.setFocusable(false);
-        jcbboxSalaContenedor.add(jcbboxSala, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 130, 38));
-
-        getContentPane().add(jcbboxSalaContenedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 100, 150, 40));
-
         labelFecha.setFont(Tema.FUENTE_NORMAL_BOLD);
         labelFecha.setForeground(Tema.BLANCO);
         labelFecha.setText("Fecha Función");
@@ -499,23 +974,23 @@ public class VistaCompraBoleto extends javax.swing.JFrame {
 
         getContentPane().add(jcbboxFechaContenedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 100, 150, 40));
 
-        btnIngresar.setBackground(Tema.ROJO_VIBRANTE);
-        btnIngresar.setFont(new java.awt.Font("Montserrat Medium", 0, 14)); // NOI18N
-        btnIngresar.setForeground(Tema.BLANCO);
-        btnIngresar.setText("Trailer");
-        btnIngresar.setToolTipText("");
-        btnIngresar.setAlignmentY(-0.5F);
-        btnIngresar.setBorder(null);
-        btnIngresar.setContentAreaFilled(false);
-        btnIngresar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnIngresar.setFocusPainted(false);
-        btnIngresar.setOpaque(true);
-        btnIngresar.addActionListener(new java.awt.event.ActionListener() {
+        btnTrailer.setBackground(Tema.ROJO_VIBRANTE);
+        btnTrailer.setFont(new java.awt.Font("Montserrat Medium", 0, 14)); // NOI18N
+        btnTrailer.setForeground(Tema.BLANCO);
+        btnTrailer.setText("Trailer");
+        btnTrailer.setToolTipText("");
+        btnTrailer.setAlignmentY(-0.5F);
+        btnTrailer.setBorder(null);
+        btnTrailer.setContentAreaFilled(false);
+        btnTrailer.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnTrailer.setFocusPainted(false);
+        btnTrailer.setOpaque(true);
+        btnTrailer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnIngresarActionPerformed(evt);
+                btnTrailerActionPerformed(evt);
             }
         });
-        getContentPane().add(btnIngresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 560, 120, 30));
+        getContentPane().add(btnTrailer, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 560, 120, 30));
 
         tituloSinopsis.setFont(Tema.FUENTE_PEQUE__BOLD);
         tituloSinopsis.setForeground(Tema.BLANCO);
@@ -567,9 +1042,9 @@ public class VistaCompraBoleto extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
+    private void btnTrailerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTrailerActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnIngresarActionPerformed
+    }//GEN-LAST:event_btnTrailerActionPerformed
 
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
         // TODO add your handling code here:
@@ -617,10 +1092,11 @@ public class VistaCompraBoleto extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnComprarBoleto;
-    private javax.swing.JButton btnIngresar;
     private javax.swing.JButton btnRegresar;
+    private javax.swing.JButton btnTrailer;
     private javax.swing.JLabel fondoPrincipalJLabel;
     private javax.swing.JLabel imagenPeliculaJLabel;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JComboBox<String> jcbboxFecha;
     private javax.swing.JPanel jcbboxFechaContenedor;
     private javax.swing.JComboBox<String> jcbboxHorario;
@@ -648,6 +1124,7 @@ public class VistaCompraBoleto extends javax.swing.JFrame {
     private javax.swing.JLabel txtClasificacionPeli;
     private javax.swing.JLabel txtDuracionPeli;
     private javax.swing.JLabel txtGeneroPeli;
+    private javax.swing.JLabel txtGeneroPeli1;
     private javax.swing.JLabel txtNombrePeli;
     private javax.swing.JTextArea txtSinopsis;
     private javax.swing.JScrollPane txtSinopsisContenedor;

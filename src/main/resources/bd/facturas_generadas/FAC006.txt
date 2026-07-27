@@ -1,0 +1,20 @@
+NÚMERO DE FACTURA: FAC006
+========================================
+              NIGHT CINE
+========================================
+Compra: C006
+Cliente: Carlitos Ortega
+Fecha de compra: 2026-07-27T00:54:28.078145300
+----------------------------------------
+Película: Crocodail
+Sala: Sala 1
+Fecha de función: 2026-07-27
+Horario: 14:00
+Butacas: F8, E5, E6, D6
+----------------------------------------
+Adultos: 2 x $5,50
+Niños/3ra edad: 2 x $2,75
+----------------------------------------
+TOTAL: $16,50
+========================================
+        Gracias por su compra
