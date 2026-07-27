@@ -1,9 +1,8 @@
 U1,admin,admin,admin,admin,ADMIN
 U2,Carlos,Ortega,carlos.ortega@outlook.com,carlos123,CLIENTE
-U3LuciaChavezluci123@hotmail.comluci123VENDEDOR
 U4,Naia,Castellanos,naia_83@hotmail.com,naia123,CLIENTE
 U5,carlos,Ortega,carlos01@epn.edu.ec,carlos123,CLIENTE
 U6,Naia,Castellanos,naia,naia,CLIENTE
-U7,Carlitos,Ortega,car,car1,CLIENTE
+U7,Carlitosd,Ortega,car,car1,CLIENTE
 U8,joel,molina,joel.molina@gmail.com,joel123,CLIENTE
 U9,Carllos,Ortega,car,1234,VENDEDOR

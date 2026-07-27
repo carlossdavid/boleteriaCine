@@ -7,18 +7,50 @@ package vista;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JTextField;
+import vista.util.ImagenEnJLabel;
+import vista.util.Tema;
 
 /**
  *
  * @author carlo
  */
 public class VistaCuenta extends javax.swing.JFrame {
-
-    /**
-     * Creates new form VistaCuenta
-     */
+    private ImagenEnJLabel fondoPrincipal; 
+    private ImagenEnJLabel iconoCartelera; 
+    private ImagenEnJLabel iconoCompras; 
+    private ImagenEnJLabel iconoCuenta;
+    
+    private final int ANCHO_VENTANA = 1280; 
+    private final int ALTO_VENTANA = 720;
+    
     public VistaCuenta() {
         initComponents();
+        configurarVentana();
+        cargarImagenes();
+    }
+    
+    public void configurarVentana(){
+        this.setLocationRelativeTo(null); // Centrado
+        this.setTitle("Sistema de Gestion Night Cine - Vista Administrador");
+        this.setSize(ANCHO_VENTANA, ALTO_VENTANA); // Tamaño fijo 
+        this.setResizable(false); // Tamaño fijo 
+    }
+    
+    // IMAGENES 
+    public void cargarImagenes() {
+        //-- IMAGENES --// 
+        // Añadir imagen de fondo 
+        fondoPrincipal = new ImagenEnJLabel(fondoPrincipalJLabel, 
+                "imagenesDeFondo/fondoPrincipalPrincipal.png");
+        // Iconos Menu 
+        iconoCartelera = new ImagenEnJLabel(iconoCaseteJLabel,
+                "iconos/cartelera.png");
+        iconoCompras = new ImagenEnJLabel(iconoCompraJLabel,
+                "iconos/carrito.png");
+        iconoCuenta = new ImagenEnJLabel(iconoCuentaJLabel,
+                "iconos/cuenta.png");
+        
+        this.repaint();
     }
 
     public JButton getBtnGuardar() {
@@ -57,9 +89,7 @@ public class VistaCuenta extends javax.swing.JFrame {
         return txtNombre;
     }
     
-    public javax.swing.JButton getBtnVolver() {
-        return btnVolver; 
-    }
+
 
     public void addBtnCerrarSesionListener(ActionListener l) {
         btnCerrarSesion.addActionListener(l);
@@ -81,9 +111,6 @@ public class VistaCuenta extends javax.swing.JFrame {
         btnGuardar.addActionListener(l);
     }
     
-    public void addBtnVolverListener(ActionListener l) {
-        btnVolver.addActionListener(l);
-    }
    
     /**
      * This method is called from within the constructor to initialize the form.
@@ -95,12 +122,9 @@ public class VistaCuenta extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        btnCerrarSesion = new javax.swing.JButton();
-        btnCompras = new javax.swing.JButton();
-        btnCasete = new javax.swing.JButton();
-        btnCuenta = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        btnGuardar = new javax.swing.JButton();
         txtNombre = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         txtCorreo = new javax.swing.JTextField();
@@ -108,127 +132,145 @@ public class VistaCuenta extends javax.swing.JFrame {
         txtApellido = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         txtContrasena = new javax.swing.JTextField();
-        btnGuardar = new javax.swing.JButton();
+        btnCerrarSesion = new javax.swing.JButton();
+        btnCasete = new javax.swing.JButton();
+        btnCompras = new javax.swing.JButton();
+        btnCuenta = new javax.swing.JButton();
+        iconoCaseteJLabel = new javax.swing.JLabel();
+        iconoCompraJLabel = new javax.swing.JLabel();
+        iconoCuentaJLabel = new javax.swing.JLabel();
         btnVolver = new javax.swing.JButton();
+        fondoPrincipalJLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        btnCerrarSesion.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        btnCerrarSesion.setText("Cerrar Sesión x");
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btnCompras.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        btnCompras.setText("Compras");
-
-        btnCasete.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        btnCasete.setText("Cartelera");
-
-        btnCuenta.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        btnCuenta.setText("Mi Cuenta");
-
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jLabel1.setFont(Tema.FUENTE_FUERTE);
+        jLabel1.setForeground(Tema.BLANCO);
         jLabel1.setText("CONFIGURACIÓN DE CUENTA");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 80, -1, -1));
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jLabel2.setFont(Tema.FUENTE_NORMAL_BOLD);
+        jLabel2.setForeground(Tema.CREMA_CLARO);
         jLabel2.setText("Nombre");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 140, 106, -1));
+
+        btnGuardar.setBackground(Tema.ROJO_VIBRANTE);
+        btnGuardar.setFont(new java.awt.Font("Montserrat Medium", 0, 14)); // NOI18N
+        btnGuardar.setForeground(Tema.BLANCO);
+        btnGuardar.setText("GUARDAR CAMBIOS");
+        btnGuardar.setToolTipText("");
+        btnGuardar.setAlignmentY(-0.5F);
+        btnGuardar.setBorder(null);
+        btnGuardar.setContentAreaFilled(false);
+        btnGuardar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnGuardar.setFocusPainted(false);
+        btnGuardar.setOpaque(true);
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 490, 240, 40));
 
         txtNombre.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jPanel1.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 180, 160, -1));
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jLabel3.setFont(Tema.FUENTE_NORMAL_BOLD);
+        jLabel3.setForeground(Tema.CREMA_CLARO);
         jLabel3.setText("Correo Electrónico");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 330, 160, -1));
 
         txtCorreo.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jPanel1.add(txtCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 370, 160, -1));
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jLabel4.setFont(Tema.FUENTE_NORMAL_BOLD);
+        jLabel4.setForeground(Tema.CREMA_CLARO);
         jLabel4.setText("Apellido");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 140, 106, -1));
 
         txtApellido.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jPanel1.add(txtApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 180, 160, -1));
 
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jLabel5.setFont(Tema.FUENTE_NORMAL_BOLD);
+        jLabel5.setForeground(Tema.CREMA_CLARO);
         jLabel5.setText("Contraseña");
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 230, 160, -1));
 
         txtContrasena.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jPanel1.add(txtContrasena, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 270, 160, -1));
 
-        btnGuardar.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        btnGuardar.setText("GUARDAR CAMBIOS");
+        btnCerrarSesion.setFont(Tema.FUENTE_ICONOS);
+        btnCerrarSesion.setForeground(new java.awt.Color(255, 0, 0));
+        btnCerrarSesion.setText("Cerrar Sesion X");
+        btnCerrarSesion.setBorderPainted(false);
+        btnCerrarSesion.setContentAreaFilled(false);
+        btnCerrarSesion.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnCerrarSesion.setFocusPainted(false);
+        btnCerrarSesion.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        jPanel1.add(btnCerrarSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 230, 20));
 
-        btnVolver.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        btnVolver.setText("Volver");
+        btnCasete.setFont(Tema.FUENTE_ICONOS);
+        btnCasete.setText("Cartelera");
+        btnCasete.setBorderPainted(false);
+        btnCasete.setContentAreaFilled(false);
+        btnCasete.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCasete.setFocusPainted(false);
+        btnCasete.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        jPanel1.add(btnCasete, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 110, 140, 140));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(46, 46, 46)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnCerrarSesion)
-                        .addGap(305, 305, 305)
-                        .addComponent(jLabel1))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnCasete, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnCompras, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(129, 129, 129)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtNombre)
-                                    .addComponent(txtCorreo, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
-                                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(83, 83, 83)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtApellido)
-                                    .addComponent(txtContrasena)
-                                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(247, 247, 247)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(btnVolver)
-                                    .addComponent(btnGuardar))))))
-                .addContainerGap(125, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(47, 47, 47)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnCerrarSesion)
-                    .addComponent(jLabel1))
-                .addGap(63, 63, 63)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnCasete, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnCompras, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnGuardar))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnVolver)))
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addComponent(jLabel4)
-                            .addGap(18, 18, 18)
-                            .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(18, 18, 18)
-                            .addComponent(jLabel5)
-                            .addGap(18, 18, 18)
-                            .addComponent(txtContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addComponent(jLabel2)
-                            .addGap(18, 18, 18)
-                            .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(18, 18, 18)
-                            .addComponent(jLabel3)
-                            .addGap(18, 18, 18)
-                            .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(104, Short.MAX_VALUE))
-        );
+        btnCompras.setFont(Tema.FUENTE_ICONOS);
+        btnCompras.setText("Compras");
+        btnCompras.setBorderPainted(false);
+        btnCompras.setContentAreaFilled(false);
+        btnCompras.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCompras.setFocusPainted(false);
+        btnCompras.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        jPanel1.add(btnCompras, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 270, 140, 140));
+
+        btnCuenta.setFont(Tema.FUENTE_ICONOS);
+        btnCuenta.setText("Mi Cuenta");
+        btnCuenta.setBorderPainted(false);
+        btnCuenta.setContentAreaFilled(false);
+        btnCuenta.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCuenta.setFocusPainted(false);
+        btnCuenta.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        jPanel1.add(btnCuenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 430, 140, 140));
+
+        iconoCaseteJLabel.setBackground(new java.awt.Color(204, 204, 204));
+        iconoCaseteJLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        iconoCaseteJLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jPanel1.add(iconoCaseteJLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 110, 120, 120));
+
+        iconoCompraJLabel.setBackground(new java.awt.Color(204, 204, 204));
+        iconoCompraJLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        iconoCompraJLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jPanel1.add(iconoCompraJLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 270, 120, 120));
+
+        iconoCuentaJLabel.setBackground(new java.awt.Color(204, 204, 204));
+        iconoCuentaJLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        iconoCuentaJLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jPanel1.add(iconoCuentaJLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 430, 120, 120));
+
+        btnVolver.setBackground(Tema.ROJO_VIBRANTE);
+        btnVolver.setFont(new java.awt.Font("Montserrat Medium", 0, 14)); // NOI18N
+        btnVolver.setForeground(Tema.BLANCO);
+        btnVolver.setText("REGRESAR");
+        btnVolver.setToolTipText("");
+        btnVolver.setAlignmentY(-0.5F);
+        btnVolver.setBorder(null);
+        btnVolver.setContentAreaFilled(false);
+        btnVolver.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnVolver.setFocusPainted(false);
+        btnVolver.setOpaque(true);
+        btnVolver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVolverActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnVolver, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 490, 180, 40));
+        jPanel1.add(fondoPrincipalJLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, 720));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -243,6 +285,14 @@ public class VistaCuenta extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnGuardarActionPerformed
+
+    private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnVolverActionPerformed
 
     /**
      * @param args the command line arguments
@@ -286,6 +336,10 @@ public class VistaCuenta extends javax.swing.JFrame {
     private javax.swing.JButton btnCuenta;
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnVolver;
+    private javax.swing.JLabel fondoPrincipalJLabel;
+    private javax.swing.JLabel iconoCaseteJLabel;
+    private javax.swing.JLabel iconoCompraJLabel;
+    private javax.swing.JLabel iconoCuentaJLabel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

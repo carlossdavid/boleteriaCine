@@ -74,10 +74,6 @@ public class VistaCliente extends javax.swing.JFrame {
     
     // GETTERS 
     
-    
-    
-    
-    
     // CONFIGURACIONES INICIALES 
     public void configurarPropiedadesVentana() {
         //-- PROPIEDADES DE LA VENTANA --//

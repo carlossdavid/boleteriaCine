@@ -3,10 +3,12 @@ package controlador;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
+import modelo.DAO.CompraDAO;
 import modelo.DAO.PeliculaDAO;
 import modelo.DAO.UsuarioDAO;
 import modelo.entidad.usuarios.Cliente;
 import vista.VistaCliente;
+import vista.VistaCompras;
 import vista.VistaCuenta;
 
 
@@ -26,6 +28,10 @@ public class ControladorVistaCuenta implements ActionListener {
         if (this.vista.getBtnCasete() != null) {
             this.vista.getBtnCasete().addActionListener(this);
         }
+        
+        if (this.vista.getBtnCompras() != null) {
+        this.vista.getBtnCompras().addActionListener(this);
+        }
     }
 
     public void iniciar() {
@@ -44,7 +50,17 @@ public class ControladorVistaCuenta implements ActionListener {
             guardarCambios();
         } else if (e.getSource() == vista.getBtnCasete()) {
             regresarCartelera();
+        } else if (e.getSource() == vista.getBtnCompras()) { 
+            abrirVistaCompras();
         }
+    }
+    
+    public void abrirVistaCompras() {
+        vista.dispose();
+        VistaCompras vistaComp = new VistaCompras();
+        CompraDAO compraDAO = new CompraDAO();
+        ControladorVistaCompras ctrl = new ControladorVistaCompras(vistaComp, compraDAO, clienteUsuario);
+        ctrl.iniciar();
     }
 
     private void guardarCambios() {
